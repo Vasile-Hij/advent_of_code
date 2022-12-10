@@ -9,7 +9,7 @@
 |--------------------------------------------|------------------|------------------|---|---|---|
 | [01](https://adventofcode.com/2022/day/1)  | Calorie Counting | [py](py/day1.py) |66487|197301 | ** |
 | [02](https://adventofcode.com/2022/day/2)  | Rock Paper Scissors  | [py](py/day2.py) |13446|13509 |** |
-| [03](https://adventofcode.com/2022/day/3)  | Rucksack Reorganizatio  | [py](py/day3.py) |8053| |* |
+| [03](https://adventofcode.com/2022/day/3)  | Rucksack Reorganizatio  | [py](py/day3.py) |8053| 2425|**|
 | [04](https://adventofcode.com/2022/day/4)  |                  | [py](py/day4.py) || | |
 | [05](https://adventofcode.com/2022/day/5)  |                  | [py](py/day5.py) || | |
 | [06](https://adventofcode.com/2022/day/6)  |                  | [py](py/day6.py) || | |
