@@ -1,6 +1,6 @@
 # pyAOC_2022
 
-![AdventOfCode](https://img.shields.io/badge/Advent%20Of%20Code-2022-blue?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/github/license/Vasile-hij/pyAOC_2022?style=flat-square) ![GitHub top Language](https://img.shields.io/github/languages/count/Vasile-hij/pyAOC_2022?style=flat-square) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Vasile-Hij/pyAOC_2022)
+![AdventOfCode](https://img.shields.io/badge/Advent%20Of%20Code-2022-blue?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/github/license/Vasile-hij/pyAOC-2022?style=flat-square) ![GitHub top Language](https://img.shields.io/github/languages/count/Vasile-hij/pyAOC-2022?style=flat-square) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Vasile-Hij/pyAOC-2022)
 
 
 `This is the most wonderful time of the year - Andy Williams`
@@ -8,8 +8,8 @@
 |  Day                                       | Name             | Solution         | Part 1| Part 2 | Stars |
 |--------------------------------------------|------------------|------------------|---|---|---|
 | [01](https://adventofcode.com/2022/day/1)  | Calorie Counting | [py](py/day1.py) |66487|197301 | ** |
-| [02](https://adventofcode.com/2022/day/2)  |                  | [py](py/day2.py) || | |
-| [03](https://adventofcode.com/2022/day/3)  |                  | [py](py/day3.py) || | |
+| [02](https://adventofcode.com/2022/day/2)  | Rock Paper Scissors  | [py](py/day2.py) |13446|13509 |** |
+| [03](https://adventofcode.com/2022/day/3)  | Rucksack Reorganizatio  | [py](py/day3.py) |8053| |* |
 | [04](https://adventofcode.com/2022/day/4)  |                  | [py](py/day4.py) || | |
 | [05](https://adventofcode.com/2022/day/5)  |                  | [py](py/day5.py) || | |
 | [06](https://adventofcode.com/2022/day/6)  |                  | [py](py/day6.py) || | |
