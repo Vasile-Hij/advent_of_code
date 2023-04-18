@@ -1,13 +1,12 @@
 #!/usr/bin/env python3
-
 """
     part_1: Every elf carry a quantity of calories, find the maximum amount of it | 66487
     part_2: Top 3 elf calories | 197301
 """
-from util import get_input_num
+from utils.get_data import get_data_num
 
-def daily_input(day='day1', separator_two='\n\n'):
-    return get_input_num(day, separator_two)
+def daily_input(year=22, day='day01', separator_two='\n\n'):
+    return get_data_num(year, day, separator_two)
 
 
 def part_1(data):

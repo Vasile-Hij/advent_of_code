@@ -1,5 +1,3 @@
-#!/usr/bin/env python3
-
 """
     Part_1:
         elf: A for Rock, B for Paper, and C for Scissors.

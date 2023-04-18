@@ -1,15 +1,19 @@
 [tool.poetry]
-name = "pyaoc-2022"
-version = "1"
+name = "advent_of_code"
+version = "1.1"
 description = "Yearly AOC contest"
 authors = ["Vasile-Hij <vasile.hijs@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [{include = "pyaoc_2022"}]
+packages = [
+    {include = "2022"},
+    {include = "utils"}
+    ]
 
 [tool.poetry.dependencies]
 python = "^3.9"
 ipdb = "^0.13.9"
+black = "^23.3.0"
 
 
 [build-system]
