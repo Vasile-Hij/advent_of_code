@@ -1,9 +1,8 @@
-#!/usr/bin/env python3
-from util import get_input_str
+from common.util import get_data_str
 
 
-def daily_input(day='day3'):
-    return get_input_str(day)
+def daily_input(year='22', day='03'):
+    return get_data_str(year, day)
 
 
 

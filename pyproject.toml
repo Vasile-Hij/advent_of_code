@@ -5,15 +5,15 @@ description = "Yearly AOC contest"
 authors = ["Vasile-Hij <vasile.hijs@gmail.com>"]
 license = "MIT"
 readme = "README.md"
-packages = [
-    {include = "2022"},
-    {include = "utils"}
-    ]
 
 [tool.poetry.dependencies]
-python = "^3.9"
+python = "^3.11"
 ipdb = "^0.13.9"
 black = "^23.3.0"
+setuptools = "^67.7.0"
+poetry-plus = "^0.11.4"
+ruff = "^0.0.263"
+python-dateutil = "^2.8.2"
 
 
 [build-system]

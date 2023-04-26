@@ -1,1 +1,1 @@
-from utils.get_files import get_input_str
+from common.util import get_data_str

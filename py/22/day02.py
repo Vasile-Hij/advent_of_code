@@ -9,11 +9,10 @@
     Part_2:
         second columns indicates now the output: X lose, Y draw, Z win, so find you had chosen
 """
+from common.util import get_data_str
 
-from util import get_input_str
-
-def daily_input(day='day2'):
-    return get_input_str(day)
+def daily_input(year='22', day='02'):
+    return get_data_str(year, day)
 
 
 def part_1(data):
