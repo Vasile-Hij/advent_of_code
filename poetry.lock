@@ -347,14 +347,14 @@ ipython = {version = ">=7.31.1", markers = "python_version >= \"3.11\""}
 
 [[package]]
 name = "ipython"
-version = "8.12.0"
+version = "8.13.2"
 description = "IPython: Productive Interactive Computing"
 category = "main"
 optional = false
-python-versions = ">=3.8"
+python-versions = ">=3.9"
 files = [
-    {file = "ipython-8.12.0-py3-none-any.whl", hash = "sha256:1c183bf61b148b00bcebfa5d9b39312733ae97f6dad90d7e9b4d86c8647f498c"},
-    {file = "ipython-8.12.0.tar.gz", hash = "sha256:a950236df04ad75b5bc7f816f9af3d74dc118fd42f2ff7e80e8e60ca1f182e2d"},
+    {file = "ipython-8.13.2-py3-none-any.whl", hash = "sha256:ffca270240fbd21b06b2974e14a86494d6d29290184e788275f55e0b55914926"},
+    {file = "ipython-8.13.2.tar.gz", hash = "sha256:7dff3fad32b97f6488e02f87b970f309d082f758d7b7fc252e3b19ee0e432dbb"},
 ]
 
 [package.dependencies]
@@ -974,4 +974,4 @@ files = [
 [metadata]
 lock-version = "2.0"
 python-versions = "^3.11"
-content-hash = "97cc92899957ee1f52256cfb016a1b7a684578ed7c44b24a01c65f9cadef0f0a"
+content-hash = "50cac3458a89ba494e84e05d6c618afa77c1c93e8ce5c56b007fa8f5f0c9d71c"

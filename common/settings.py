@@ -25,7 +25,7 @@ def get_input_path(value):
 
 
 files = {
-    'input_path': 'input/{year}/day{day}.txt',
+    'input_path': 'input/{year}/day{day}{sample}.txt',
     'file_path': 'input.{year}.day{day}.txt',
     'script_path': 'py.{year}.day{day}'
          }

@@ -9,10 +9,11 @@
     Part_2:
         second columns indicates now the output: X lose, Y draw, Z win, so find you had chosen
 """
-from common.util import get_data_str
 
-def daily_input(year='22', day='02'):
-    return get_data_str(year, day)
+
+def start_day():
+    type_data = 'str'
+    return type_data
 
 
 def part_1(data):
@@ -44,12 +45,3 @@ def part_2(data):
         'C Z': 6 + 1
     }
     return sum([new_rules[chance] for chance in data])
-
-
-def main():
-    print(f'Part_1 is {part_1(daily_input())}.') # 13446
-    print(f'Part_2 is {part_2(daily_input())}.') # 13509
-
-
-if __name__ == '__main__':
-    main()

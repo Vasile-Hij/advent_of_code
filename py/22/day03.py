@@ -1,9 +1,6 @@
-from common.util import get_data_str
-
-
-def daily_input(year='22', day='03'):
-    return get_data_str(year, day)
-
+def start_day():
+    type_data = 'str'
+    return type_data
 
 
 def part_1(data):
@@ -46,12 +43,3 @@ def part_2(data):
             counter += common - char_A + 26 + 1
 
     return counter
-
-
-def main(): 
-    print(f'Part_1 is {part_1(daily_input())}.')  # 8053
-    print(f'Part_2 is {part_2(daily_input())}.')  # 2425
-
-
-if __name__ == '__main__':
-    main()

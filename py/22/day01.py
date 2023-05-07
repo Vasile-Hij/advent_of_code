@@ -4,6 +4,12 @@
 """
 
 
+def start_day():
+    type_data = 'int'
+    separator = '\n\n'
+    return type_data, separator
+
+
 def helper(data):
     result = [sum(result) for result in data]
     result.sort(reverse=True)
