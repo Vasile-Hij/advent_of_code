@@ -7,15 +7,15 @@ def get_function(input_path, get_function_type, separator):
             return 'get_data_num'
         if function == 'str':
             return 'get_data_str'
-        if function == 'file':
-            return 'get_file'
+        if function == 'str_sep':
+            return 'get_data_str_sep'
 
     function_type = function_name(get_function_type)
 
     function_mapping = {
         'get_data_num': get_data_num,
         'get_data_str': get_data_str,
-        'get_file': get_file
+        'get_data_str_sep': get_data_str_sep
     }
     try:
         if separator is None:
@@ -38,15 +38,19 @@ def unpack_values(start_day):
 
 def get_data_num(input_path, separator=None):
     with open(input_path, 'r') as file:
-        return [[int(i) for i in x.split()] for x in file.read().split(separator)]
+        return [[int(item) for item in line.split() if item] for line in file.read().split(separator)]
 
 
-def get_data_str(input_path, separator=None):
+def get_data_str(input_path):
     with open(input_path, 'r') as file:
         data = file.readlines()
         return list(map(str.strip, data))
 
 
-def get_file(input_path):
+def get_data_str_sep(input_path, separator=None):
     with open(input_path, 'r') as file:
-        return [line.rstrip() for line in file.readlines()]
+        if separator:
+            data = file.read().split(separator)
+        else:
+            data = file.read()
+        return [[item for item in line.split('\n') if item] for line in data if line]

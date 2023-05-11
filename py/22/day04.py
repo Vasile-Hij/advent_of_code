@@ -1,5 +1,5 @@
 def start_day():
-    type_data = "file"
+    type_data = 'str'
     return type_data
 
 
@@ -12,7 +12,8 @@ def part_1(data):
         first, second = each_pair.strip().split(',')
         first = set(find_range(*map(int, first.split('-'))))
         second = set(find_range(*map(int, second.split('-'))))
-        if len(first - second) == 0 or len(second - first) == 0:
+        # if len(first - second) == 0 or len(second - first) == 0:
+        if first.issubset(second) or second.issubset(first):
             counter += 1
     return counter
 
