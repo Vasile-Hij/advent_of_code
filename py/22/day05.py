@@ -43,7 +43,7 @@ def part_1(data):
         # operation = operation.replace(' ', '').replace('move', '').replace('from', '').replace('to', '')
         # _move, _from, _to = operation.strip()
         _move, _from, _to = map(int, re.findall(r'\d+', operation))
-    # todo
+    # todo operations
 
     return crates, operations
 
