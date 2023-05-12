@@ -11,7 +11,7 @@
 | [02](https://adventofcode.com/2022/day/2)  | Rock Paper Scissors     | [py](py/22/day02.py) | 13446  | 13509  | **    |
 | [03](https://adventofcode.com/2022/day/3)  | Rucksack Reorganization | [py](py/22/day03.py) | 8053   | 2425   | **    |
 | [04](https://adventofcode.com/2022/day/4)  | Camp Cleanup            | [py](py/22/day04.py) | 433    | 852    | **    |
-| [05](https://adventofcode.com/2022/day/5)  | Supply Stacks           | [py](py/22/day05-1.py) |        |        |       |
+| [05](https://adventofcode.com/2022/day/5)  | Supply Stacks           | [py](py/22/day05.py) |JRVNHHCSJ|        |  *      |
 | [06](https://adventofcode.com/2022/day/6)  |                         | [py](py/22/day06.py) |        |        |       |
 | [07](https://adventofcode.com/2022/day/7)  |                         | [py](py/22/day07.py) |        |        |       |
 | [08](https://adventofcode.com/2022/day/8)  |                         | [py](py/22/day08.py) |        |        |       |

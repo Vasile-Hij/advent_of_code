@@ -36,16 +36,18 @@ def helper(data):
 
 def part_1(data):
     crates, operations = helper(data)
-    print(operations)
-    arranged_crates = {}
 
     for operation in operations.values():
         # operation = operation.replace(' ', '').replace('move', '').replace('from', '').replace('to', '')
         # _move, _from, _to = operation.strip()
         _move, _from, _to = map(int, re.findall(r'\d+', operation))
-    # todo operations
+        for counter in range(1, _move+1):
+            crates[_to].append(crates[_from].pop())
+            counter += 1
 
-    return crates, operations
+    arranged_crates = dict(sorted(crates.items()))
+    top_crates = ''.join(crate.pop() for crate in arranged_crates.values())
+    return top_crates
 
 
 def part_2(data):
