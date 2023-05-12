@@ -43,7 +43,6 @@ def part_1(data):
         _move, _from, _to = map(int, re.findall(r'\d+', operation))
         for counter in range(1, _move+1):
             crates[_to].append(crates[_from].pop())
-            counter += 1
 
     arranged_crates = dict(sorted(crates.items()))
     top_crates = ''.join(crate.pop() for crate in arranged_crates.values())
@@ -51,4 +50,15 @@ def part_1(data):
 
 
 def part_2(data):
-    return
+    crates, operations = helper(data)
+
+    for operation in operations.values():
+        _move, _from, _to = map(int, re.findall(r'\d+', operation))
+        temp_movement = deque()
+        for counter in range(1, _move + 1):
+            temp_movement.extendleft(crates[_from].pop())
+        crates[_to].extend(temp_movement)
+
+    arranged_crates = dict(sorted(crates.items()))
+    top_crates = ''.join(crate.pop() for crate in arranged_crates.values())
+    return top_crates
