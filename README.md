@@ -2,6 +2,15 @@
 
 ![AdventOfCode](https://img.shields.io/badge/Advent%20Of%20Code-2022-blue?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/github/license/Vasile-hij/pyAOC-2022?style=flat-square) ![GitHub top Language](https://img.shields.io/github/languages/count/Vasile-hij/pyAOC-2022?style=flat-square) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Vasile-Hij/pyAOC-2022)
 
+Clone and cd to root project then:
+$ poetry install
+
+Run:
+$`python main.py -v <yearday>` e.g: `python main.py -v 2201` '22' represent year 2022 and '01' is day 01. 
+For current year works with day only: `python main.py -v 01`
+For testing sample input add `-s s`: `python main.py -v 01 s- s`
+
+
 
 `This is the most wonderful time of the year - Andy Williams`
 
@@ -13,7 +22,7 @@
 | [04](https://adventofcode.com/2022/day/4)  | Camp Cleanup            | [py](py/22/day04.py) | 433       | 852       | **      |
 | [05](https://adventofcode.com/2022/day/5)  | Supply Stacks           | [py](py/22/day05.py) | JRVNHHCSJ | GNFBSBJLH | **      |
 | [06](https://adventofcode.com/2022/day/6)  | Turning Trouble         | [py](py/22/day06.py) | 1287      | 3716      | **      |
-| [07](https://adventofcode.com/2022/day/7)  |                         | [py](py/22/day07.py) |           |           |         |
+| [07](https://adventofcode.com/2022/day/7)  | No Space Left On Device | [py](py/22/day07.py) | 1367870   |           | *       |
 | [08](https://adventofcode.com/2022/day/8)  |                         | [py](py/22/day08.py) |           |           |         |
 | [09](https://adventofcode.com/2022/day/9)  |                         | [py](py/22/day09.py) |           |           |         |
 | [10](https://adventofcode.com/2022/day/10) |                         | [py](py/22/day10.py) |           |           |         |
