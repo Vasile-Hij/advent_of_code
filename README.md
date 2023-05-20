@@ -22,7 +22,7 @@ For testing sample input add `-s s`: `python main.py -v 01 s- s`
 | [04](https://adventofcode.com/2022/day/4)  | Camp Cleanup            | [py](py/22/day04.py) | 433       | 852       | **      |
 | [05](https://adventofcode.com/2022/day/5)  | Supply Stacks           | [py](py/22/day05.py) | JRVNHHCSJ | GNFBSBJLH | **      |
 | [06](https://adventofcode.com/2022/day/6)  | Turning Trouble         | [py](py/22/day06.py) | 1287      | 3716      | **      |
-| [07](https://adventofcode.com/2022/day/7)  | No Space Left On Device | [py](py/22/day07.py) | 1367870   |           | *       |
+| [07](https://adventofcode.com/2022/day/7)  | No Space Left On Device | [py](py/22/day07.py) | 1367870   | 549173    | **      |
 | [08](https://adventofcode.com/2022/day/8)  |                         | [py](py/22/day08.py) |           |           |         |
 | [09](https://adventofcode.com/2022/day/9)  |                         | [py](py/22/day09.py) |           |           |         |
 | [10](https://adventofcode.com/2022/day/10) |                         | [py](py/22/day10.py) |           |           |         |
