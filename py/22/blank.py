@@ -1,15 +1,17 @@
 def start_day():
-    type_data = ''
-    return type_data
+    return ''  # e.g. find_digits
 
 
-def helper(data):
-    return
+def helper(_data):
+    return _data
 
 
 def part_1(data):
-    return
+    x = helper(data)
+    return x
 
 
 def part_2(data):
-    return
+    y = helper(data)
+    return y
+
