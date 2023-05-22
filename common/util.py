@@ -1,56 +1,97 @@
 import re
+from collections import Counter
+
+separator = '─'*100
+lines = str.splitlines
 
 
-def get_function(input_path, get_function_type, separator):
-    def function_name(function):
-        if function == 'int':
-            return 'get_data_num'
-        if function == 'str':
-            return 'get_data_str'
-        if function == 'str_sep':
-            return 'get_data_str_sep'
-
-    function_type = function_name(get_function_type)
-
-    function_mapping = {
-        'get_data_num': get_data_num,
-        'get_data_str': get_data_str,
-        'get_data_str_sep': get_data_str_sep
-    }
-    try:
-        if separator is None:
-            return function_mapping[function_type](input_path)
-        return function_mapping[function_type](input_path, separator)
-    except KeyError:
-        print(f'This {function_type} is invalid!')
+def paragraph(text):
+    return text.split('\n\n')
 
 
-def unpack_values(start_day):
-    separator = None
-    try:
-        function_type, separator = start_day()
-    except ValueError:
+def helper_base(source: str, functions: callable = str, display: int = 10):
+    day_text = read_raw(source)
+    name, function, segmentation = functions()
 
-        function_type = start_day()
+    parser_function = get_function(function)
 
-    return function_type, separator
+    if segmentation != 'lines':
+        custom_segmentation = get_function(segmentation)
+        segmentation = custom_segmentation(day_text.rstrip())
+    else:
+        segmentation = lines(day_text.rstrip())
+    print(name)
+    display_items('Raw input', day_text.splitlines(), display)
+    data = make_tuple(parser_function, segmentation)
+    if parser_function != str or parser_function != lines:
+        display_items('Parsed file', data, display)
 
-
-def get_data_num(input_path, separator=None):
-    with open(input_path, 'r') as file:
-        return [[int(item) for item in line.split() if item] for line in file.read().split(separator)]
-
-
-def get_data_str(input_path):
-    with open(input_path, 'r') as file:
-        data = file.readlines()
-        return list(map(str.strip, data))
+    return data
 
 
-def get_data_str_sep(input_path, separator=None):
-    with open(input_path, 'r') as file:
-        if separator:
-            data = file.read().split(separator)
-        else:
-            data = file.read()
-        return [[item for item in line.split('\n') if item] for line in data if line]
+def get_function(function: str):
+    method_name = function
+    possibles = globals().copy()
+    possibles.update(locals())
+    method = possibles.get(method_name)
+
+    if not method:
+        raise NotImplementedError(f'Method {method_name} not implemented')
+    return method
+
+
+def display_items(file_raw, items, display: int, separate=separator):
+    if display:
+        type_input = Counter(map(type, items))
+
+        def counter(types):
+            """count lines and verbose if plural"""
+            for types, name in types.items():
+                return f'{name} {types.__name__}{"" if name == 1 else "s"}'
+
+        print(f'{separate}\n{file_raw}: {counter(type_input)}:\n{separate}')
+        for line in items[:display]:
+            print(truncate(line))
+        if display < len(items):
+            print('...')
+
+
+def read_raw(source: str):
+    with open(source, 'r') as file:
+        data = file.read()
+        return data
+
+
+def printer(part: str, result: str, func: callable = str, separate: str = separator):
+    _part = part
+
+    match part:
+        case 'part_1':
+            _part = 'Part 1'
+        case 'part_2':
+            _part = 'Part 2'
+
+    results = f'{_part}: {func(result)}'
+    return f'{separate}\n{results}\n{separate}'
+
+
+def truncate(obj, width: int = 100, ellipsis: str = ' ...'):
+    string = str(obj)
+    if len(string) <= width:
+        return string
+    return string[:width - len(ellipsis)] + ellipsis
+
+
+def make_tuple(function: callable, *sequences):
+    return tuple(map(function, *sequences))
+
+
+def make_list(function: callable, *sequences):
+    return list(map(function, *sequences))
+
+
+def find_digits(text: str):
+    return make_tuple(int, re.findall(r'[0-9]', text))
+
+
+four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
