@@ -3,9 +3,11 @@ import re
 
 
 def start_day():
-    type_data = 'str_sep'
-    sep = '\n\n'
-    return type_data, sep
+    name = '--- Day 5: Supply Stacks ---'
+    parser_function = 'each_item'
+    display_lines_or_paragraph = 'paragraph'
+    return name, parser_function, display_lines_or_paragraph
+
 
 
 def helper(data):

@@ -1,9 +1,15 @@
 def start_day():
-    type_data = 'str'
-    return type_data
+    name = '--- Day 4: Camp Cleanup ---'
+    parser_function = 'str_strip'
+    display_lines_or_paragraph = 'lines'
+    return name, parser_function, display_lines_or_paragraph
 
 
 find_range = lambda first, second: range(first, second + 1)
+
+
+def helper(data):
+    return 
 
 
 def part_1(data):

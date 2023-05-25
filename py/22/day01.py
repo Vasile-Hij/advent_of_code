@@ -5,13 +5,15 @@
 
 
 def start_day():
-    type_data = 'int'
-    separator = '\n\n'
-    return type_data, separator
+    name = '--- Day 1: Calorie Counting ---'
+    parser_function = 'integers'
+    display_lines_or_paragraph = 'paragraph'
+    return name, parser_function, display_lines_or_paragraph
 
 
 def helper(data):
     result = [sum(result) for result in data]
+    print(result)
     result.sort(reverse=True)
     return result
 

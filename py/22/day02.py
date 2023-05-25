@@ -12,36 +12,50 @@
 
 
 def start_day():
-    type_data = 'str'
-    return type_data
+    name = '--- Day 2: Rock Paper Scissors ---'
+    parser_function = 'str_split'
+    display_lines_or_paragraph = 'lines'
+    return name, parser_function, display_lines_or_paragraph
+
+
+def helper(data):
+    return data
 
 
 def part_1(data):
-    rules = {
-        'A X': 1 + 3,
-        'A Y': 2 + 6,
-        'A Z': 3 + 0,
-        'B X': 1 + 0,
-        'B Y': 2 + 3,
-        'B Z': 3 + 6,
-        'C X': 1 + 6,
-        'C Y': 2 + 0,
-        'C Z': 3 + 3
-    }
+    answer = 0
 
-    return sum([rules[chance] for chance in data])
+    for line in data:
+        left, right = line
+        left = "ABC".index(left)
+        right = "XYZ".index(right)
+
+        answer += right + 1
+
+        match (right - left) % 3:
+            case 1:
+                answer += 6
+            case 0:
+                answer += 3
+
+    return answer
 
 
 def part_2(data):
-    new_rules = {
-        'A X': 0 + 3,
-        'A Y': 3 + 1,
-        'A Z': 6 + 2,
-        'B X': 0 + 1,
-        'B Y': 3 + 2,
-        'B Z': 6 + 3,
-        'C X': 0 + 2,
-        'C Y': 3 + 3,
-        'C Z': 6 + 1
-    }
-    return sum([new_rules[chance] for chance in data])
+    answer = 0
+
+    for line in data:
+        left, right = line
+        left = "ABC".index(left)
+
+        match right:
+            case "X":
+                answer += (left - 1) % 3 + 1
+            case "Y":
+                answer += 3
+                answer += left + 1
+            case "Z":
+                answer += 6
+                answer += (left + 1) % 3 + 1
+
+    return answer

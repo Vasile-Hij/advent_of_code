@@ -1,18 +1,14 @@
 import re
 from collections import Counter
 
-separator = '─'*100
+
+separator = '─' * 100
 lines = str.splitlines
 
 
-def paragraph(text):
-    return text.split('\n\n')
-
-
-def helper_base(source: str, functions: callable = str, display: int = 10):
+def helper_base(source: str, year: str, functions: callable = str, display: int = 10):
     day_text = read_raw(source)
     name, function, segmentation = functions()
-
     parser_function = get_function(function)
 
     if segmentation != 'lines':
@@ -20,7 +16,10 @@ def helper_base(source: str, functions: callable = str, display: int = 10):
         segmentation = custom_segmentation(day_text.rstrip())
     else:
         segmentation = lines(day_text.rstrip())
-    print(name)
+
+    _year = ''.join(['--- Year: 20', year])
+    print(_year, name)
+
     display_items('Raw input', day_text.splitlines(), display)
     data = make_tuple(parser_function, segmentation)
     if parser_function != str or parser_function != lines:
@@ -38,6 +37,12 @@ def get_function(function: str):
     if not method:
         raise NotImplementedError(f'Method {method_name} not implemented')
     return method
+
+
+def get_functions(source, *args):
+    if get_function(args):
+        return True
+    return False
 
 
 def display_items(file_raw, items, display: int, separate=separator):
@@ -72,14 +77,14 @@ def printer(part: str, result: str, func: callable = str, separate: str = separa
             _part = 'Part 2'
 
     results = f'{_part}: {func(result)}'
-    return f'{separate}\n{results}\n{separate}'
+    print(f'{separate}\n{results}\n{separate}')
 
 
 def truncate(obj, width: int = 100, ellipsis: str = ' ...'):
     string = str(obj)
     if len(string) <= width:
         return string
-    return string[:width - len(ellipsis)] + ellipsis
+    return string[: width - len(ellipsis)] + ellipsis
 
 
 def make_tuple(function: callable, *sequences):
@@ -90,8 +95,33 @@ def make_list(function: callable, *sequences):
     return list(map(function, *sequences))
 
 
+def str_strip(data: str):
+    return data.strip()
+
+
+def str_split(data: str):
+    return data.split()
+
+
+def paragraph(data: str):
+    return data.split('\n\n')
+
+
+def integers(data: str):
+    return make_tuple(int, re.findall(r'-?[0-9]+', data))
+
+
 def find_digits(text: str):
     return make_tuple(int, re.findall(r'[0-9]', text))
 
 
 four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
+
+
+def each_first_item(data: str):
+    return [item[0] for item in data]
+
+
+def each_item(data: str):
+    return [item for item in data]
+

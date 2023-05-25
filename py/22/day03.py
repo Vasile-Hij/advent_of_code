@@ -1,12 +1,20 @@
 def start_day():
-    type_data = 'str'
-    return type_data
+    name = '--- Day 3: Rucksack Reorganization ---'
+    parser_function = 'each_first_item'
+    display_lines_or_paragraph = 'lines'
+    return name, parser_function, display_lines_or_paragraph
+
+
+def helper(data):
+    return data
 
 
 def part_1(data):
     counter = 0
+    _data = helper(data)
     
-    for char in data:
+    
+    for char in _data:
         mid = len(char) // 2
         left = char[:mid]
         right = char[mid:]
@@ -26,10 +34,11 @@ def part_1(data):
 
 
 def part_2(data):
+    _data = helper(data)
     counter = 0
     
-    for char in range(0, len(data), 3):
-        step = data[char:char+3]
+    for char in range(0, len(_data), 3):
+        step = _data[char:char+3]
 
         common, = set(step[0]) & set(step[1]) & set(step[2]) 
 
