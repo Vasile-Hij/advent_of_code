@@ -1,18 +1,13 @@
 import argparse
+import sys
 from common.checker import clean_input
 from common.settings import files
 from common.util import helper_base, printer
 from importlib import import_module
 
 
-def run(func, part, source, functions):
-    result = helper_base(source, functions)
-    print(printer(part, result, func))
-
-
 if __name__ == '__main__':
-    _help = \
-        """
+    _help = """
             1. For year 2022 and day 01 type: -v 2201 ("-v" is value, "22" is directory , "01" is "day01") 
             2. If you type only 2 digits, it will be considered that day, but no more than 25 (if that day is solved yet),
             and year it will be the latest year available in 'input' directory.
@@ -35,16 +30,14 @@ if __name__ == '__main__':
         input_path = files['input_path'].format(year=year, day=day, sample='')
 
     script = import_module(script_path)
-    print(f'year: {year}, day: {day}')
 
-    for each_day in ("part_1", "part_2"):
-        if not hasattr(script, 'start_day'):
-            print('Please define input function and/or separator')
-            continue
+    if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
+        print(f'Please define all functions as in "blank.py" template')
+        sys.exit()
 
-        functions_required = getattr(script, 'start_day')
 
-        if not hasattr(script, each_day):
-            continue
-        run(getattr(script, each_day), each_day, input_path, functions_required)
+    functions = getattr(script, 'start_day')
+    result = helper_base(source=input_path, year=year, functions=functions, )
 
+    for each_day in ["part_1", "part_2"]:
+        printer(part=each_day, result=result, func=getattr(script, each_day))

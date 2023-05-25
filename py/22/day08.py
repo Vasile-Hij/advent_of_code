@@ -10,11 +10,15 @@ def helper(_data):
 
 
 def part_1(data):
-    x = helper(data)
-    return x
+    #x = helper(data)
+    a = {'a': 123, 'b': 321}
+    c = {'a': 123, 'b': 321}
+
+    return a
 
 
 def part_2(data):
+    c = {'a': 123, 'b': 321}
     # y = helper(data)
     # return y
-    pass
+    return c

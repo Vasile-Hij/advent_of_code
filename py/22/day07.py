@@ -3,8 +3,10 @@ from pathlib import Path
 
 
 def start_day():
-    type_data = 'str'
-    return type_data
+    name = '--- Day 7: No Space Left On Device ---'
+    parser_function = 'str_split'
+    display_lines_or_paragraph = 'lines'
+    return name, parser_function, display_lines_or_paragraph
 
 
 def helper(_data):
@@ -12,7 +14,7 @@ def helper(_data):
     dirs = defaultdict(int)
 
     for line in _data:
-        match line.split():
+        match line:
             case ['$', 'cd', new_dir]:
                 curr_dir = curr_dir / new_dir
                 curr_dir = curr_dir.resolve()
@@ -33,4 +35,6 @@ def part_2(data):
     required_space = 30000000
     dirs = helper(data)
 
-    return min(size for size in dirs.values() if dirs[Path('/')] - size <= available_space - required_space)
+    return min(
+        size for size in dirs.values() if dirs[Path('/')] - size <= available_space - required_space
+    )
