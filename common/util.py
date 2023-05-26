@@ -22,8 +22,8 @@ def helper_base(source: str, year: str, functions: callable = str, display: int 
 
     display_items('Raw input', day_text.splitlines(), display)
     data = make_tuple(parser_function, segmentation)
-    if parser_function != str or parser_function != lines:
-        display_items('Parsed file', data, display)
+    #if parser_function != str or parser_function != lines:
+    display_items('Parsed file', data, display)
 
     return data
 
@@ -124,4 +124,9 @@ def each_first_item(data: str):
 
 def each_item(data: str):
     return [item for item in data]
+
+
+def strings_per_line(data):
+        _data = paragraph(data)
+        return [[item for item in line.split('\n') if item] for line in _data if line][0]
 
