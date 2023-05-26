@@ -4,7 +4,7 @@ import re
 
 def start_day():
     name = '--- Day 5: Supply Stacks ---'
-    parser_function = 'each_item'
+    parser_function = 'strings_per_line'
     display_lines_or_paragraph = 'paragraph'
     return name, parser_function, display_lines_or_paragraph
 
