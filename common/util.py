@@ -1,12 +1,12 @@
 import re
-from collections import Counter
+from collections import Counter, abc
 
 
 separator = '─' * 100
 lines = str.splitlines
 
 
-def helper_base(source: str, year: str, functions: callable = str, display: int = 10):
+def helper_base(source: str, year: str, functions: callable = str, display: int = 10) -> tuple:
     day_text = read_raw(source)
     name, function, segmentation = functions()
     parser_function = get_function(function)
@@ -22,8 +22,8 @@ def helper_base(source: str, year: str, functions: callable = str, display: int 
 
     display_items('Raw input', day_text.splitlines(), display)
     data = make_tuple(parser_function, segmentation)
-    #if parser_function != str or parser_function != lines:
-    display_items('Parsed file', data, display)
+    if parser_function != str or parser_function != lines:
+        display_items('Parsed file', data, display)
 
     return data
 
@@ -39,10 +39,8 @@ def get_function(function: str):
     return method
 
 
-def get_functions(source, *args):
-    if get_function(args):
-        return True
-    return False
+def get_functions(*functions: str) -> list:
+    return [get_function(func) for func in functions]
 
 
 def display_items(file_raw, items, display: int, separate=separator):
@@ -61,7 +59,7 @@ def display_items(file_raw, items, display: int, separate=separator):
             print('...')
 
 
-def read_raw(source: str):
+def read_raw(source: str) -> str:
     with open(source, 'r') as file:
         data = file.read()
         return data
@@ -87,46 +85,68 @@ def truncate(obj, width: int = 100, ellipsis: str = ' ...'):
     return string[: width - len(ellipsis)] + ellipsis
 
 
-def make_tuple(function: callable, *sequences):
+def make_tuple(function: callable, *sequences) -> tuple:
     return tuple(map(function, *sequences))
 
 
-def make_list(function: callable, *sequences):
+def make_list(function: callable, *sequences) -> list:
     return list(map(function, *sequences))
 
 
-def str_strip(data: str):
+def str_strip(data: str) -> str:
     return data.strip()
 
 
-def str_split(data: str):
+def str_split(data: str) -> str:
     return data.split()
 
 
-def paragraph(data: str):
+def paragraph(data: str) -> str:
     return data.split('\n\n')
 
 
-def integers(data: str):
+def integers(data: str) -> tuple[int]:
     return make_tuple(int, re.findall(r'-?[0-9]+', data))
 
 
-def find_digits(text: str):
+def find_digits(text: str) -> tuple[int]:
     return make_tuple(int, re.findall(r'[0-9]', text))
+
+
+def each_first_item(data: str) -> list[tuple]:
+    return [item[0] for item in data]
+
+
+def each_item(data: str) -> list[tuple]:
+    return [item for item in data]
+
+
+def strings_per_line(data) -> list:
+    _data = paragraph(data)
+    return [[item for item in line.split('\n') if item] for line in _data if line][0]
 
 
 four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
 
 
-def each_first_item(data: str):
-    return [item[0] for item in data]
+def add_together(a, b):
+    return (a[0] + b[0], a[1] + b[1])
 
 
-def each_item(data: str):
-    return [item for item in data]
+def sum_items(iterable, pred=bool) -> int:
+    return sum(1 for item in iterable if pred(item))
 
 
-def strings_per_line(data):
-        _data = paragraph(data)
-        return [[item for item in line.split('\n') if item] for line in _data if line][0]
+class Matrix2D(dict):
+    def __init__(self, grid=(), directions=four_directions, skip=(), default=KeyError):
+        self.directions = directions
+        self.default = default
 
+        self.update(
+            {
+                (x, y): value
+                for y, row in enumerate(grid)
+                for x, value in enumerate(row)
+                if value not in skip
+            }
+        )

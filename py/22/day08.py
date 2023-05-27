@@ -1,3 +1,6 @@
+from common.util import get_functions
+
+
 def start_day():
     name = '--- Day 8: Treetop Tree House ---'
     parser_function = 'find_digits'
@@ -10,15 +13,30 @@ def helper(_data):
 
 
 def part_1(data):
-    #x = helper(data)
-    a = {'a': 123, 'b': 321}
-    c = {'a': 123, 'b': 321}
+    _data = helper(data)
+    
+    sum_items, add_together, Matrix2D, four_directions = get_functions(
+        'sum_items', 'add_together', 'Matrix2D', 'four_directions'
+    )
 
-    return a
+    def start_to_direction(start, direction, grid):
+        while True:
+            start = add_together(start, direction)
+            if start not in grid:
+                return
+            yield start
 
+    def visible_from_outside(grid) -> int:
+        def is_visible(location) -> bool:
+            return any(
+                all(grid[point] < grid[location] for point in start_to_direction(location, direction, grid))
+                for direction in four_directions
+            )
+
+        return sum_items(grid, is_visible)
+
+    return visible_from_outside(Matrix2D(_data))
+    
 
 def part_2(data):
-    c = {'a': 123, 'b': 321}
-    # y = helper(data)
-    # return y
-    return c
+    return

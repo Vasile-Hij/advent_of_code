@@ -49,5 +49,5 @@ Testing sample input add `-s s`: `python main.py -v 01 -s s`
 - [x] run script from command line v0.1
 - [x] refactor day 01 - 04 to run with command line now
 - [x] refactor run command line v0.2 to accept more functions
-- [ ] refactor day 01-07 to run with command line v2
-- 
+- [x] refactor day 01-07 to run with command line v2
+- [] 

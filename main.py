@@ -37,7 +37,7 @@ if __name__ == '__main__':
 
 
     functions = getattr(script, 'start_day')
-    result = helper_base(source=input_path, year=year, functions=functions, )
+    result = helper_base(source=input_path, year=year, functions=functions)
 
     for each_day in ["part_1", "part_2"]:
         printer(part=each_day, result=result, func=getattr(script, each_day))
