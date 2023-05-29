@@ -150,3 +150,10 @@ class Matrix2D(dict):
                 if value not in skip
             }
         )
+
+
+def _product(numbers) -> float:
+    result = 1
+    for number in numbers:
+        result *= number
+    return result
