@@ -1,14 +1,18 @@
 import re
-from collections import Counter, abc
+from importlib import import_module
+from collections import Counter
+
 
 
 separator = '─' * 100
 lines = str.splitlines
 
 
-def helper_base(source: str, year: str, functions: callable = str, display: int = 10) -> tuple:
+def helper_base(source: str, year: str, functions: callable = str, display: int = 10) -> tuple:    
     day_text = read_raw(source)
-    name, function, segmentation = functions()
+    
+    n, f, s = functions()
+    name, function, segmentation = n.lower(), f.lower(), s.lower()
     parser_function = get_function(function)
 
     if segmentation != 'lines':
@@ -16,6 +20,7 @@ def helper_base(source: str, year: str, functions: callable = str, display: int 
         segmentation = custom_segmentation(day_text.rstrip())
     else:
         segmentation = lines(day_text.rstrip())
+
 
     _year = ''.join(['--- Year: 20', year])
     print(_year, name)
@@ -59,10 +64,58 @@ def display_items(file_raw, items, display: int, separate=separator):
             print('...')
 
 
+def check_required_files_exists(year, day, sample):
+    input_path_sample = 'input/{year}/day{day}{sample}.txt'
+    input_path = 'input/{year}/day{day}.txt'
+    script_path = 'py.{year}.day{day}'
+    created_script_path = 'py/{year}/day{day}.py'
+    script_example = 'py/script_example.txt'
+    
+
+    
+    try:
+        script_exists = import_module(script_path.format(year=year, day=day))
+    except (ModuleNotFoundError, NameError):
+        write_file(created_script_path.format(year=year, day=day))
+        print('Script created!')
+        
+        get_blank_text = read_raw(script_example)
+        code_blank_to_day = [x for x in get_blank_text]
+        
+        script_created = created_script_path.format(year=year, day=day)
+
+        with open(script_created, 'w') as file_text:
+            file_text.writelines(code_blank_to_day)
+        
+        script_exists = import_module(script_path.format(year=year, day=day))
+        
+    
+    if sample:
+        try:
+            input_path_exist = input_path_sample.format(year=year, day=day, sample="_sample")
+        except FileNotFoundError:
+            write_file(input_path_sample.format(year=year, day=day, sample=sample))
+            print('Sample file created without data!')
+            raise('populate file manually due mulptiple examples!')
+    else:
+        try:
+            input_path_exist = input_path.format(year=year, day=day)
+        except FileNotFoundError:
+            print('making request')
+            input_path_exist = write_file(input_path.format(year=year, day=day))
+             
+        
+    return script_exists, input_path_exist
+
+
 def read_raw(source: str) -> str:
     with open(source, 'r') as file:
-        data = file.read()
-        return data
+        return file.read()
+    
+    
+def write_file(source):
+    with open(source, 'a') as file:
+        return file.write(source)
 
 
 def printer(part: str, result: str, func: callable = str, separate: str = separator):
@@ -93,6 +146,12 @@ def make_list(function: callable, *sequences) -> list:
     return list(map(function, *sequences))
 
 
+def strings_per_line(data) -> list:
+    _data = paragraph(data)
+    return [[item for item in line.split('\n') if item] for line in _data if line][0]
+
+
+
 def str_strip(data: str) -> str:
     return data.strip()
 
@@ -121,9 +180,12 @@ def each_item(data: str) -> list[tuple]:
     return [item for item in data]
 
 
-def strings_per_line(data) -> list:
-    _data = paragraph(data)
-    return [[item for item in line.split('\n') if item] for line in _data if line][0]
+def find_strings(name):
+    return tuple(re.findall(r'[a-zA-Z]', name))
+
+
+def check_len_string(name) -> bool:
+    return True if len(name) > 1 else False
 
 
 four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
