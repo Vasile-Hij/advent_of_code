@@ -1,6 +1,8 @@
 from datetime import date
-from common.settings import get_input_path
+from src.common.settings import get_input_path
+from setup_proj import paths_dir, make_dir
 import os, sys
+
 
 INPUT_DAY_SHORT = 1
 INPUT_DAY_LONG = 2
@@ -57,7 +59,6 @@ def input_day(value):
        return year, day
     
 
-
 def input_year_day(value):
     clean_value = value.strip()
 
@@ -71,30 +72,7 @@ def input_year_day(value):
         if year > get_year():
             raise(f'That year is into the future! Try previous years!')
 
-        if year < current_year and not get_input_path(year):
-            year_path = 'py/{year}'.format(year=year)
-            
-            user_input = ''
-            
-            _yes = 'yes', 'ye', 'sure', 'aye', 'true', '1', 'please'  
-            _no = "no", "nop", "ney", "dunno", "don't", "false", "0"
-            
-            yes = [y for y in _yes]
-            no = [n for n in _no]
-            
-            print(f'For "yes" choose: {yes}')
-            print(f'For "no" choose: {no}')
-            
-            question = input(f'Would you like to create {year} year?: \n')
-            user_input += question.lower().strip().replace(',', '')
- 
-            if user_input in yes:
-                if not os.path.exists(year_path):
-                    os.makedirs(year_path)
-                    print('Run again previous command!')
-                sys.exit(1)
-            if user_input in no:
-                raise(f'Run again answering with yes or choose existing years in dirrectory py/existing_year')
+        if year < current_year:
+            print('Well done ! You may start from the begininng to Aoc: 2016')
         
         return year, day
-

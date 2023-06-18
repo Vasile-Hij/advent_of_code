@@ -1,4 +1,4 @@
-from common.util import get_functions, sum_items, add_together, Matrix2D, four_directions, _product
+from src.common.util import sum_items, add_together, Matrix2D, four_directions, _product
 
 def start_day():
     name = '--- Day 8: Treetop Tree House ---'

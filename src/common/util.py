@@ -1,15 +1,17 @@
+import os
 import re
 from importlib import import_module
 from collections import Counter
-
+from setup_proj import paths_dir, make_dir
 
 
 separator = '─' * 100
 lines = str.splitlines
 
 
-def helper_base(source: str, year: str, functions: callable = str, display: int = 10) -> tuple:    
+def helper_base(source: str, year: str, functions: callable = str, display: int = 10) -> tuple:
     day_text = read_raw(source)
+    
     
     n, f, s = functions()
     name, function, segmentation = n.lower(), f.lower(), s.lower()
@@ -65,46 +67,56 @@ def display_items(file_raw, items, display: int, separate=separator):
 
 
 def check_required_files_exists(year, day, sample):
-    input_path_sample = 'input/{year}/day{day}{sample}.txt'
-    input_path = 'input/{year}/day{day}.txt'
-    script_path = 'py.{year}.day{day}'
-    created_script_path = 'py/{year}/day{day}.py'
-    script_example = 'py/script_example.txt'
-    
-
-    
+    script_path = paths_dir['script_path'].format(year=year, day=day)
+    created_script_path = paths_dir['created_script_path'].format(year=year, day=day)
+    input_path_day = paths_dir['input_path_day'].format(year=year, day=day)
+    input_path_day_sample = paths_dir['input_path_day_sample'].format(year=year, day=day, sample='_sample')
+    input_path = paths_dir['input_path'].format(year=year)
+    year_path = paths_dir['year_path'].format(year=year)
+            
     try:
-        script_exists = import_module(script_path.format(year=year, day=day))
+        script_exists = import_module(script_path)
     except (ModuleNotFoundError, NameError):
-        write_file(created_script_path.format(year=year, day=day))
+        make_dir(year_path)
+        write_file(created_script_path)
         print('Script created!')
         
-        get_blank_text = read_raw(script_example)
-        code_blank_to_day = [x for x in get_blank_text]
-        
-        script_created = created_script_path.format(year=year, day=day)
+        _text = read_raw(paths_dir['script_example'])
+        added_blank_functions = [x for x in _text]
 
-        with open(script_created, 'w') as file_text:
-            file_text.writelines(code_blank_to_day)
+        with open(created_script_path, 'w') as file_text:
+            file_text.writelines(added_blank_functions)
+            print('Script successfully populated!')
         
-        script_exists = import_module(script_path.format(year=year, day=day))
-        
+        script_exists = import_module(script_path)
     
+    try:
+        import_module(input_path)
+    except (FileNotFoundError, ModuleNotFoundError):
+        make_dir(input_path)
+        print(f'Directory "src/input/{year}" have been created!')
+        
+    try:
+        input_path_exist = read_raw(input_path_day)
+    except FileNotFoundError:
+        with open(input_path_day_sample, 'w') as f:
+            f.write('')
+        print('Making the request to AoC')
+        aoc_data = ''
+        with open(input_path_day_sample, 'w') as f:
+            f.write(aoc_data)
+            
+        input_path_exist = read_raw(input_path_day)
+
     if sample:
         try:
-            input_path_exist = input_path_sample.format(year=year, day=day, sample="_sample")
+            input_path_exist = read_raw(input_path_day_sample)
         except FileNotFoundError:
-            write_file(input_path_sample.format(year=year, day=day, sample=sample))
+            with open(input_path_day_sample, 'w') as f:
+                f.write('')
             print('Sample file created without data!')
-            raise('populate file manually due mulptiple examples!')
-    else:
-        try:
-            input_path_exist = input_path.format(year=year, day=day)
-        except FileNotFoundError:
-            print('making request')
-            input_path_exist = write_file(input_path.format(year=year, day=day))
-             
-        
+            raise('Populate file manually due mulptiple examples!') # TO DO: find a pattern to automate it
+    
     return script_exists, input_path_exist
 
 
@@ -114,10 +126,10 @@ def read_raw(source: str) -> str:
     
     
 def write_file(source):
-    with open(source, 'a') as file:
+    with open(source, 'w') as file:
         return file.write(source)
-
-
+    
+    
 def printer(part: str, result: str, func: callable = str, separate: str = separator):
     _part = part
 
