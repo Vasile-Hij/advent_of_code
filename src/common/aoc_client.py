@@ -2,7 +2,7 @@ import requests
 import os
 from lxml import html
 from src.common.util import read_raw
-from src.common.paths import paths_dir 
+from src.common.pathsgit  import paths_dir 
 from src.common.settings import get_config_file_auth
 from setup_proj import make_dir
 
