@@ -1,0 +1,58 @@
+def add_2(a, b):
+    return (a[0] + b[0], a[1] + b[1])
+
+
+def quantify(iterable, pred=bool) -> int:
+    return sum(1 for item in iterable if pred(item))
+
+
+class Matrix2D(dict):
+    def __init__(self, grid=(), directions=four_directions, skip=(), default=KeyError):
+        self.directions = directions
+        self.default = default
+
+        self.update(
+            {
+                (x, y): value
+                for y, row in enumerate(grid)
+                for x, value in enumerate(row)
+                if value not in skip
+            }
+        )
+
+
+
+
+from common.util import get_functions
+
+
+def start_day():
+    name = '--- Day 8: Treetop Tree House ---'
+    parser_function = 'find_digits'
+    display_lines_or_paragraph = 'lines'
+    return name, parser_function, display_lines_or_paragraph
+
+
+
+def helper(_data):
+    quantify, add_2, Matrix2D, four_directions = get_functions(
+        'quantify', 'add_2', 'Matrix2D', 'four_directions'
+    )
+
+    def go_in_direction(start, direction, grid):
+        while True:
+            start = add_2(start, direction)
+            if start not in grid:
+                return
+            yield start
+
+    def visible_from_outside(grid) -> int:
+        def is_visible(loc) -> bool:
+            return any(
+                all(grid[p] < grid[loc] for p in go_in_direction(loc, dir, grid))
+                for dir in four_directions
+            )
+
+        return quantify(grid, is_visible)
+
+    return visible_from_outside(Matrix2D(_data))
