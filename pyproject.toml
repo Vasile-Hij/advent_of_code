@@ -15,13 +15,25 @@ poetry-plus = "^0.11.4"
 ruff = "^0.0.263"
 python-dateutil = "^2.8.2"
 decorator = "^5.1.1"
-ipython = "^8.13.2"
+# ipython = "^8.13.2" error on pywinty dueno binary version python 3.11
 twine = "^4.0"
+pre-commit = "^3.1.0"
+jupyter = "*"
+watchdog = {extras = ["watchmedo"], version = "^3.0.0"}
+lxml = "^4.9"
 
 [tool.black]
 line-length = 100
+target-version = "py311"
+skip-string-normalization = true
+
 
 [tool.ruff]
+line-length = 100
+extend-select = ['Q']
+flake8-quotes = {inline-quotes = 'single', multiline-quotes = 'double'}
+
+
 select = [
   "E",   # pycodestyle
   "F",   # pyflakes
@@ -35,6 +47,15 @@ exclude = [
   "venv"
 ]
 
+[tool.ruff.mccabe]
+# Unlike Flake8, default to a complexity level of 10.
+max-complexity = 15 
+
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+
+[virtualenvs]
+create = true
+in-project = true

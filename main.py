@@ -1,9 +1,9 @@
 import argparse
-import sys
-from common.checker import clean_input #check_maximum_availability
-from common.settings import files, get_credentials
-from common.util import helper_base, printer, check_required_files_exists
-from importlib import import_module
+from src.common.checker import clean_input
+from src.common.util import read_raw
+from src.common.util import helper_base, printer, check_required_files_exists
+import setup_proj
+
 
 
 if __name__ == '__main__':
@@ -20,19 +20,20 @@ if __name__ == '__main__':
     parser = argparse.ArgumentParser(description="Run Advent of Code solution.")
     parser.add_argument('--value', '-v', type=int, help=_help)
     parser.add_argument('--sample', '-s', type=str, help=_help)
-    parser.add_argument('--account_name', '-a', type=str, help=_help)
     args = parser.parse_args()
 
     year, day = clean_input(args.value)
     sample = args.sample
-    account_name = args.account_name
     
-    # if account_name:
-    #     username, password = get_credentials(account_name)
-    #     print(username, password )
+    try:
+        setup_was_run = read_raw('setup.cfg')
+        if setup_was_run == '1':
+            pass
+    except FileNotFoundError:
+        setup_proj()
+        raise('Run again')    
 
     script, input_path = check_required_files_exists(year=year, day=day, sample=sample)
-
   
     if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
         print(f'Please define all functions as in "blank.txt" template')

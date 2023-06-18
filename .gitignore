@@ -130,6 +130,8 @@ dmypy.json
 
 .idea
 .vscode
-http_eg
 
 .config.cfg
+setup.cfg
+.func
+.aoc_client
