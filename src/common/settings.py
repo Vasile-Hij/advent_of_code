@@ -1,6 +1,7 @@
 import os
 from pathlib import Path
-from configparser import ConfigParser
+from configparser import ConfigParser, NoOptionError, NoSectionError
+
 
 
 def get_path():
@@ -24,13 +25,31 @@ def get_input_path(value):
             return year
 
 
-def get_config_file_auth():
+def github_session(value=None):
     path = Path(__file__)
     ROOT_DIR = path.parent.parent.parent
-    config_path = os.path.join(ROOT_DIR, '.config.cfg')
+    cfg_name = '.config.cfg'
+    
+    config_path = os.path.join(ROOT_DIR, cfg_name)
     config = ConfigParser()
     config.read(config_path)
 
-    GITHUB_TOKEN = config.get('GitHub', 'token_gh')
+    try:
+        token = config.get('GitHub', 'session')
+    except (NoOptionError, NoSectionError):
+        config.add_section('GitHub')
+        config.set('GitHub', 'session', value)
+        
+        with open(cfg_name, 'w') as cfg:
+            config.write(cfg)
+            
+        with open('.gitignore', 'r') as rf:
+            gitignore_file = rf.read().splitlines()
+        
+        if not cfg_name in gitignore_file:
+            with open('.gitignore', 'a+') as gf:
+                gf.write(cfg_name)
+            
+        token = config.get('GitHub', 'session')
     
-    return GITHUB_TOKEN
+    return token

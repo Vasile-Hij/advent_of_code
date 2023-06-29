@@ -21,6 +21,7 @@ pre-commit = "^3.1.0"
 jupyter = "*"
 watchdog = {extras = ["watchmedo"], version = "^3.0.0"}
 lxml = "^4.9"
+browser-cookie3 = "^0.19.1"
 
 [tool.black]
 line-length = 100
