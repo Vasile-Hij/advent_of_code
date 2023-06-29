@@ -1,8 +1,5 @@
 from datetime import date
 from src.common.settings import get_input_path
-from setup_proj import paths_dir, make_dir
-import os, sys
-
 
 INPUT_DAY_SHORT = 1
 INPUT_DAY_LONG = 2

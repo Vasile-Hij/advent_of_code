@@ -1,22 +1,21 @@
-# pyAOC_2022
+# Advent of code
 
 ![AdventOfCode](https://img.shields.io/badge/Advent%20Of%20Code-2022-blue?style=flat-square) [![License: MIT](https://img.shields.io/badge/License-MIT-green.svg)](https://img.shields.io/github/license/Vasile-hij/pyAOC-2022?style=flat-square) ![GitHub top Language](https://img.shields.io/github/languages/count/Vasile-hij/pyAOC-2022?style=flat-square) ![GitHub commit activity](https://img.shields.io/github/commit-activity/w/Vasile-Hij/pyAOC-2022)
 
 `This is the most wonderful time of the year - Andy Williams`
 
 This repo is built on python that is runned with poetry making all configs that you need automatically: creates directories, scripts,
-request HTML page from Advent of Code site and downloaded in 'data/cached_html', take 'input', 'sample*' and send 'result*' to the page.
-
-* to do
+request HTML page from Advent of Code site and downloaded in 'src/cached_html', taking 'input', 'sample file' from 'src/input' and send back 'result' to the AoC page.
 
 You need to do:
 1. Clone and cd to root project then:
 `$ poetry install`
 
-2. Create a 'Fine-grained-token' on [Github](https://github.com/settings/tokens?type=beta)
-Then create a file `.config.cfg` in parent directory and pass the token like this: [GitHub] token=yourtoken. This can tbe changed in 'data/common/settings'.
+2. You need to be signed in Chrome with GitHub account (for now).
 
-2.1. If you want to use project with your own inputs and different approach in solving problems, you have to remove anything in directory 'py/' except 'script_example.txt'; then in directory 'src/' remove completely 'input/' and 'cached_html/'.
+2.1 if don't want use this option, add input manually: `input/{year}/day{day}.txt` or `input/{year}/day{day}_sample.txt`
+
+2.2. If you want to use project with your own inputs and different approach in solving problems, you have to remove anything in directory 'py/' except 'script_example.txt'; then in directory 'src/' remove completely 'input/' and 'cached_html/'.
 
 
 3. Run:
@@ -26,9 +25,6 @@ If no year is mentioned, it will be taken automatically last year available: `py
 In this case '22' is the last year available for 'day01'.
 
 Testing sample input add `-s s`: `python main.py -v 01 -s s`
-
-
-# Using GitHub to login see below!
 
 
  

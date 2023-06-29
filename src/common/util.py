@@ -1,8 +1,8 @@
-import os
 import re
 from importlib import import_module
 from collections import Counter
 from setup_proj import paths_dir, make_dir
+from src.aoc.aoc_client import get_cached_html
 
 
 separator = '─' * 100
@@ -102,6 +102,7 @@ def check_required_files_exists(year, day, sample):
         with open(input_path_day_sample, 'w') as f:
             f.write('')
         print('Making the request to AoC')
+        get_aoc_data = get_cached_html()
         aoc_data = ''
         with open(input_path_day_sample, 'w') as f:
             f.write(aoc_data)
