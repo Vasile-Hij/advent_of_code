@@ -131,4 +131,5 @@ dmypy.json
 .idea
 .vscode
 
-.setup.cfg.config.cfg
+.setup.cfg
+.config.cfg
