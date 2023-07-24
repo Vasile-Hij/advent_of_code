@@ -131,6 +131,4 @@ dmypy.json
 .idea
 .vscode
 
-setup.cfg
-.aoc_client
-.config.cfg
+.setup.cfg.config.cfg

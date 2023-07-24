@@ -1,5 +1,6 @@
 from src.common.util import sum_items, add_together, Matrix2D, four_directions, _product
 
+
 def start_day():
     name = '--- Day 8: Treetop Tree House ---'
     parser_function = 'find_digits'
