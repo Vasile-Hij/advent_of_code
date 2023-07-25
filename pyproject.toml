@@ -10,18 +10,19 @@ readme = "README.md"
 python = "^3.11"
 ipdb = "^0.13.9"
 black = "^23.3.0"
-setuptools = "^67.7.0"
+setuptools = "^68.0.0"
 poetry-plus = "^0.11.4"
-ruff = "^0.0.263"
+ruff = "^0.0.280"
 python-dateutil = "^2.8.2"
 decorator = "^5.1.1"
-# ipython = "^8.13.2" error on pywinty dueno binary version python 3.11
+# ipython = "^8.13.2" error on pywinty due no binary version python 3.11
 twine = "^4.0"
 pre-commit = "^3.1.0"
-jupyter = "*"
 watchdog = {extras = ["watchmedo"], version = "^3.0.0"}
 lxml = "^4.9"
 browser-cookie3 = "^0.19.1"
+ipython = "^8.14.0"
+cssselect = "^1.2.0"
 
 [tool.black]
 line-length = 100

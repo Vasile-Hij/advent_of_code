@@ -1,9 +1,7 @@
 import argparse
 from src.common.checker import clean_input
-from src.common.util import read_raw
 from src.common.util import helper_base, printer, check_required_files_exists
-import setup_proj
-
+from setup_proj import get_setup
 
 
 if __name__ == '__main__':
@@ -13,7 +11,7 @@ if __name__ == '__main__':
             and year it will be the latest year available in 'input' directory.
             3. Sample day is taken by adding an "s" by the of digits: -v 01 -s s or -v 2201 -s s.
             4. Account states for signing to AOC using GitHub cedentials: e.g: ... -a github
-            
+
             Run e.g.: python3 main.py -v 01 -s s -a github'        
            """
 
@@ -24,22 +22,16 @@ if __name__ == '__main__':
 
     year, day = clean_input(args.value)
     sample = args.sample
-    
-    try:
-        setup_was_run = read_raw('setup.cfg')
-        if setup_was_run == '1':
-            pass
-    except FileNotFoundError:
-        setup_proj()
-        raise('Run again')    
 
-    script, input_path = check_required_files_exists(year=year, day=day, sample=sample)
-  
+    get_setup()
+
+    script, input_data_exist = check_required_files_exists(year=year, day=day, sample=sample)
+
     if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
         print(f'Please define all functions as in "blank.txt" template')
-            
+
     functions = getattr(script, 'start_day')
-    result = helper_base(source=input_path, year=year, functions=functions)
+    result = helper_base(source=input_data_exist, year=year, functions=functions)
 
     for each_day in ["part_1", "part_2"]:
         printer(part=each_day, result=result, func=getattr(script, each_day))

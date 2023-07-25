@@ -2,29 +2,31 @@ import re
 from importlib import import_module
 from collections import Counter
 from setup_proj import paths_dir, make_dir
-from src.aoc.aoc_client import get_cached_html
-
+from src.aoc.aoc_client import get_aoc_data
+from src.common.exceptions import Ignore
+from src.common.settings import get_input_path
 
 separator = '─' * 100
 lines = str.splitlines
 
 
 def helper_base(source: str, year: str, functions: callable = str, display: int = 10) -> tuple:
-    day_text = read_raw(source)
-    
-    
+    day_text = source
     n, f, s = functions()
     name, function, segmentation = n.lower(), f.lower(), s.lower()
+    
+    if function is None or function == '':
+        raise Ignore('Add a function')
+    
     parser_function = get_function(function)
 
-    if segmentation != 'lines':
+    if segmentation != 'lines' or segmentation is None:
         custom_segmentation = get_function(segmentation)
         segmentation = custom_segmentation(day_text.rstrip())
     else:
         segmentation = lines(day_text.rstrip())
 
-
-    _year = ''.join(['--- Year: 20', year])
+    _year = f'--- Year: 20{year}'
     print(_year, name)
 
     display_items('Raw input', day_text.splitlines(), display)
@@ -73,7 +75,7 @@ def check_required_files_exists(year, day, sample):
     input_path_day_sample = paths_dir['input_path_day_sample'].format(year=year, day=day, sample='_sample')
     input_path = paths_dir['input_path'].format(year=year)
     year_path = paths_dir['year_path'].format(year=year)
-            
+
     try:
         script_exists = import_module(script_path)
     except (ModuleNotFoundError, NameError):
@@ -89,42 +91,41 @@ def check_required_files_exists(year, day, sample):
             print('Script successfully populated!')
         
         script_exists = import_module(script_path)
-    
-    try:
-        import_module(input_path)
-    except (FileNotFoundError, ModuleNotFoundError):
-        make_dir(input_path)
-        print(f'Directory "src/input/{year}" have been created!')
         
     try:
-        input_path_exist = read_raw(input_path_day)
+        input_data_exist = read_raw(input_path_day)
     except FileNotFoundError:
+        available_year = get_input_path(input_path)
+        if available_year != year:
+            make_dir(input_path)
+            print(f'Directory "src/input/{year}" have been created!')
+        
         with open(input_path_day_sample, 'w') as f:
             f.write('')
-        print('Making the request to AoC')
-        get_aoc_data = get_cached_html()
-        aoc_data = ''
-        with open(input_path_day_sample, 'w') as f:
-            f.write(aoc_data)
-            
-        input_path_exist = read_raw(input_path_day)
+        aoc_input = get_aoc_data(year, day)
+
+        with open(input_path_day, 'w') as f:
+            for line in aoc_input:
+                f.write(line)
+                
+        input_data_exist = read_raw(input_path_day)
 
     if sample:
         try:
-            input_path_exist = read_raw(input_path_day_sample)
+            input_data_exist = read_raw(input_path_day_sample)
         except FileNotFoundError:
             with open(input_path_day_sample, 'w') as f:
                 f.write('')
             print('Sample file created without data!')
             raise('Populate file manually due mulptiple examples!') # TO DO: find a pattern to automate it
     
-    return script_exists, input_path_exist
+    return script_exists, input_data_exist
 
 
 def read_raw(source: str) -> str:
     with open(source, 'r') as file:
         return file.read()
-    
+
     
 def write_file(source):
     with open(source, 'w') as file:
@@ -162,7 +163,6 @@ def make_list(function: callable, *sequences) -> list:
 def strings_per_line(data) -> list:
     _data = paragraph(data)
     return [[item for item in line.split('\n') if item] for line in _data if line][0]
-
 
 
 def str_strip(data: str) -> str:

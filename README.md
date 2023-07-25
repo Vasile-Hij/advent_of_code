@@ -63,4 +63,4 @@ Testing sample input add `-s s`: `python main.py -v 01 -s s`
 - [x] refactor run command line v0.2 to accept more functions
 - [x] refactor day 01-07 to run with command line v2
 - [x] refactor way direcotories are created
-- [] get automatically input from AoC in HTML file
+- [x] get automatically AOC's data (caching HTML storyline and HTML input)
