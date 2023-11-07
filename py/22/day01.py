@@ -13,7 +13,6 @@ def start_day():
 
 def helper(data):
     result = [sum(result) for result in data]
-    print(result)
     result.sort(reverse=True)
     return result
 

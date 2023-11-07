@@ -1,4 +1,4 @@
-from src.common.util import sum_items, add_together, Matrix2D, four_directions, _product
+from src.common.utils import sum_items, add_together, Matrix2D, four_directions, _product
 
 def start_day():
     name = '--- Day 8: Treetop Tree House ---'
@@ -15,8 +15,6 @@ def helper(_data):
                 return
             yield start
             
-        
-    
     return _data, start_to_direction
  
 
@@ -38,11 +36,9 @@ def part_1(data):
 def part_2(data):
     _data, start_to_direction = helper(data)
     
-    
     def distance_result(location, grid):
         return _product(visual_distance(location, direction, matrix) for direction in four_directions)
-        
-        
+            
     def visual_distance(location, direction, grid):
         seen = 0
         
@@ -51,7 +47,6 @@ def part_2(data):
                 break
         return seen
                 
-        
     matrix = Matrix2D(grid=_data)
     
     return max(distance_result(point, matrix) for point in matrix)

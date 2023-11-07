@@ -1,8 +1,11 @@
 import argparse
-from src.common.checker import clean_input
-from src.common.util import helper_base, printer, check_required_files_exists
-from setup_proj import get_setup
+import logging
 
+from src.common.checker import InputCheck
+from src.common.setup_project import SetupProject
+from src.common.display import Display
+
+logger = logging.getLogger(__name__)
 
 if __name__ == '__main__':
     _help = """
@@ -15,23 +18,45 @@ if __name__ == '__main__':
             Run e.g.: python3 main.py -v 01 -s s -a github'        
            """
 
-    parser = argparse.ArgumentParser(description="Run Advent of Code solution.")
-    parser.add_argument('--value', '-v', type=int, help=_help)
-    parser.add_argument('--sample', '-s', type=str, help=_help)
-    args = parser.parse_args()
+    class Command(InputCheck, Display):
+        def cmd_arguments(self):
+            parser = argparse.ArgumentParser(description="Run Advent of Code solution.")
+            parser.add_argument('--value', '-v', type=int, help=_help)
+            parser.add_argument('--sample', '-s', type=str, help=_help)
+            args = parser.parse_args()
 
-    year, day = clean_input(args.value)
-    sample = args.sample
+            year, day = self.clean_input(args.value)
+            sample = args.sample
+            
+            return year, day, sample
 
-    get_setup()
+        def run(self):
+            #__import__('ipdb').set_trace(context=10)
+            SetupProject.get_setup()
+            year, day, sample = self.cmd_arguments()
+            
+            script, input_data_exist = self.check_required_files_exists(year=year, day=day, sample=sample)
 
-    script, input_data_exist = check_required_files_exists(year=year, day=day, sample=sample)
+            if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
+                logger.info(f'Please define all functions as in "blank.txt" template')
+        
+            get_name_and_methods = getattr(script, 'start_day')
+            result = self.helper_base(source=input_data_exist, year=year, methods=get_name_and_methods)
+        
+            for each_day in ["part_1", "part_2"]:
+                self.printer(part=each_day, result=result, func=getattr(script, each_day))
 
-    if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
-        print(f'Please define all functions as in "blank.txt" template')
 
-    functions = getattr(script, 'start_day')
-    result = helper_base(source=input_data_exist, year=year, functions=functions)
+    runner = Command()
+    runner.run()
+    
 
-    for each_day in ["part_1", "part_2"]:
-        printer(part=each_day, result=result, func=getattr(script, each_day))
+    # class BaseConfig:
+    # class InputCheck:
+    # class SolverFunctions:
+    # 
+    # class Command(InputCheck, Display):
+    #     
+    # class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
+    #     
+    
