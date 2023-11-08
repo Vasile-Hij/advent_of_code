@@ -1,6 +1,5 @@
 import os
 import logging
-import inspect
 from pathlib import Path
 from configparser import ConfigParser, NoOptionError, NoSectionError
 from src.common.utils import SolverFunctions
@@ -94,24 +93,9 @@ class BaseConfig:
         return cls.get_config_value(
             cfg_name=cfg_name, header_name=header_name, field_name=field_name, value=value
             )
-    
-    # @staticmethod
-    # def get_function(function: str):
-    #     method_name = function
-    #     possibles = globals().copy()
-    #     possibles.update(locals())
-    #     method = possibles.get(method_name)
-    #     print(possibles)
-    #     if not method:
-    #         raise NotImplementedError(f'Method {method_name} not implemented')
-    #     return method
-    # 
-    # def get_functions(self, *functions: str) -> list:
-    #     return [self.get_function(func) for func in functions]
 
     @staticmethod
     def get_method(method_name: str):
-        method_exist = isinstance(SolverFunctions.__dict__[f'{method_name}'], classmethod)
-        
         isinstance(SolverFunctions.__dict__[f'{method_name}'], classmethod)
-        return SolverFunctions.__dict__[f'{method_name}']
+        return getattr(SolverFunctions, method_name)
+    

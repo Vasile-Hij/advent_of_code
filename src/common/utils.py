@@ -3,7 +3,7 @@ import re
 separator = '─' * 100
 
     
-class SolverFunctions:   
+class SolverFunctions:
     @staticmethod
     def read_raw(source: str) -> str:
         with open(source, 'r') as file:
@@ -15,15 +15,16 @@ class SolverFunctions:
             return file.write(source)
 
     @staticmethod
-    def make_tuple(function: callable, *sequences) -> tuple:
-        return tuple(map(function, *sequences))
+    def make_tuple(method: callable, *sequences) -> tuple:
+        return tuple(map(method, *sequences))
 
     @staticmethod
-    def make_list(function: callable, *sequences) -> list:
-        return list(map(function, *sequences))
-    
-    def strings_per_line(self, data) -> list:
-        data = self.paragraph(data)
+    def make_list(method: callable, *sequences) -> list:
+        return list(map(method, *sequences))
+
+    @classmethod
+    def strings_per_line(cls, data) -> list:
+        data = cls.paragraph(data)
         return [[item for item in line.split('\n') if item] for line in data if line][0]
 
     @staticmethod
@@ -41,12 +42,13 @@ class SolverFunctions:
     @classmethod
     def integers(cls, data: str) -> tuple[int]:
         return cls.make_tuple(int, re.findall(r'-?[0-9]+', data))
-    
-    def find_digits(self, text: str) -> tuple[int]:
-        return self.make_tuple(int, re.findall(r'[0-9]', text))
+
+    @classmethod
+    def find_digits(cls, text: str) -> tuple[int]:
+        return cls.make_tuple(int, re.findall(r'[0-9]', text))
 
     @staticmethod
-    def each_first_item(self, data: str):
+    def each_first_item(data: str):
         return [item[0] for item in data]
 
     @staticmethod

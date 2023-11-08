@@ -9,7 +9,7 @@ find_range = lambda first, second: range(first, second + 1)
 
 
 def helper(data):
-    return 
+    return
 
 
 def part_1(data):

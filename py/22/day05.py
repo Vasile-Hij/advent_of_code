@@ -9,7 +9,6 @@ def start_day():
     return name, parser_function, display_lines_or_paragraph
 
 
-
 def helper(data):
     crates_data = data[0][:-1]
     operations_data = data[1]
@@ -47,13 +46,12 @@ def part_1(data):
             crates[_to].append(crates[_from].pop())
 
     arranged_crates = dict(sorted(crates.items()))
-    top_crates = ''.join(crate.pop() for crate in arranged_crates.values())
-    return top_crates
+    return ''.join(crate.pop() for crate in arranged_crates.values())
 
 
 def part_2(data):
     crates, operations = helper(data)
-
+    
     for operation in operations.values():
         _move, _from, _to = map(int, re.findall(r'\d+', operation))
         temp_movement = deque()

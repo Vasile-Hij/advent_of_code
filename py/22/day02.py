@@ -9,53 +9,54 @@
     Part_2:
         second columns indicates now the output: X lose, Y draw, Z win, so find you had chosen
 """
+from src.common.utils import SolverFunctions
+
+name = '--- Day 2: Rock Paper Scissors ---'
+parser_method = 'str_split'
+display_lines_or_paragraph = 'lines'
 
 
-def start_day():
-    name = '--- Day 2: Rock Paper Scissors ---'
-    parser_function = 'str_split'
-    display_lines_or_paragraph = 'lines'
-    return name, parser_function, display_lines_or_paragraph
+class SolveTheDay(SolverFunctions):
+    @staticmethod
+    def helper(data):
+        return data
 
+    @classmethod
+    def part_1(cls, data):       
+        answer = 0
 
-def helper(data):
-    return data
+        for line in data:
+            left, right = line
+            left = "ABC".index(left)
+            right = "XYZ".index(right)
 
+            answer += right + 1
 
-def part_1(data):
-    answer = 0
+            match (right - left) % 3:
+                case 1:
+                    answer += 6
+                case 0:
+                    answer += 3
 
-    for line in data:
-        left, right = line
-        left = "ABC".index(left)
-        right = "XYZ".index(right)
+            return answer
+        return
 
-        answer += right + 1
+    @classmethod
+    def part_2(cls, data):
+        answer = 0
 
-        match (right - left) % 3:
-            case 1:
-                answer += 6
-            case 0:
-                answer += 3
+        for line in data:
+            left, right = line
+            left = "ABC".index(left)
 
-    return answer
+            match right:
+                case "X":
+                    answer += (left - 1) % 3 + 1
+                case "Y":
+                    answer += 3
+                    answer += left + 1
+                case "Z":
+                    answer += 6
+                    answer += (left + 1) % 3 + 1
 
-
-def part_2(data):
-    answer = 0
-
-    for line in data:
-        left, right = line
-        left = "ABC".index(left)
-
-        match right:
-            case "X":
-                answer += (left - 1) % 3 + 1
-            case "Y":
-                answer += 3
-                answer += left + 1
-            case "Z":
-                answer += 6
-                answer += (left + 1) % 3 + 1
-
-    return answer
+        return answer

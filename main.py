@@ -7,6 +7,13 @@ from src.common.display import Display
 
 logger = logging.getLogger(__name__)
 
+NAME = 'name'
+PARSER_METHOD = 'parser_method'
+DISPLAY_TYPE = 'display_lines_or_paragraph'
+SOLVER_CLASS = 'SolveTheDay'
+PART_1 = 'part_1'
+PART_2 = 'part_2'
+
 if __name__ == '__main__':
     _help = """
             1. For year 2022 and day 01 type: -v 2201 ("-v" is value, "22" is directory , "01" is "day01") 
@@ -27,36 +34,47 @@ if __name__ == '__main__':
 
             year, day = self.clean_input(args.value)
             sample = args.sample
-            
+
             return year, day, sample
 
         def run(self):
-            #__import__('ipdb').set_trace(context=10)
             SetupProject.get_setup()
             year, day, sample = self.cmd_arguments()
             
             script, input_data_exist = self.check_required_files_exists(year=year, day=day, sample=sample)
 
-            if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
-                logger.info(f'Please define all functions as in "blank.txt" template')
+            # if not all(hasattr(script, checker) for checker in ['helper', 'part_1', 'part_2']):
+            #     logger.info(f'Please define all functions as in "blank.txt" template')
         
-            get_name_and_methods = getattr(script, 'start_day')
-            result = self.helper_base(source=input_data_exist, year=year, methods=get_name_and_methods)
-        
-            for each_day in ["part_1", "part_2"]:
-                self.printer(part=each_day, result=result, func=getattr(script, each_day))
+            name = getattr(script, NAME)
+            parser_method = getattr(script, PARSER_METHOD)
+            display_type = getattr(script, DISPLAY_TYPE)
 
+            result = self.helper_base(
+                source=input_data_exist, 
+                year=year, 
+                name=name,
+                display_type=display_type,
+                parser_method=parser_method
+            )
+
+            for each_day in [PART_1, PART_2]:
+                self.printer(
+                    each_day=each_day,
+                    result=result,
+                    class_helper=[script, SOLVER_CLASS]
+                )
 
     runner = Command()
     runner.run()
     
-
+    # CLASSES HELPER
     # class BaseConfig:
     # class InputCheck:
     # class SolverFunctions:
-    # 
+    
     # class Command(InputCheck, Display):
-    #     
+
     # class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
-    #     
+
     

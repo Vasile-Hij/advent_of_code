@@ -13,7 +13,6 @@ def part_1(data):
     counter = 0
     _data = helper(data)
     
-    
     for char in _data:
         mid = len(char) // 2
         left = char[:mid]

@@ -7,8 +7,7 @@ from collections import Counter
 from src.common.setup_project import SetupProject
 from src.aoc.aoc_client import AdventOfCodeBase
 from src.common.configs import BaseConfig
-from src.common.utils import separator, SolverFunctions
-
+from src.common.utils import SolverFunctions
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -17,35 +16,48 @@ logger.setLevel(logging.INFO)
 
 class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
     lines = str.splitlines
+    separator = '─' * 100
 
     @classmethod
-    def helper_base(cls, source: str, year: str, methods: callable = str, display: int = 10) -> tuple:
-        day_text = source
-        name, method, display_type = methods()
-        name, method, segmentation = name.lower(), method.lower(), display_type.lower()
+    def helper_base(
+            cls, 
+            source: str, 
+            year: str,
+            name: str,
+            display_type: str,
+            parser_method: callable = str,
+            display: int = 10
+    ) -> tuple:
+        day_text, name, segmentation, method = source, name, display_type.lower(), parser_method.lower(),
 
-        parser_function = cls.get_method(method)
+        parser_method = cls.get_method(method)
 
         if segmentation != 'lines' or segmentation is None:
             custom_segmentation = cls.get_method(segmentation)
             segmentation = custom_segmentation(day_text.rstrip())
         else:
-            segmentation = cls.lines(day_text.rstrip())
+            segmentation = cls.lines(day_text.rstrip())  # TODO 
 
         _year = f'--- Year: 20{year}'
         print(_year, name)
 
         cls.display_items(cls, 'Raw input', day_text.splitlines(), display)
-        data = cls.make_tuple(parser_function, segmentation)
-        if parser_function != str or parser_function != cls.lines:
-            cls.display_items('Parsed file', data, display)
+        data = cls.make_tuple(parser_method, segmentation)
+        if parser_method != str or parser_method != cls.lines:
+            cls.display_items(cls, 'Parsed file', data, display)
 
         return data
 
-    def display_items(self, file_raw, items, display: int, separate=separator):
+    def display_items(
+            self, 
+            file_raw, 
+            items, 
+            display: int, 
+            separate=separator
+    ):
         if display:
             type_input = Counter(map(type, items))
-
+        
             def counter(types):
                 """count lines and verbose if plural"""
                 for types, name in types.items():
@@ -57,17 +69,26 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             if display < len(items):
                 print('...')
 
-    @staticmethod
-    def printer(part: str, result: str, func: callable = str, separate: str = separator) -> tuple:
-        _part = part
-
-        match part:
+    @classmethod
+    def printer(
+            cls,
+            each_day: str,
+            result: tuple,
+            class_helper: list[callable, str],
+            separate: str = separator
+    ):
+        _part = each_day
+        script, class_name = class_helper
+        class_name = getattr(script, class_name)
+        
+        match each_day:
             case 'part_1':
                 _part = 'Part 1'
+                results = f'{_part}: {class_name.part_1(result)}'
             case 'part_2':
                 _part = 'Part 2'
-
-        results = f'{_part}: {func(result)}'
+                results = f'{_part}: {class_name.part_2(result)}'
+        
         print(f'{separate}\n{results}\n{separate}')
 
     @staticmethod
