@@ -1,6 +1,6 @@
 [tool.poetry]
 name = "advent_of_code"
-version = "1.1"
+version = "1.2"
 description = "Yearly AOC contest"
 authors = ["Vasile-Hij <vasile.hijs@gmail.com>"]
 license = "MIT"
@@ -8,21 +8,22 @@ readme = "README.md"
 
 [tool.poetry.dependencies]
 python = "^3.11"
-ipdb = "^0.13.9"
+ipython = "8.*"
+ipdb = "0.*"
 black = "^23.3.0"
 setuptools = "^68.0.0"
 poetry-plus = "^0.11.4"
-ruff = "^0.0.280"
+ruff = "^0.1.4"
 python-dateutil = "^2.8.2"
 decorator = "^5.1.1"
-# ipython = "^8.13.2" error on pywinty due no binary version python 3.11
+# ipython = "^8.17"  # error on pywinty due no binary version python 3.11
 twine = "^4.0"
 pre-commit = "^3.1.0"
 watchdog = {extras = ["watchmedo"], version = "^3.0.0"}
-lxml = "^4.9"
 browser-cookie3 = "^0.19.1"
-ipython = "^8.14.0"
 cssselect = "^1.2.0"
+lxml = "^4.9.3"
+termcolor = "^2.3"
 
 [tool.black]
 line-length = 100

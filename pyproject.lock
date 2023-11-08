@@ -1,18 +1,5 @@
 [[package]]
 category = "main"
-description = "High level compatibility layer for multiple asynchronous event loop implementations"
-name = "anyio"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "3.7.0"
-
-[package.dependencies]
-idna = ">=2.8"
-sniffio = ">=1.1"
-
-[[package]]
-category = "main"
 description = "Disable App Nap on macOS >= 10.9"
 name = "appnope"
 optional = false
@@ -20,29 +7,8 @@ platform = "*"
 python-versions = "*"
 version = "0.1.3"
 
-[[package]]
-category = "main"
-description = "The secure Argon2 password hashing algorithm."
-name = "argon2-cffi"
-optional = false
-platform = "*"
-python-versions = ">=3.6"
-version = "21.3.0"
-
-[package.dependencies]
-argon2-cffi-bindings = "*"
-
-[[package]]
-category = "main"
-description = "Low-level CFFI bindings for Argon2"
-name = "argon2-cffi-bindings"
-optional = false
-platform = "*"
-python-versions = ">=3.6"
-version = "21.2.0"
-
-[package.dependencies]
-cffi = ">=1.0.1"
+[package.requirements]
+platform = "darwin"
 
 [[package]]
 category = "main"
@@ -51,31 +17,10 @@ name = "asttokens"
 optional = false
 platform = "*"
 python-versions = "*"
-version = "2.2.1"
+version = "2.4.1"
 
 [package.dependencies]
-six = "*"
-
-[[package]]
-category = "main"
-description = "Specifications for callback functions passed in to an API"
-name = "backcall"
-optional = false
-platform = "*"
-python-versions = "*"
-version = "0.2.0"
-
-[[package]]
-category = "main"
-description = "Screen-scraping library"
-name = "beautifulsoup4"
-optional = false
-platform = "*"
-python-versions = ">=3.6.0"
-version = "4.12.2"
-
-[package.dependencies]
-soupsieve = ">1.2"
+six = ">=1.12.0"
 
 [[package]]
 category = "main"
@@ -83,8 +28,8 @@ description = "The uncompromising code formatter."
 name = "black"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "23.3.0"
+python-versions = ">=3.8"
+version = "23.11.0"
 
 [package.dependencies]
 click = ">=8.0.0"
@@ -92,19 +37,6 @@ mypy-extensions = ">=0.4.3"
 packaging = ">=22.0"
 pathspec = ">=0.9.0"
 platformdirs = ">=2"
-
-[[package]]
-category = "main"
-description = "An easy safelist-based HTML-sanitizing tool."
-name = "bleach"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "6.0.0"
-
-[package.dependencies]
-six = ">=1.9.0"
-webencodings = "*"
 
 [[package]]
 category = "main"
@@ -134,6 +66,7 @@ python-versions = ">=3.6"
 version = "0.12.14"
 
 [package.dependencies]
+lockfile = ">=0.9"
 msgpack = ">=0.5.2"
 requests = "*"
 
@@ -153,7 +86,7 @@ name = "certifi"
 optional = false
 platform = "*"
 python-versions = ">=3.6"
-version = "2023.5.7"
+version = "2023.7.22"
 
 [[package]]
 category = "main"
@@ -161,11 +94,14 @@ description = "Foreign Function Interface for Python calling C code."
 name = "cffi"
 optional = false
 platform = "*"
-python-versions = "*"
-version = "1.15.1"
+python-versions = ">=3.8"
+version = "1.16.0"
 
 [package.dependencies]
 pycparser = "*"
+
+[package.requirements]
+platform = "linux"
 
 [[package]]
 category = "main"
@@ -173,8 +109,8 @@ description = "Validate configuration and produce human readable error messages.
 name = "cfgv"
 optional = false
 platform = "*"
-python-versions = ">=3.6.1"
-version = "3.3.1"
+python-versions = ">=3.8"
+version = "3.4.0"
 
 [[package]]
 category = "main"
@@ -183,7 +119,7 @@ name = "charset-normalizer"
 optional = false
 platform = "*"
 python-versions = ">=3.7.0"
-version = "3.1.0"
+version = "3.3.2"
 
 [[package]]
 category = "main"
@@ -205,7 +141,7 @@ name = "click"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "8.1.3"
+version = "8.1.7"
 
 [package.dependencies]
 colorama = "*"
@@ -221,24 +157,12 @@ version = "0.4.6"
 
 [[package]]
 category = "main"
-description = "Jupyter Python Comm implementation, for usage in ipykernel, xeus-python etc."
-name = "comm"
-optional = false
-platform = "*"
-python-versions = ">=3.6"
-version = "0.1.3"
-
-[package.dependencies]
-traitlets = ">=5.3"
-
-[[package]]
-category = "main"
 description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
 name = "cryptography"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "41.0.1"
+version = "41.0.5"
 
 [package.dependencies]
 cffi = ">=1.12"
@@ -248,12 +172,12 @@ platform = "linux"
 
 [[package]]
 category = "main"
-description = "An implementation of the Debug Adapter Protocol for Python"
-name = "debugpy"
+description = "cssselect parses CSS3 Selectors and translates them to XPath 1.0"
+name = "cssselect"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "1.6.7"
+version = "1.2.0"
 
 [[package]]
 category = "main"
@@ -266,21 +190,12 @@ version = "5.1.1"
 
 [[package]]
 category = "main"
-description = "XML bomb protection for Python stdlib modules"
-name = "defusedxml"
-optional = false
-platform = "all"
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "0.7.1"
-
-[[package]]
-category = "main"
 description = "Distribution utilities"
 name = "distlib"
 optional = false
 platform = "any"
 python-versions = "*"
-version = "0.3.6"
+version = "0.3.7"
 
 [[package]]
 category = "main"
@@ -297,17 +212,8 @@ description = "Get the currently executing AST node of a frame, and other inform
 name = "executing"
 optional = false
 platform = "*"
-python-versions = "*"
-version = "1.2.0"
-
-[[package]]
-category = "main"
-description = "Fastest Python implementation of JSON schema"
-name = "fastjsonschema"
-optional = false
-platform = "*"
-python-versions = "*"
-version = "2.17.1"
+python-versions = ">=3.5"
+version = "2.0.1"
 
 [[package]]
 category = "main"
@@ -315,8 +221,8 @@ description = "A platform independent file lock."
 name = "filelock"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "3.12.2"
+python-versions = ">=3.8"
+version = "3.13.1"
 
 [[package]]
 category = "main"
@@ -337,8 +243,8 @@ description = "File identification library for Python"
 name = "identify"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "2.5.24"
+python-versions = ">=3.8"
+version = "2.5.31"
 
 [[package]]
 category = "main"
@@ -355,8 +261,8 @@ description = "Read metadata from Python packages"
 name = "importlib-metadata"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "6.6.0"
+python-versions = ">=3.8"
+version = "6.8.0"
 
 [package.dependencies]
 zipp = ">=0.5"
@@ -381,43 +287,17 @@ version = ">=7.31.1"
 
 [[package]]
 category = "main"
-description = "IPython Kernel for Jupyter"
-name = "ipykernel"
-optional = false
-platform = "*"
-python-versions = ">=3.8"
-version = "6.23.2"
-
-[package.dependencies]
-appnope = "*"
-comm = ">=0.1.1"
-debugpy = ">=1.6.5"
-ipython = ">=7.23.1"
-jupyter-client = ">=6.1.12"
-jupyter-core = ">=4.12,<5.0.0 || >=5.1.0"
-matplotlib-inline = ">=0.1"
-nest-asyncio = "*"
-packaging = "*"
-psutil = "*"
-pyzmq = ">=20"
-tornado = ">=6.1"
-traitlets = ">=5.4.0"
-
-[[package]]
-category = "main"
 description = "IPython: Productive Interactive Computing"
 name = "ipython"
 optional = false
 platform = "Linux"
 python-versions = ">=3.9"
-version = "8.14.0"
+version = "8.17.2"
 
 [package.dependencies]
-backcall = "*"
 decorator = "*"
 jedi = ">=0.16"
 matplotlib-inline = "*"
-pickleshare = "*"
 prompt-toolkit = ">=3.0.30,<3.0.37 || >3.0.37,<3.1.0"
 pygments = ">=2.4.0"
 stack-data = "*"
@@ -437,37 +317,12 @@ version = ">4.3"
 
 [[package]]
 category = "main"
-description = "Vestigial utilities from IPython"
-name = "ipython-genutils"
-optional = false
-platform = "Linux"
-python-versions = "*"
-version = "0.2.0"
-
-[[package]]
-category = "main"
-description = "Jupyter interactive widgets"
-name = "ipywidgets"
-optional = false
-platform = "Linux"
-python-versions = ">=3.7"
-version = "8.0.6"
-
-[package.dependencies]
-ipykernel = ">=4.5.1"
-ipython = ">=6.1.0"
-jupyterlab-widgets = ">=3.0.0,<3.1.0"
-traitlets = ">=4.3.1"
-widgetsnbextension = ">=4.0.0,<4.1.0"
-
-[[package]]
-category = "main"
 description = "Utility functions for Python class constructs"
 name = "jaraco.classes"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "3.2.3"
+python-versions = ">=3.8"
+version = "3.3.0"
 
 [package.dependencies]
 more-itertools = "*"
@@ -479,10 +334,10 @@ name = "jedi"
 optional = false
 platform = "any"
 python-versions = ">=3.6"
-version = "0.18.2"
+version = "0.19.1"
 
 [package.dependencies]
-parso = ">=0.8.0,<0.9.0"
+parso = ">=0.8.3,<0.9.0"
 
 [[package]]
 category = "main"
@@ -498,18 +353,6 @@ platform = "linux"
 
 [[package]]
 category = "main"
-description = "A very fast and expressive template engine."
-name = "jinja2"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "3.1.2"
-
-[package.dependencies]
-MarkupSafe = ">=2.0"
-
-[[package]]
-category = "main"
 description = "An implementation of JSON Schema validation for Python"
 name = "jsonschema"
 optional = false
@@ -519,156 +362,12 @@ version = "2.6.0"
 
 [[package]]
 category = "main"
-description = "Jupyter metapackage. Install all the Jupyter components in one go."
-name = "jupyter"
-optional = false
-platform = "UNKNOWN"
-python-versions = "*"
-version = "1.0.0"
-
-[package.dependencies]
-ipykernel = "*"
-ipywidgets = "*"
-jupyter-console = "*"
-nbconvert = "*"
-notebook = "*"
-qtconsole = "*"
-
-[[package]]
-category = "main"
-description = "Jupyter protocol implementation and client libraries"
-name = "jupyter-client"
-optional = false
-platform = "*"
-python-versions = ">=3.8"
-version = "8.2.0"
-
-[package.dependencies]
-jupyter-core = ">=4.12,<5.0.0 || >=5.1.0"
-python-dateutil = ">=2.8.2"
-pyzmq = ">=23.0"
-tornado = ">=6.2"
-traitlets = ">=5.3"
-
-[[package]]
-category = "main"
-description = "Jupyter terminal console"
-name = "jupyter-console"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "6.6.3"
-
-[package.dependencies]
-ipykernel = ">=6.14"
-ipython = "*"
-jupyter-client = ">=7.0.0"
-jupyter-core = ">=4.12,<5.0.0 || >=5.1.0"
-prompt-toolkit = ">=3.0.30"
-pygments = "*"
-pyzmq = ">=17"
-traitlets = ">=5.4"
-
-[[package]]
-category = "main"
-description = "Jupyter core package. A base package on which Jupyter projects rely."
-name = "jupyter-core"
-optional = false
-platform = "*"
-python-versions = ">=3.8"
-version = "5.3.1"
-
-[package.dependencies]
-platformdirs = ">=2.5"
-traitlets = ">=5.3"
-
-[package.dependencies.pywin32]
-platform = "win32"
-version = ">=300"
-
-[[package]]
-category = "main"
-description = "Jupyter Event System library"
-name = "jupyter-events"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "0.4.0"
-
-[package.dependencies]
-jsonschema = "*"
-python-json-logger = "*"
-pyyaml = "*"
-traitlets = "*"
-
-[[package]]
-category = "main"
-description = "The backend—i.e. core services, APIs, and REST endpoints—to Jupyter web applications."
-name = "jupyter-server"
-optional = false
-platform = "*"
-python-versions = ">=3.8"
-version = "2.5.0"
-
-[package.dependencies]
-anyio = ">=3.1.0"
-argon2-cffi = "*"
-jinja2 = "*"
-jupyter-client = ">=7.4.4"
-jupyter-core = ">=4.12,<5.0.0 || >=5.1.0"
-jupyter-events = ">=0.4.0"
-jupyter-server-terminals = "*"
-nbconvert = ">=6.4.4"
-nbformat = ">=5.3.0"
-packaging = "*"
-prometheus-client = "*"
-pywinpty = "*"
-pyzmq = ">=24"
-send2trash = "*"
-terminado = ">=0.8.3"
-tornado = ">=6.2.0"
-traitlets = ">=5.6.0"
-websocket-client = "*"
-
-[[package]]
-category = "main"
-description = "A Jupyter Server Extension Providing Terminals."
-name = "jupyter-server-terminals"
-optional = false
-platform = "*"
-python-versions = ">=3.8"
-version = "0.4.4"
-
-[package.dependencies]
-pywinpty = ">=2.0.3"
-terminado = ">=0.8.3"
-
-[[package]]
-category = "main"
-description = "Pygments theme using JupyterLab CSS variables"
-name = "jupyterlab-pygments"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "0.2.2"
-
-[[package]]
-category = "main"
-description = "Jupyter interactive widgets for JupyterLab"
-name = "jupyterlab-widgets"
-optional = false
-platform = "Linux"
-python-versions = ">=3.7"
-version = "3.0.7"
-
-[[package]]
-category = "main"
 description = "Store and access your passwords safely."
 name = "keyring"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "23.13.1"
+python-versions = ">=3.8"
+version = "24.2.0"
 
 [package.dependencies]
 "jaraco.classes" = "*"
@@ -691,12 +390,21 @@ version = ">=0.2.0"
 
 [[package]]
 category = "main"
+description = "Platform-independent file locking module"
+name = "lockfile"
+optional = false
+platform = "UNKNOWN"
+python-versions = "*"
+version = "0.12.2"
+
+[[package]]
+category = "main"
 description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
 name = "lxml"
 optional = false
 platform = "*"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*"
-version = "4.9.2"
+version = "4.9.3"
 
 [[package]]
 category = "main"
@@ -721,15 +429,6 @@ mdurl = ">=0.1,<1.0"
 
 [[package]]
 category = "main"
-description = "Safely add untrusted strings to HTML/XML markup."
-name = "markupsafe"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "2.1.3"
-
-[[package]]
-category = "main"
 description = "Inline Matplotlib backend for Jupyter"
 name = "matplotlib-inline"
 optional = false
@@ -751,21 +450,12 @@ version = "0.1.2"
 
 [[package]]
 category = "main"
-description = "A sane Markdown parser with useful plugins and renderers"
-name = "mistune"
-optional = false
-platform = "any"
-python-versions = "*"
-version = "2.0.5"
-
-[[package]]
-category = "main"
 description = "More routines for operating on iterables, beyond itertools"
 name = "more-itertools"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "9.1.0"
+python-versions = ">=3.8"
+version = "10.1.0"
 
 [[package]]
 category = "main"
@@ -773,8 +463,8 @@ description = "MessagePack serializer"
 name = "msgpack"
 optional = false
 platform = "*"
-python-versions = "*"
-version = "1.0.5"
+python-versions = ">=3.8"
+version = "1.0.7"
 
 [[package]]
 category = "main"
@@ -787,96 +477,12 @@ version = "1.0.0"
 
 [[package]]
 category = "main"
-description = "Jupyter Notebook as a Jupyter Server extension."
-name = "nbclassic"
-optional = false
-platform = "Linux"
-python-versions = ">=3.7"
-version = "1.0.0"
-
-[package.dependencies]
-Send2Trash = ">=1.8.0"
-argon2-cffi = "*"
-ipykernel = "*"
-ipython-genutils = "*"
-jinja2 = "*"
-jupyter-client = ">=6.1.1"
-jupyter-core = ">=4.6.1"
-jupyter-server = ">=1.8"
-nbconvert = ">=5"
-nbformat = "*"
-nest-asyncio = ">=1.5"
-notebook-shim = ">=0.2.3"
-prometheus-client = "*"
-pyzmq = ">=17"
-terminado = ">=0.8.3"
-tornado = ">=6.1"
-traitlets = ">=4.2.1"
-
-[[package]]
-category = "main"
-description = "A client library for executing notebooks. Formerly nbconvert's ExecutePreprocessor."
-name = "nbclient"
+description = "Ammonia HTML sanitizer Python binding"
+name = "nh3"
 optional = false
 platform = "*"
-python-versions = ">=3.8.0"
-version = "0.8.0"
-
-[package.dependencies]
-jupyter-client = ">=6.1.12"
-jupyter-core = ">=4.12,<5.0.0 || >=5.1.0"
-nbformat = ">=5.1"
-traitlets = ">=5.4"
-
-[[package]]
-category = "main"
-description = "Converting Jupyter Notebooks"
-name = "nbconvert"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "7.5.0"
-
-[package.dependencies]
-beautifulsoup4 = "*"
-bleach = "!=5.0.0"
-defusedxml = "*"
-jinja2 = ">=3.0"
-jupyter-core = ">=4.7"
-jupyterlab-pygments = "*"
-markupsafe = ">=2.0"
-mistune = ">=2.0.3,<3"
-nbclient = ">=0.5.0"
-nbformat = ">=5.7"
-packaging = "*"
-pandocfilters = ">=1.4.1"
-pygments = ">=2.4.1"
-tinycss2 = "*"
-traitlets = ">=5.1"
-
-[[package]]
-category = "main"
-description = "The Jupyter Notebook format"
-name = "nbformat"
-optional = false
-platform = "*"
-python-versions = ">=3.8"
-version = "5.9.0"
-
-[package.dependencies]
-fastjsonschema = "*"
-jsonschema = ">=2.6"
-jupyter-core = "*"
-traitlets = ">=5.1"
-
-[[package]]
-category = "main"
-description = "Patch asyncio to allow nested event loops"
-name = "nest-asyncio"
-optional = false
-platform = "*"
-python-versions = ">=3.5"
-version = "1.5.6"
+python-versions = "*"
+version = "0.2.14"
 
 [[package]]
 category = "main"
@@ -892,60 +498,12 @@ setuptools = "*"
 
 [[package]]
 category = "main"
-description = "A web-based notebook environment for interactive computing"
-name = "notebook"
-optional = false
-platform = "Linux"
-python-versions = ">=3.7"
-version = "6.5.4"
-
-[package.dependencies]
-Send2Trash = ">=1.8.0"
-argon2-cffi = "*"
-ipykernel = "*"
-ipython-genutils = "*"
-jinja2 = "*"
-jupyter-client = ">=5.3.4"
-jupyter-core = ">=4.6.1"
-nbclassic = ">=0.4.7"
-nbconvert = ">=5"
-nbformat = "*"
-nest-asyncio = ">=1.5"
-prometheus-client = "*"
-pyzmq = ">=17"
-terminado = ">=0.8.3"
-tornado = ">=6.1"
-traitlets = ">=4.2.1"
-
-[[package]]
-category = "main"
-description = "A shim layer for notebook traits and config"
-name = "notebook-shim"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "0.2.3"
-
-[package.dependencies]
-jupyter-server = ">=1.8,<3"
-
-[[package]]
-category = "main"
 description = "Core utilities for Python packages"
 name = "packaging"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "23.1"
-
-[[package]]
-category = "main"
-description = "Utilities for writing pandoc filters in python"
-name = "pandocfilters"
-optional = false
-platform = "*"
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "1.5.0"
+version = "23.2"
 
 [[package]]
 category = "main"
@@ -972,7 +530,7 @@ name = "pathspec"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "0.11.1"
+version = "0.11.2"
 
 [[package]]
 category = "main"
@@ -991,15 +549,6 @@ platform = "!=win32"
 
 [[package]]
 category = "main"
-description = "Tiny 'shelve'-like database with concurrency support"
-name = "pickleshare"
-optional = false
-platform = "*"
-python-versions = "*"
-version = "0.7.5"
-
-[[package]]
-category = "main"
 description = "Query metadata from sdists / bdists / installed packages."
 name = "pkginfo"
 optional = false
@@ -1014,7 +563,7 @@ name = "platformdirs"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "3.5.3"
+version = "3.11.0"
 
 [[package]]
 category = "main"
@@ -1046,7 +595,7 @@ name = "pre-commit"
 optional = false
 platform = "*"
 python-versions = ">=3.8"
-version = "3.3.3"
+version = "3.5.0"
 
 [package.dependencies]
 cfgv = ">=2.0.0"
@@ -1057,33 +606,15 @@ virtualenv = ">=20.10.0"
 
 [[package]]
 category = "main"
-description = "Python client for the Prometheus monitoring system."
-name = "prometheus-client"
-optional = false
-platform = "*"
-python-versions = ">=3.6"
-version = "0.17.0"
-
-[[package]]
-category = "main"
 description = "Library for building powerful interactive command lines in Python"
 name = "prompt-toolkit"
 optional = false
 platform = "*"
 python-versions = ">=3.7.0"
-version = "3.0.38"
+version = "3.0.39"
 
 [package.dependencies]
 wcwidth = "*"
-
-[[package]]
-category = "main"
-description = "Cross-platform lib for process and system monitoring in Python."
-name = "psutil"
-optional = false
-platform = "Platform Independent"
-python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
-version = "5.9.5"
 
 [[package]]
 category = "main"
@@ -1093,6 +624,9 @@ optional = false
 platform = "*"
 python-versions = "*"
 version = "0.7.0"
+
+[package.requirements]
+platform = "!=win32"
 
 [[package]]
 category = "main"
@@ -1112,6 +646,9 @@ platform = "Cross Platform"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
 version = "2.21"
 
+[package.requirements]
+platform = "linux"
+
 [[package]]
 category = "main"
 description = "Cryptographic library for Python"
@@ -1119,7 +656,7 @@ name = "pycryptodomex"
 optional = false
 platform = "Posix; MacOS X; Windows"
 python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
-version = "3.18.0"
+version = "3.19.0"
 
 [[package]]
 category = "main"
@@ -1128,7 +665,7 @@ name = "pygments"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "2.15.1"
+version = "2.16.1"
 
 [[package]]
 category = "main"
@@ -1174,45 +711,15 @@ six = ">=1.5"
 
 [[package]]
 category = "main"
-description = "A python library adding a json log formatter"
-name = "python-json-logger"
-optional = false
-platform = "*"
-python-versions = ">=3.6"
-version = "2.0.7"
-
-[[package]]
-category = "main"
-description = "Python for Window Extensions"
-name = "pywin32"
-optional = false
-platform = "*"
-python-versions = "*"
-version = "306"
-
-[package.requirements]
-platform = "win32"
-
-[[package]]
-category = "main"
-description = ""
+description = "A (partial) reimplementation of pywin32 using ctypes/cffi"
 name = "pywin32-ctypes"
 optional = false
 platform = "*"
-python-versions = "*"
-version = "0.2.0"
+python-versions = ">=3.6"
+version = "0.2.2"
 
 [package.requirements]
 platform = "win32"
-
-[[package]]
-category = "main"
-description = "Pseudo terminal support for Windows from Python."
-name = "pywinpty"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "2.0.10"
 
 [[package]]
 category = "main"
@@ -1221,65 +728,21 @@ name = "pyyaml"
 optional = false
 platform = "Any"
 python-versions = ">=3.6"
-version = "6.0"
+version = "6.0.1"
 
 [[package]]
 category = "main"
-description = "Python bindings for 0MQ"
-name = "pyzmq"
-optional = false
-platform = "*"
-python-versions = ">=3.6"
-version = "25.1.0"
-
-[package.dependencies]
-cffi = "*"
-
-[[package]]
-category = "main"
-description = "Jupyter Qt console"
-name = "qtconsole"
-optional = false
-platform = "Linux"
-python-versions = ">= 3.7"
-version = "5.4.3"
-
-[package.dependencies]
-ipykernel = ">=4.1"
-ipython-genutils = "*"
-jupyter-client = ">=4.1"
-jupyter-core = "*"
-packaging = "*"
-pygments = "*"
-pyzmq = ">=17.1"
-qtpy = ">=2.0.1"
-traitlets = "<5.2.1 || >5.2.1,<5.2.2 || >5.2.2"
-
-[[package]]
-category = "main"
-description = "Provides an abstraction layer on top of the various Qt bindings (PyQt5/6 and PySide2/6)."
-name = "qtpy"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "2.3.1"
-
-[package.dependencies]
-packaging = "*"
-
-[[package]]
-category = "main"
-description = "readme_renderer is a library for rendering \"readme\" descriptions for Warehouse"
+description = "readme_renderer is a library for rendering readme descriptions for Warehouse"
 name = "readme-renderer"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "37.3"
+python-versions = ">=3.8"
+version = "42.0"
 
 [package.dependencies]
 Pygments = ">=2.5.1"
-bleach = ">=2.1.0"
 docutils = ">=0.13.1"
+nh3 = ">=0.2.14"
 
 [[package]]
 category = "main"
@@ -1324,7 +787,7 @@ name = "rich"
 optional = false
 platform = "*"
 python-versions = ">=3.7.0"
-version = "13.4.2"
+version = "13.6.0"
 
 [package.dependencies]
 markdown-it-py = ">=2.2.0"
@@ -1332,12 +795,12 @@ pygments = ">=2.13.0,<3.0.0"
 
 [[package]]
 category = "main"
-description = "An extremely fast Python linter, written in Rust."
+description = "An extremely fast Python linter and code formatter, written in Rust."
 name = "ruff"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "0.0.263"
+version = "0.1.4"
 
 [[package]]
 category = "main"
@@ -1357,21 +820,12 @@ platform = "linux"
 
 [[package]]
 category = "main"
-description = "Send file to trash natively under Mac OS X, Windows and Linux"
-name = "send2trash"
-optional = false
-platform = "*"
-python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,>=2.7"
-version = "1.8.2"
-
-[[package]]
-category = "main"
 description = "Tool to Detect Surrounding Shell"
 name = "shellingham"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "1.5.1"
+version = "1.5.4"
 
 [[package]]
 category = "main"
@@ -1384,30 +838,12 @@ version = "1.16.0"
 
 [[package]]
 category = "main"
-description = "Sniff out which async library your code is running under"
-name = "sniffio"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "1.3.0"
-
-[[package]]
-category = "main"
-description = "A modern CSS selector implementation for Beautiful Soup."
-name = "soupsieve"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "2.4.1"
-
-[[package]]
-category = "main"
 description = "Extract data from python stack frames and tracebacks for informative displays"
 name = "stack-data"
 optional = false
 platform = "*"
 python-versions = "*"
-version = "0.6.2"
+version = "0.6.3"
 
 [package.dependencies]
 asttokens = ">=2.1.0"
@@ -1416,29 +852,12 @@ pure-eval = "*"
 
 [[package]]
 category = "main"
-description = "Tornado websocket backend for the Xterm.js Javascript terminal emulator library."
-name = "terminado"
+description = "ANSI color formatting for output in terminal"
+name = "termcolor"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "0.17.1"
-
-[package.dependencies]
-ptyprocess = "*"
-pywinpty = ">=1.1.0"
-tornado = ">=6.1.0"
-
-[[package]]
-category = "main"
-description = "A tiny CSS parser"
-name = "tinycss2"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "1.2.1"
-
-[package.dependencies]
-webencodings = ">=0.4"
+version = "2.3.0"
 
 [[package]]
 category = "main"
@@ -1451,21 +870,12 @@ version = "0.4.6"
 
 [[package]]
 category = "main"
-description = "Tornado is a Python web framework and asynchronous networking library, originally developed at FriendFeed."
-name = "tornado"
-optional = false
-platform = "*"
-python-versions = ">= 3.8"
-version = "6.3.2"
-
-[[package]]
-category = "main"
 description = "Traitlets Python configuration system"
 name = "traitlets"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "5.9.0"
+python-versions = ">=3.8"
+version = "5.13.0"
 
 [[package]]
 category = "main"
@@ -1494,7 +904,7 @@ name = "urllib3"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "2.0.3"
+version = "2.0.7"
 
 [[package]]
 category = "main"
@@ -1503,12 +913,12 @@ name = "virtualenv"
 optional = false
 platform = "*"
 python-versions = ">=3.7"
-version = "20.23.1"
+version = "20.24.6"
 
 [package.dependencies]
-distlib = ">=0.3.6,<1"
-filelock = ">=3.12,<4"
-platformdirs = ">=3.5.1,<4"
+distlib = ">=0.3.7,<1"
+filelock = ">=3.12.2,<4"
+platformdirs = ">=3.9.1,<4"
 
 [[package]]
 category = "main"
@@ -1529,7 +939,7 @@ name = "wcwidth"
 optional = false
 platform = "*"
 python-versions = "*"
-version = "0.2.6"
+version = "0.2.9"
 
 [[package]]
 category = "main"
@@ -1542,46 +952,22 @@ version = "0.5.1"
 
 [[package]]
 category = "main"
-description = "WebSocket client for Python with low level API options"
-name = "websocket-client"
-optional = false
-platform = "*"
-python-versions = ">=3.7"
-version = "1.5.3"
-
-[[package]]
-category = "main"
-description = "Jupyter interactive widgets for Jupyter Notebook"
-name = "widgetsnbextension"
-optional = false
-platform = "Linux"
-python-versions = ">=3.7"
-version = "4.0.7"
-
-[[package]]
-category = "main"
 description = "Backport of pathlib-compatible object wrapper for zip files"
 name = "zipp"
 optional = false
 platform = "*"
-python-versions = ">=3.7"
-version = "3.15.0"
+python-versions = ">=3.8"
+version = "3.17.0"
 
 [metadata]
-content-hash = "f626727d8c7ff17808f426110d2b35f3806c2adad8f46b95b5566f748f8f790d"
+content-hash = "7fa34b5750332f3497439e7a661296c0f22a5756d4fde3532da4237d85675ffc"
 platform = "*"
 python-versions = "^3.11"
 
 [metadata.hashes]
-anyio = []
 appnope = []
-argon2-cffi = []
-argon2-cffi-bindings = []
 asttokens = []
-backcall = []
-beautifulsoup4 = []
 black = []
-bleach = []
 browser-cookie3 = []
 cachecontrol = []
 cachy = []
@@ -1592,72 +978,45 @@ charset-normalizer = []
 cleo = []
 click = []
 colorama = []
-comm = []
 cryptography = []
-debugpy = []
+cssselect = []
 decorator = []
-defusedxml = []
 distlib = []
 docutils = []
 executing = []
-fastjsonschema = []
 filelock = []
 html5lib = []
 identify = []
 idna = []
 importlib-metadata = []
 ipdb = []
-ipykernel = []
 ipython = []
-ipython-genutils = []
-ipywidgets = []
 "jaraco.classes" = []
 jedi = []
 jeepney = []
-jinja2 = []
 jsonschema = []
-jupyter = []
-jupyter-client = []
-jupyter-console = []
-jupyter-core = []
-jupyter-events = []
-jupyter-server = []
-jupyter-server-terminals = []
-jupyterlab-pygments = []
-jupyterlab-widgets = []
 keyring = []
+lockfile = []
 lxml = []
 lz4 = []
 markdown-it-py = []
-markupsafe = []
 matplotlib-inline = []
 mdurl = []
-mistune = []
 more-itertools = []
 msgpack = []
 mypy-extensions = []
-nbclassic = []
-nbclient = []
-nbconvert = []
-nbformat = []
-nest-asyncio = []
+nh3 = []
 nodeenv = []
-notebook = []
-notebook-shim = []
 packaging = []
-pandocfilters = []
 parso = []
 pastel = []
 pathspec = []
 pexpect = []
-pickleshare = []
 pkginfo = []
 platformdirs = []
 poetry-plus = []
 pre-commit = []
-prometheus-client = []
 prompt-toolkit = []
-psutil = []
 ptyprocess = []
 pure-eval = []
 pycparser = []
@@ -1667,14 +1026,8 @@ pylev = []
 pyparsing = []
 pyrsistent = []
 python-dateutil = []
-python-json-logger = []
-pywin32 = []
 pywin32-ctypes = []
-pywinpty = []
 pyyaml = []
-pyzmq = []
-qtconsole = []
-qtpy = []
 readme-renderer = []
 requests = []
 requests-toolbelt = []
@@ -1682,16 +1035,11 @@ rfc3986 = []
 rich = []
 ruff = []
 secretstorage = []
-send2trash = []
 shellingham = []
 six = []
-sniffio = []
-soupsieve = []
 stack-data = []
-terminado = []
-tinycss2 = []
+termcolor = []
 tomlkit = []
-tornado = []
 traitlets = []
 twine = []
 urllib3 = []
@@ -1699,6 +1047,4 @@ virtualenv = []
 watchdog = []
 wcwidth = []
 webencodings = []
-websocket-client = []
-widgetsnbextension = []
 zipp = []

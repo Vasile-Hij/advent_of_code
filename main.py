@@ -1,8 +1,18 @@
 import argparse
-from src.common.checker import clean_input
-from src.common.util import helper_base, printer, check_required_files_exists
-from setup_proj import get_setup
+import logging
 
+from src.common.checker import InputCheck
+from src.common.setup_project import SetupProject
+from src.common.display import Display
+
+logger = logging.getLogger(__name__)
+
+TITLE = 'title'
+PARSER_METHOD = 'parser_method'
+DISPLAY_TYPE = 'display_lines_or_paragraph'
+SOLVER_CLASS = 'SolveTheDay'
+PART_1 = 'part_1'
+PART_2 = 'part_2'
 
 if __name__ == '__main__':
     _help = """
@@ -10,28 +20,58 @@ if __name__ == '__main__':
             2. If you type only 2 digits, it will be considered that day, but no more than 25 (if that day is solved yet),
             and year it will be the latest year available in 'input' directory.
             3. Sample day is taken by adding an "s" by the of digits: -v 01 -s s or -v 2201 -s s.
-            4. Account states for signing to AOC using GitHub cedentials: e.g: ... -a github
+            4. Account states for signing to AOC using GitHub credentials: e.g: ... -a github
 
             Run e.g.: python3 main.py -v 01 -s s -a github'        
            """
 
-    parser = argparse.ArgumentParser(description="Run Advent of Code solution.")
-    parser.add_argument('--value', '-v', type=int, help=_help)
-    parser.add_argument('--sample', '-s', type=str, help=_help)
-    args = parser.parse_args()
+    class Command(InputCheck, Display):
+        def cmd_arguments(self):
+            parser = argparse.ArgumentParser(description="Run Advent of Code solution.")
+            parser.add_argument('--value', '-v', type=int, help=_help)
+            parser.add_argument('--sample', '-s', type=str, help=_help)
+            args = parser.parse_args()
 
-    year, day = clean_input(args.value)
-    sample = args.sample
+            year, day = self.clean_input(args.value)
+            sample = args.sample
 
-    get_setup()
+            return year, day, sample
 
-    script, input_data_exist = check_required_files_exists(year=year, day=day, sample=sample)
+        def run(self):
+            SetupProject.get_setup()
+            year, day, sample = self.cmd_arguments()
+            
+            script, input_data_exist = self.check_required_files_exists(year=year, day=day, sample=sample)
 
-    if not all(hasattr(script, checker) for checker in ['start_day', 'helper', 'part_1', 'part_2']):
-        print(f'Please define all functions as in "blank.txt" template')
+            title = getattr(script, TITLE)
+            parser_method = getattr(script, PARSER_METHOD)
+            display_type = getattr(script, DISPLAY_TYPE)
+            
+            result = self.helper_base(
+                source=input_data_exist, 
+                year=year, 
+                title=title,
+                display_type=display_type,
+                parser_method=parser_method
+            )
 
-    functions = getattr(script, 'start_day')
-    result = helper_base(source=input_data_exist, year=year, functions=functions)
+            for each_day in [PART_1, PART_2]:
+                self.printer(
+                    each_day=each_day,
+                    result=result,
+                    class_helper=[script, SOLVER_CLASS]
+                )
 
-    for each_day in ["part_1", "part_2"]:
-        printer(part=each_day, result=result, func=getattr(script, each_day))
+    runner = Command()
+    runner.run()
+    
+    # CLASSES HELPER
+    # class BaseConfig:
+    # class InputCheck:
+    # class SolverFunctions:
+    
+    # class Command(InputCheck, Display):
+
+    # class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
+
+    
