@@ -4,7 +4,7 @@
 """
 from src.common.utils import SolverFunctions
 
-name = '--- Day 1: Calorie Counting ---'
+title = 'Day 1: Calorie Counting'
 parser_method = 'integers'
 display_lines_or_paragraph = 'paragraph'
 

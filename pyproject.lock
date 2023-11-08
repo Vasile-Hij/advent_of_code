@@ -1,0 +1,1050 @@
+[[package]]
+category = "main"
+description = "Disable App Nap on macOS >= 10.9"
+name = "appnope"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.1.3"
+
+[package.requirements]
+platform = "darwin"
+
+[[package]]
+category = "main"
+description = "Annotate AST trees with source code positions"
+name = "asttokens"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "2.4.1"
+
+[package.dependencies]
+six = ">=1.12.0"
+
+[[package]]
+category = "main"
+description = "The uncompromising code formatter."
+name = "black"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "23.11.0"
+
+[package.dependencies]
+click = ">=8.0.0"
+mypy-extensions = ">=0.4.3"
+packaging = ">=22.0"
+pathspec = ">=0.9.0"
+platformdirs = ">=2"
+
+[[package]]
+category = "main"
+description = "Loads cookies from your browser into a cookiejar object so can download with urllib and other libraries the same content you see in the web browser."
+name = "browser-cookie3"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.19.1"
+
+[package.dependencies]
+lz4 = "*"
+pycryptodomex = "*"
+
+[package.dependencies.jeepney]
+platform = "linux"
+python = ">=3.7"
+version = "*"
+
+[[package]]
+category = "main"
+description = "httplib2 caching for requests"
+name = "cachecontrol"
+optional = false
+platform = "*"
+python-versions = ">=3.6"
+version = "0.12.14"
+
+[package.dependencies]
+lockfile = ">=0.9"
+msgpack = ">=0.5.2"
+requests = "*"
+
+[[package]]
+category = "main"
+description = "Cachy provides a simple yet effective caching library."
+name = "cachy"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.2.0"
+
+[[package]]
+category = "main"
+description = "Python package for providing Mozilla's CA Bundle."
+name = "certifi"
+optional = false
+platform = "*"
+python-versions = ">=3.6"
+version = "2023.7.22"
+
+[[package]]
+category = "main"
+description = "Foreign Function Interface for Python calling C code."
+name = "cffi"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "1.16.0"
+
+[package.dependencies]
+pycparser = "*"
+
+[package.requirements]
+platform = "linux"
+
+[[package]]
+category = "main"
+description = "Validate configuration and produce human readable error messages."
+name = "cfgv"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "3.4.0"
+
+[[package]]
+category = "main"
+description = "The Real First Universal Charset Detector. Open, modern and actively maintained alternative to Chardet."
+name = "charset-normalizer"
+optional = false
+platform = "*"
+python-versions = ">=3.7.0"
+version = "3.3.2"
+
+[[package]]
+category = "main"
+description = "Cleo allows you to create beautiful and testable command-line interfaces."
+name = "cleo"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.6.8"
+
+[package.dependencies]
+pastel = ">=0.1.0,<0.2.0"
+pylev = ">=1.3,<2.0"
+
+[[package]]
+category = "main"
+description = "Composable command line interface toolkit"
+name = "click"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "8.1.7"
+
+[package.dependencies]
+colorama = "*"
+
+[[package]]
+category = "main"
+description = "Cross-platform colored terminal text."
+name = "colorama"
+optional = false
+platform = "*"
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*,>=2.7"
+version = "0.4.6"
+
+[[package]]
+category = "main"
+description = "cryptography is a package which provides cryptographic recipes and primitives to Python developers."
+name = "cryptography"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "41.0.5"
+
+[package.dependencies]
+cffi = ">=1.12"
+
+[package.requirements]
+platform = "linux"
+
+[[package]]
+category = "main"
+description = "cssselect parses CSS3 Selectors and translates them to XPath 1.0"
+name = "cssselect"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "1.2.0"
+
+[[package]]
+category = "main"
+description = "Decorators for Humans"
+name = "decorator"
+optional = false
+platform = "All"
+python-versions = ">=3.5"
+version = "5.1.1"
+
+[[package]]
+category = "main"
+description = "Distribution utilities"
+name = "distlib"
+optional = false
+platform = "any"
+python-versions = "*"
+version = "0.3.7"
+
+[[package]]
+category = "main"
+description = "Docutils -- Python Documentation Utilities"
+name = "docutils"
+optional = false
+platform = "OS-independent"
+python-versions = ">=3.7"
+version = "0.20.1"
+
+[[package]]
+category = "main"
+description = "Get the currently executing AST node of a frame, and other information"
+name = "executing"
+optional = false
+platform = "*"
+python-versions = ">=3.5"
+version = "2.0.1"
+
+[[package]]
+category = "main"
+description = "A platform independent file lock."
+name = "filelock"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "3.13.1"
+
+[[package]]
+category = "main"
+description = "HTML parser based on the WHATWG HTML specification"
+name = "html5lib"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "1.1"
+
+[package.dependencies]
+six = ">=1.9"
+webencodings = "*"
+
+[[package]]
+category = "main"
+description = "File identification library for Python"
+name = "identify"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "2.5.31"
+
+[[package]]
+category = "main"
+description = "Internationalized Domain Names in Applications (IDNA)"
+name = "idna"
+optional = false
+platform = "*"
+python-versions = ">=3.5"
+version = "3.4"
+
+[[package]]
+category = "main"
+description = "Read metadata from Python packages"
+name = "importlib-metadata"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "6.8.0"
+
+[package.dependencies]
+zipp = ">=0.5"
+
+[[package]]
+category = "main"
+description = "IPython-enabled pdb"
+name = "ipdb"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.13.13"
+
+[package.dependencies]
+[package.dependencies.decorator]
+python = ">=3.11"
+version = "*"
+
+[package.dependencies.ipython]
+python = ">=3.11"
+version = ">=7.31.1"
+
+[[package]]
+category = "main"
+description = "IPython: Productive Interactive Computing"
+name = "ipython"
+optional = false
+platform = "Linux"
+python-versions = ">=3.9"
+version = "8.17.2"
+
+[package.dependencies]
+decorator = "*"
+jedi = ">=0.16"
+matplotlib-inline = "*"
+prompt-toolkit = ">=3.0.30,<3.0.37 || >3.0.37,<3.1.0"
+pygments = ">=2.4.0"
+stack-data = "*"
+traitlets = ">=5"
+
+[package.dependencies.appnope]
+platform = "darwin"
+version = "*"
+
+[package.dependencies.colorama]
+platform = "win32"
+version = "*"
+
+[package.dependencies.pexpect]
+platform = "!=win32"
+version = ">4.3"
+
+[[package]]
+category = "main"
+description = "Utility functions for Python class constructs"
+name = "jaraco.classes"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "3.3.0"
+
+[package.dependencies]
+more-itertools = "*"
+
+[[package]]
+category = "main"
+description = "An autocompletion tool for Python that can be used for text editors."
+name = "jedi"
+optional = false
+platform = "any"
+python-versions = ">=3.6"
+version = "0.19.1"
+
+[package.dependencies]
+parso = ">=0.8.3,<0.9.0"
+
+[[package]]
+category = "main"
+description = "Low-level, pure Python DBus protocol wrapper."
+name = "jeepney"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "0.8.0"
+
+[package.requirements]
+platform = "linux"
+
+[[package]]
+category = "main"
+description = "An implementation of JSON Schema validation for Python"
+name = "jsonschema"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "2.6.0"
+
+[[package]]
+category = "main"
+description = "Store and access your passwords safely."
+name = "keyring"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "24.2.0"
+
+[package.dependencies]
+"jaraco.classes" = "*"
+
+[package.dependencies.SecretStorage]
+platform = "linux"
+version = ">=3.2"
+
+[package.dependencies.importlib-metadata]
+python = "<3.12"
+version = ">=4.11.4"
+
+[package.dependencies.jeepney]
+platform = "linux"
+version = ">=0.4.2"
+
+[package.dependencies.pywin32-ctypes]
+platform = "win32"
+version = ">=0.2.0"
+
+[[package]]
+category = "main"
+description = "Platform-independent file locking module"
+name = "lockfile"
+optional = false
+platform = "UNKNOWN"
+python-versions = "*"
+version = "0.12.2"
+
+[[package]]
+category = "main"
+description = "Powerful and Pythonic XML processing library combining libxml2/libxslt with the ElementTree API."
+name = "lxml"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, != 3.4.*"
+version = "4.9.3"
+
+[[package]]
+category = "main"
+description = "LZ4 Bindings for Python"
+name = "lz4"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "4.3.2"
+
+[[package]]
+category = "main"
+description = "Python port of markdown-it. Markdown parsing, done right!"
+name = "markdown-it-py"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "3.0.0"
+
+[package.dependencies]
+mdurl = ">=0.1,<1.0"
+
+[[package]]
+category = "main"
+description = "Inline Matplotlib backend for Jupyter"
+name = "matplotlib-inline"
+optional = false
+platform = "*"
+python-versions = ">=3.5"
+version = "0.1.6"
+
+[package.dependencies]
+traitlets = "*"
+
+[[package]]
+category = "main"
+description = "Markdown URL utilities"
+name = "mdurl"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "0.1.2"
+
+[[package]]
+category = "main"
+description = "More routines for operating on iterables, beyond itertools"
+name = "more-itertools"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "10.1.0"
+
+[[package]]
+category = "main"
+description = "MessagePack serializer"
+name = "msgpack"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "1.0.7"
+
+[[package]]
+category = "main"
+description = "Type system extensions for programs checked with the mypy type checker."
+name = "mypy-extensions"
+optional = false
+platform = "*"
+python-versions = ">=3.5"
+version = "1.0.0"
+
+[[package]]
+category = "main"
+description = "Ammonia HTML sanitizer Python binding"
+name = "nh3"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.2.14"
+
+[[package]]
+category = "main"
+description = "Node.js virtual environment builder"
+name = "nodeenv"
+optional = false
+platform = "any"
+python-versions = ">=2.7,!=3.0.*,!=3.1.*,!=3.2.*,!=3.3.*,!=3.4.*,!=3.5.*,!=3.6.*"
+version = "1.8.0"
+
+[package.dependencies]
+setuptools = "*"
+
+[[package]]
+category = "main"
+description = "Core utilities for Python packages"
+name = "packaging"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "23.2"
+
+[[package]]
+category = "main"
+description = "A Python Parser"
+name = "parso"
+optional = false
+platform = "any"
+python-versions = ">=3.6"
+version = "0.8.3"
+
+[[package]]
+category = "main"
+description = "Bring colors to your terminal."
+name = "pastel"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.1.1"
+
+[[package]]
+category = "main"
+description = "Utility library for gitignore style pattern matching of file paths."
+name = "pathspec"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "0.11.2"
+
+[[package]]
+category = "main"
+description = "Pexpect allows easy control of interactive console applications."
+name = "pexpect"
+optional = false
+platform = "UNIX"
+python-versions = "*"
+version = "4.8.0"
+
+[package.dependencies]
+ptyprocess = ">=0.5"
+
+[package.requirements]
+platform = "!=win32"
+
+[[package]]
+category = "main"
+description = "Query metadata from sdists / bdists / installed packages."
+name = "pkginfo"
+optional = false
+platform = "Unix"
+python-versions = ">=3.6"
+version = "1.9.6"
+
+[[package]]
+category = "main"
+description = "A small Python package for determining appropriate platform-specific dirs, e.g. a \"user data dir\"."
+name = "platformdirs"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "3.11.0"
+
+[[package]]
+category = "main"
+description = "Python dependency management and packaging made easy."
+name = "poetry-plus"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.11.4"
+
+[package.dependencies]
+cachecontrol = ">=0.12.4,<0.13.0"
+cachy = ">=0.2,<0.3"
+cleo = ">=0.6.7,<0.7.0"
+html5lib = ">=1.0,<2.0"
+jsonschema = ">=2.6,<3.0"
+pkginfo = ">=1.4,<2.0"
+pyparsing = ">=2.2,<3.0"
+pyrsistent = ">=0.14.2,<0.15.0"
+requests = ">=2.18,<3.0"
+requests-toolbelt = ">=0.8.0,<0.9.0"
+shellingham = ">=1.1,<2.0"
+tomlkit = ">=0.4.0,<0.5.0"
+
+[[package]]
+category = "main"
+description = "A framework for managing and maintaining multi-language pre-commit hooks."
+name = "pre-commit"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "3.5.0"
+
+[package.dependencies]
+cfgv = ">=2.0.0"
+identify = ">=1.0.0"
+nodeenv = ">=0.11.1"
+pyyaml = ">=5.1"
+virtualenv = ">=20.10.0"
+
+[[package]]
+category = "main"
+description = "Library for building powerful interactive command lines in Python"
+name = "prompt-toolkit"
+optional = false
+platform = "*"
+python-versions = ">=3.7.0"
+version = "3.0.39"
+
+[package.dependencies]
+wcwidth = "*"
+
+[[package]]
+category = "main"
+description = "Run a subprocess in a pseudo terminal"
+name = "ptyprocess"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.7.0"
+
+[package.requirements]
+platform = "!=win32"
+
+[[package]]
+category = "main"
+description = "Safely evaluate AST nodes without side effects"
+name = "pure-eval"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.2.2"
+
+[[package]]
+category = "main"
+description = "C parser in Python"
+name = "pycparser"
+optional = false
+platform = "Cross Platform"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "2.21"
+
+[package.requirements]
+platform = "linux"
+
+[[package]]
+category = "main"
+description = "Cryptographic library for Python"
+name = "pycryptodomex"
+optional = false
+platform = "Posix; MacOS X; Windows"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*, !=3.4.*"
+version = "3.19.0"
+
+[[package]]
+category = "main"
+description = "Pygments is a syntax highlighting package written in Python."
+name = "pygments"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "2.16.1"
+
+[[package]]
+category = "main"
+description = "A pure Python Levenshtein implementation that's not freaking GPL'd."
+name = "pylev"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "1.4.0"
+
+[[package]]
+category = "main"
+description = "Python parsing module"
+name = "pyparsing"
+optional = false
+platform = "*"
+python-versions = ">=2.6, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "2.4.7"
+
+[[package]]
+category = "main"
+description = "Persistent/Functional/Immutable data structures"
+name = "pyrsistent"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.14.11"
+
+[package.dependencies]
+six = "*"
+
+[[package]]
+category = "main"
+description = "Extensions to the standard Python datetime module"
+name = "python-dateutil"
+optional = false
+platform = "*"
+python-versions = "!=3.0.*,!=3.1.*,!=3.2.*,>=2.7"
+version = "2.8.2"
+
+[package.dependencies]
+six = ">=1.5"
+
+[[package]]
+category = "main"
+description = "A (partial) reimplementation of pywin32 using ctypes/cffi"
+name = "pywin32-ctypes"
+optional = false
+platform = "*"
+python-versions = ">=3.6"
+version = "0.2.2"
+
+[package.requirements]
+platform = "win32"
+
+[[package]]
+category = "main"
+description = "YAML parser and emitter for Python"
+name = "pyyaml"
+optional = false
+platform = "Any"
+python-versions = ">=3.6"
+version = "6.0.1"
+
+[[package]]
+category = "main"
+description = "readme_renderer is a library for rendering readme descriptions for Warehouse"
+name = "readme-renderer"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "42.0"
+
+[package.dependencies]
+Pygments = ">=2.5.1"
+docutils = ">=0.13.1"
+nh3 = ">=0.2.14"
+
+[[package]]
+category = "main"
+description = "Python HTTP for Humans."
+name = "requests"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "2.31.0"
+
+[package.dependencies]
+certifi = ">=2017.4.17"
+charset-normalizer = ">=2,<4"
+idna = ">=2.5,<4"
+urllib3 = ">=1.21.1,<3"
+
+[[package]]
+category = "main"
+description = "A utility belt for advanced users of python-requests"
+name = "requests-toolbelt"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.8.0"
+
+[package.dependencies]
+requests = ">=2.0.1,<3.0.0"
+
+[[package]]
+category = "main"
+description = "Validating URI References per RFC 3986"
+name = "rfc3986"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "2.0.0"
+
+[[package]]
+category = "main"
+description = "Render rich text, tables, progress bars, syntax highlighting, markdown and more to the terminal"
+name = "rich"
+optional = false
+platform = "*"
+python-versions = ">=3.7.0"
+version = "13.6.0"
+
+[package.dependencies]
+markdown-it-py = ">=2.2.0"
+pygments = ">=2.13.0,<3.0.0"
+
+[[package]]
+category = "main"
+description = "An extremely fast Python linter and code formatter, written in Rust."
+name = "ruff"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "0.1.4"
+
+[[package]]
+category = "main"
+description = "Python bindings to FreeDesktop.org Secret Service API"
+name = "secretstorage"
+optional = false
+platform = "Linux"
+python-versions = ">=3.6"
+version = "3.3.3"
+
+[package.dependencies]
+cryptography = ">=2.0"
+jeepney = ">=0.6"
+
+[package.requirements]
+platform = "linux"
+
+[[package]]
+category = "main"
+description = "Tool to Detect Surrounding Shell"
+name = "shellingham"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "1.5.4"
+
+[[package]]
+category = "main"
+description = "Python 2 and 3 compatibility utilities"
+name = "six"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*"
+version = "1.16.0"
+
+[[package]]
+category = "main"
+description = "Extract data from python stack frames and tracebacks for informative displays"
+name = "stack-data"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.6.3"
+
+[package.dependencies]
+asttokens = ">=2.1.0"
+executing = ">=1.2.0"
+pure-eval = "*"
+
+[[package]]
+category = "main"
+description = "ANSI color formatting for output in terminal"
+name = "termcolor"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "2.3.0"
+
+[[package]]
+category = "main"
+description = "Style preserving TOML library"
+name = "tomlkit"
+optional = false
+platform = "*"
+python-versions = ">=2.7, !=3.0.*, !=3.1.*, !=3.2.*, !=3.3.*"
+version = "0.4.6"
+
+[[package]]
+category = "main"
+description = "Traitlets Python configuration system"
+name = "traitlets"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "5.13.0"
+
+[[package]]
+category = "main"
+description = "Collection of utilities for publishing packages on PyPI"
+name = "twine"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "4.0.2"
+
+[package.dependencies]
+importlib-metadata = ">=3.6"
+keyring = ">=15.1"
+pkginfo = ">=1.8.1"
+readme-renderer = ">=35.0"
+requests = ">=2.20"
+requests-toolbelt = ">=0.8.0,<0.9.0 || >0.9.0"
+rfc3986 = ">=1.4.0"
+rich = ">=12.0.0"
+urllib3 = ">=1.26.0"
+
+[[package]]
+category = "main"
+description = "HTTP library with thread-safe connection pooling, file post, and more."
+name = "urllib3"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "2.0.7"
+
+[[package]]
+category = "main"
+description = "Virtual Python Environment builder"
+name = "virtualenv"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "20.24.6"
+
+[package.dependencies]
+distlib = ">=0.3.7,<1"
+filelock = ">=3.12.2,<4"
+platformdirs = ">=3.9.1,<4"
+
+[[package]]
+category = "main"
+description = "Filesystem events monitoring"
+name = "watchdog"
+optional = false
+platform = "*"
+python-versions = ">=3.7"
+version = "3.0.0"
+
+[package.dependencies]
+PyYAML = ">=3.10"
+
+[[package]]
+category = "main"
+description = "Measures the displayed width of unicode strings in a terminal"
+name = "wcwidth"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.2.9"
+
+[[package]]
+category = "main"
+description = "Character encoding aliases for legacy web content"
+name = "webencodings"
+optional = false
+platform = "*"
+python-versions = "*"
+version = "0.5.1"
+
+[[package]]
+category = "main"
+description = "Backport of pathlib-compatible object wrapper for zip files"
+name = "zipp"
+optional = false
+platform = "*"
+python-versions = ">=3.8"
+version = "3.17.0"
+
+[metadata]
+content-hash = "7fa34b5750332f3497439e7a661296c0f22a5756d4fde3532da4237d85675ffc"
+platform = "*"
+python-versions = "^3.11"
+
+[metadata.hashes]
+appnope = []
+asttokens = []
+black = []
+browser-cookie3 = []
+cachecontrol = []
+cachy = []
+certifi = []
+cffi = []
+cfgv = []
+charset-normalizer = []
+cleo = []
+click = []
+colorama = []
+cryptography = []
+cssselect = []
+decorator = []
+distlib = []
+docutils = []
+executing = []
+filelock = []
+html5lib = []
+identify = []
+idna = []
+importlib-metadata = []
+ipdb = []
+ipython = []
+"jaraco.classes" = []
+jedi = []
+jeepney = []
+jsonschema = []
+keyring = []
+lockfile = []
+lxml = []
+lz4 = []
+markdown-it-py = []
+matplotlib-inline = []
+mdurl = []
+more-itertools = []
+msgpack = []
+mypy-extensions = []
+nh3 = []
+nodeenv = []
+packaging = []
+parso = []
+pastel = []
+pathspec = []
+pexpect = []
+pkginfo = []
+platformdirs = []
+poetry-plus = []
+pre-commit = []
+prompt-toolkit = []
+ptyprocess = []
+pure-eval = []
+pycparser = []
+pycryptodomex = []
+pygments = []
+pylev = []
+pyparsing = []
+pyrsistent = []
+python-dateutil = []
+pywin32-ctypes = []
+pyyaml = []
+readme-renderer = []
+requests = []
+requests-toolbelt = []
+rfc3986 = []
+rich = []
+ruff = []
+secretstorage = []
+shellingham = []
+six = []
+stack-data = []
+termcolor = []
+tomlkit = []
+traitlets = []
+twine = []
+urllib3 = []
+virtualenv = []
+watchdog = []
+wcwidth = []
+webencodings = []
+zipp = []

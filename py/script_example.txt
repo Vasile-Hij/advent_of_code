@@ -1,8 +1,8 @@
 from src.common.utils import SolverFunctions
 
-name = ''
+title = 'Day'
 parser_method = ''
-display_lines_or_paragraph = 'paragraph'
+display_lines_or_paragraph = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

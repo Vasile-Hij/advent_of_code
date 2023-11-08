@@ -23,6 +23,7 @@ watchdog = {extras = ["watchmedo"], version = "^3.0.0"}
 browser-cookie3 = "^0.19.1"
 cssselect = "^1.2.0"
 lxml = "^4.9.3"
+termcolor = "^2.3"
 
 [tool.black]
 line-length = 100

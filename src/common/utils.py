@@ -79,10 +79,9 @@ class SolverFunctions:
         return result
 
 
-four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
-
-
 class Matrix2D(dict):
+    four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
+    
     def __init__(self, grid=(), directions=four_directions, skip=(), default=KeyError):
         super().__init__()
         self.directions = directions

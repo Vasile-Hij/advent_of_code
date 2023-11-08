@@ -1,19 +1,24 @@
-def start_day():
-    name = ''
-    parser_function = ''
-    display_lines_or_paragraph = ''
-    return name, parser_function, display_lines_or_paragraph
+from src.common.utils import SolverFunctions
+
+title = 'Day'
+parser_method = ''
+display_lines_or_paragraph = 'paragraph'  # by default
 
 
-def helper(_data):
-    return _data
+class SolveTheDay(SolverFunctions):    
+    @staticmethod
+    def helper(data):
+    
+        return
+    
+    @classmethod
+    def part_1(cls, data):
+        result = cls.helper(data)
+        
+        return
 
-
-def part_1(data):
-    x = helper(data)
-    return x
-
-
-def part_2(data):
-    y = helper(data)
-    return y
+    @classmethod
+    def part_2(cls, data):
+        result = cls.helper(data)
+        
+        return

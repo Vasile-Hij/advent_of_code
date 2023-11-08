@@ -11,7 +11,7 @@
 """
 from src.common.utils import SolverFunctions
 
-name = '--- Day 2: Rock Paper Scissors ---'
+title = 'Day 2: Rock Paper Scissors'
 parser_method = 'str_split'
 display_lines_or_paragraph = 'lines'
 

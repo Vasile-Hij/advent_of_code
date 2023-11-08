@@ -2,6 +2,7 @@ import logging
 from datetime import date
 from src.common.exceptions import Ignore
 from src.common.configs import BaseConfig
+from termcolor import colored
 
 
 logger = logging.getLogger(__name__)
@@ -74,6 +75,6 @@ class InputCheck:
                 raise Ignore('That year is into the future! Try previous years!')
     
             if year < self.current_year:
-                print("Let's go!")
+                print(colored("Let's go!", 'black', 'on_green', ['bold']))
              
             return year, day

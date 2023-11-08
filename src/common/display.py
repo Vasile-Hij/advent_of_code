@@ -4,18 +4,21 @@ import logging
 from importlib import import_module
 from collections import Counter
 
+from src.common.exceptions import Ignore
 from src.common.setup_project import SetupProject
 from src.aoc.aoc_client import AdventOfCodeBase
 from src.common.configs import BaseConfig
 from src.common.utils import SolverFunctions
+from termcolor import colored
 
 logging.basicConfig()
 logger = logging.getLogger()
 logger.setLevel(logging.INFO)
 
+lines = str.splitlines
+
 
 class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
-    lines = str.splitlines
     separator = '─' * 100
 
     @classmethod
@@ -23,47 +26,49 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             cls, 
             source: str, 
             year: str,
-            name: str,
+            title: str,
             display_type: str,
             parser_method: callable = str,
-            display: int = 10
+            display: str = 10
     ) -> tuple:
-        day_text, name, segmentation, method = source, name, display_type.lower(), parser_method.lower(),
-
-        parser_method = cls.get_method(method)
+        source_day_text, title, segmentation, method = source, title, display_type.lower(), parser_method.lower(),
+        
+        if parser_method:
+            parser_method = cls.get_method(method)
+        else:
+            raise Ignore(colored('Please add a "parser_method" in the day script!', 'black', 'on_red'))
 
         if segmentation != 'lines' or segmentation is None:
             custom_segmentation = cls.get_method(segmentation)
-            segmentation = custom_segmentation(day_text.rstrip())
+            segmentation = custom_segmentation(source_day_text.rstrip())
         else:
-            segmentation = cls.lines(day_text.rstrip())  # TODO 
+            segmentation = lines(source_day_text.rstrip())
 
-        _year = f'--- Year: 20{year}'
-        print(_year, name)
+        print(colored(f'--- Year: 20{year} | {title} ---', 'black', 'on_light_grey', ['bold']))
 
-        cls.display_items(cls, 'Raw input', day_text.splitlines(), display)
+        cls.display_items(cls, 'Raw input', source_day_text.splitlines(), display)
         data = cls.make_tuple(parser_method, segmentation)
-        if parser_method != str or parser_method != cls.lines:
+        if parser_method != str or parser_method != lines:
             cls.display_items(cls, 'Parsed file', data, display)
 
         return data
 
     def display_items(
             self, 
-            file_raw, 
+            title, 
             items, 
-            display: int, 
+            display, 
             separate=separator
     ):
         if display:
-            type_input = Counter(map(type, items))
+            items_count = Counter(map(type, items))
         
-            def counter(types):
+            def counter(items_count):
                 """count lines and verbose if plural"""
-                for types, name in types.items():
+                for types, name in items_count.items():
                     return f'{name} {types.__name__}{"" if name == 1 else "s"}'
 
-            print(f'{separate}\n{file_raw}: {counter(type_input)}:\n{separate}')
+            print(f'{separate}\n{title}: {counter(items_count)}:\n{separate}')
             for line in items[:display]:
                 print(self.truncate(line))
             if display < len(items):
@@ -89,8 +94,12 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                 _part = 'Part 2'
                 results = f'{_part}: {class_name.part_2(result)}'
         
-        print(f'{separate}\n{results}\n{separate}')
-
+        print(
+            f'{separate}\n',
+            colored(f'{results}', 'light_green', 'on_black', ['bold']),
+            f'\n{separate}'
+        )
+     
     @staticmethod
     def truncate(obj, width: int = 100, dots: str = ' ...'):
         string = str(obj)
