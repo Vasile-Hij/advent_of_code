@@ -4,31 +4,33 @@
 
 `This is the most wonderful time of the year - Andy Williams`
 
-This repo is built on python that is run with poetry making all configs that you need automatically: creates directories, 
+This repository is built on python that run with poetry making all configs that you need automatically: creates directories, 
 scripts, request HTML page from Advent of Code site and downloaded in 'src/cached_html', taking 'input', 'sample file' 
-from 'src/input' and send back 'result' to the AoC page and pass the day (the last part is on progress).
+from 'src/input' and send back 'result' to the AoC page and pass the day filling the input on to the page (the last part is on progress).
 
-You need to do:
+
 1. Clone and cd to root project then:
-`$ poetry install`, then `poetry shell`
+`$ poetry install`, then `poetry shell` to activate the environment;
 
-2. Go on Chrome Browser on [Advent of Code](https://adventofcode.com/) and choose [GitHub] as signin option
-(only this method it is available for now).
+2. Two ways of run it when you need creating files and populate them with data:
 
-2.1 If you don't want to use this option, add input manually: `input/{year}/day{day}.txt` and 
-`input/{year}/day{day}_sample.txt`
+    A. *Automatically*: go on Chrome Browser on [Advent of Code](https://adventofcode.com/) and choose [GitHub] as a sign in option
+     (only this method it is available for now).
 
-2.2. If you want to use project with your own inputs and different approach in solving problems, you have to remove 
-anything in directory 'py/' except 'script_example.txt'; then in directory 'src/' remove completely 'input/' 
-and 'cached_html/'. Then add manually the input into the files.
+    B. *Manually*: add input manually: `input/{year}/day{day}.txt` and `input/{year}/day{day}_sample.txt`.
+
+   Note: If you want to use project with your own inputs and different approach in solving problems, you have to remove 
+   anything in directory 'py/', except 'script_example.txt'; then in directory 'src/' remove completely 'input/' 
+   and 'cached_html/'. Then add manually the input into the files as in 2.B step.
 
 3. Run:
 $`python main.py -v <yearday>` e.g: `python main.py -v 2201` '22' represent year 2022 and '01' is day 01.
 
-If no year is mentioned, it will be taken automatically last year available: `python main.py -v 01`. 
-In this case '22' is the last year available for 'day01'.
+   If no year is mentioned, it will be taken automatically last year available: `python main.py -v 01`. 
+   In this case '22' is the last year available for 'day01'.
 
-Testing sample input add `-s s`: `python main.py -v 01 -s s`
+4. Testing:
+For testing sample input add '-s s': `python main.py -v 2201 -s s`
 
 
  
@@ -70,7 +72,8 @@ Testing sample input add `-s s`: `python main.py -v 01 -s s`
 - [x] [#9](https://github.com/Vasile-Hij/advent_of_code/issues/9) Automate scripts and input file
 - [x] [#10](https://github.com/Vasile-Hij/advent_of_code/issues/10) Get input data from AoC in HTML format
 - [x] [#16](https://github.com/Vasile-Hij/advent_of_code/issues/16) Cache AOC's HTML storyline and input
-- [progess] [#17](https://github.com/Vasile-Hij/advent_of_code/issues/17) Migrate project from functions to classes
+- [x] [#17](https://github.com/Vasile-Hij/advent_of_code/issues/17) Migrate project from functions to classes (bonus: coloured print)
+- [x] Test methods
 
 ### TO DO'S:
     1. find a pattern to automate downloading multiple examples when given and chose the right one required for testing solution

@@ -35,12 +35,33 @@ skip-string-normalization = true
 line-length = 100
 extend-select = ['Q']
 flake8-quotes = {inline-quotes = 'single', multiline-quotes = 'double'}
-
-
 select = [
-  "E",   # pycodestyle
-  "F",   # pyflakes
-  "UP",  # pyupgrade
+    "E", # pycodestyle
+    "W", # pycodestyle
+    "F", # pyflakes
+    "C", # mccabe (complexity)
+    "PL", # pylint. Activating this activates everything: PLC PLE PLR etc
+    "YTT", # flake8-2020
+    "T10", # ipdb
+    "DJ", # flake8-django
+    "EXE", # flake8-executable
+    "ICN", # flake8-import-conventions
+    "PYI", # flake8-pyi
+    "TID", # flake8-tidy-imports
+    "INT", # flake8-gettext
+    "NPY", # NumPy-specific rules
+    "PGH", # pygrep-hooks
+    "PD", # pandas-vet
+    "RSE", # flake8-raise
+    "PIE", # flake8-pie - easy
+    "ISC", # flake8-implicit-str-concat - easy
+    "INP", # flake8-no-pep420
+    "C4", # flake8-comprehensions
+    "RUF", # ruff specific rules
+    "SIM", # flake8-simplify
+    "PTH", # flake8-pathlib
+#    "BLE", # flake8-blind-except - easy
+    "A", # flake8-builtin
 ]
 ignore = [
   "E501",  # line too long

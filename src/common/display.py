@@ -3,6 +3,7 @@ import logging
 
 from importlib import import_module
 from collections import Counter
+from typing import Tuple
 
 from src.common.exceptions import Ignore
 from src.common.setup_project import SetupProject
@@ -29,10 +30,10 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             title: str,
             display_type: str,
             parser_method: callable = str,
-            display: str = 10
-    ) -> tuple:
-        source_day_text, title, segmentation, method = source, title, display_type.lower(), parser_method.lower(),
-        
+            display: int = 10
+    ) -> Tuple:
+        source_day_text, title, segmentation, method = source, title, display_type, parser_method,
+
         if parser_method:
             parser_method = cls.get_method(method)
         else:
@@ -69,7 +70,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                     return f'{name} {types.__name__}{"" if name == 1 else "s"}'
 
             print(f'{separate}\n{title}: {counter(items_count)}:\n{separate}')
-            for line in items[:display]:
+            for line in items[0:display]:
                 print(self.truncate(line))
             if display < len(items):
                 print('...')

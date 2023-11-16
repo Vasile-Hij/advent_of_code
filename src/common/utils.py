@@ -1,68 +1,85 @@
 import re
+from typing import Tuple, List
 
 separator = '─' * 100
 
     
 class SolverFunctions:
+    """
+        File and text handler
+    """
+    
     @staticmethod
     def read_raw(source: str) -> str:
         with open(source, 'r') as file:
             return file.read()
 
     @staticmethod
-    def write_file(source):
+    def write_file(source: str) -> str:
         with open(source, 'w') as file:
             return file.write(source)
 
     @staticmethod
-    def make_tuple(method: callable, *sequences) -> tuple:
+    def make_tuple(method: callable, *sequences) -> Tuple:
         return tuple(map(method, *sequences))
 
     @staticmethod
-    def make_list(method: callable, *sequences) -> list:
+    def make_list(method: callable, *sequences) -> List:
         return list(map(method, *sequences))
+    
+    """
+        Strings operations
+    """
 
     @classmethod
-    def strings_per_line(cls, data) -> list:
-        data = cls.paragraph(data)
-        return [[item for item in line.split('\n') if item] for line in data if line][0]
+    def strings_per_line(cls, text) -> List[str]:
+        text = cls.paragraph(text)
+        return [[item for item in line.split('\n') if item] for line in text if line][0]
 
     @staticmethod
-    def str_strip(data: str) -> str:
-        return data.strip()
+    def str_strip(text: str) -> str:
+        return text.strip()
 
     @staticmethod
-    def str_split(data: str):
-        return data.split()
+    def str_split(text: str) -> List[str]:
+        return text.split()
     
     @staticmethod
-    def paragraph(data: str):
-        return data.split('\n\n')
+    def check_len_string(text: str) -> bool:
+        return True if len(text) > 1 else False
+    
+    @staticmethod
+    def paragraph(text: str) -> str:
+        return text.split('\n\n')
+
+    @staticmethod
+    def each_first_item(text: str) -> List[str]:
+        return [item[0] for item in text]
+
+    @staticmethod
+    def each_item(data: str) -> List[str]:
+        return [item for item in data]
     
     @classmethod
-    def integers(cls, data: str) -> tuple[int]:
-        return cls.make_tuple(int, re.findall(r'-?[0-9]+', data))
+    def integers(cls, text: str) -> Tuple[int]:
+        return cls.make_tuple(int, re.findall(r'-?[0-9]+', text))
 
     @classmethod
-    def find_digits(cls, text: str) -> tuple[int]:
+    def positive_integers(cls, text: str) -> Tuple[int]:
+        return cls.make_tuple(int, re.findall(r'[0-9]+', text))
+
+    @classmethod
+    def find_digits(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'[0-9]', text))
 
-    @staticmethod
-    def each_first_item(data: str):
-        return [item[0] for item in data]
+    @classmethod
+    def find_strings(cls, text: str) -> Tuple[str]:
+        return cls.make_tuple(str, re.findall(r'[a-zA-Z]+', text))
 
-    @staticmethod
-    def each_item(data: str):
-        return [item for item in data]
-
-    @staticmethod
-    def find_strings(name):
-        return tuple(re.findall(r'[a-zA-Z]', name))
+    """
+        Calculus
+    """
     
-    @staticmethod
-    def check_len_string(name) -> bool:
-        return True if len(name) > 1 else False
-
     @staticmethod
     def add_together(a, b):
         return a[0] + b[0], a[1] + b[1]

@@ -4,6 +4,7 @@ import logging
 from src.common.checker import InputCheck
 from src.common.setup_project import SetupProject
 from src.common.display import Display
+from test.tests import Test
 
 logger = logging.getLogger(__name__)
 
@@ -39,6 +40,8 @@ if __name__ == '__main__':
 
         def run(self):
             SetupProject.get_setup()
+            Test.test_methods()
+            
             year, day, sample = self.cmd_arguments()
             
             script, input_data_exist = self.check_required_files_exists(year=year, day=day, sample=sample)

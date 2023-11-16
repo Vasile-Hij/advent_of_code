@@ -1,7 +1,7 @@
 from src.common.utils import SolverFunctions
 
 title = 'Day'
-parser_method = ''
+parser_method = 'find_digits'
 display_lines_or_paragraph = 'paragraph'  # by default
 
 
@@ -9,7 +9,7 @@ class SolveTheDay(SolverFunctions):
     @staticmethod
     def helper(data):
     
-        return
+        return data
     
     @classmethod
     def part_1(cls, data):
