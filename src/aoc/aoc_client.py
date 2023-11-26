@@ -1,5 +1,7 @@
 import logging
 import requests
+from termcolor import colored
+
 from src.aoc.lxml_utils import HTMLHelper
 from src.common.configs import BaseConfig
 from src.common.setup_project import SetupProject
@@ -22,18 +24,17 @@ class AdventOfCodeBase:
         request_day = day[1:] if day.startswith('0') else day
         input_day = f'{request_day}/input'
     
-        cls.get_cached_html_story(year, day, year_long, request_day)
         return cls.get_cached_html_input(year, day, year_long, input_day)
 
     @classmethod
     def get_cached_html_input(cls, year, day, year_long, request_day):
         _input = True
-        logger.info('Requesting AoC input!')
+        logger.info(colored('Requesting AoC input!', 'black', 'on_light_yellow'))
         return cls.get_cached_html(year, day, year_long, request_day, _input).text_content()
 
     @classmethod
     def get_cached_html_story(cls, year, day, year_long, request_day):
-        logger.info('Requesting AoC story!')
+        logger.info(colored('Requesting AoC story!', 'black', 'on_light_yellow'))
         return cls.get_cached_html(year, day, year_long, request_day)
     
     @classmethod

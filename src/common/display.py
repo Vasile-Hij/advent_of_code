@@ -1,11 +1,10 @@
-import sys
 import logging
 
 from importlib import import_module
 from collections import Counter
 from typing import Tuple
 
-from src.common.exceptions import Ignore
+from src.common.exceptions import Ignore, ActionRequired
 from src.common.setup_project import SetupProject
 from src.aoc.aoc_client import AdventOfCodeBase
 from src.common.configs import BaseConfig
@@ -39,7 +38,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         else:
             raise Ignore(colored('Please add a "parser_method" in the day script!', 'black', 'on_red'))
 
-        if segmentation != 'lines' or segmentation is None:
+        if segmentation != 'lines' or not segmentation:
             custom_segmentation = cls.get_method(segmentation)
             segmentation = custom_segmentation(source_day_text.rstrip())
         else:
@@ -64,9 +63,9 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         if display:
             items_count = Counter(map(type, items))
         
-            def counter(items_count):
+            def counter(all_items):
                 """count lines and verbose if plural"""
-                for types, name in items_count.items():
+                for types, name in all_items.items():
                     return f'{name} {types.__name__}{"" if name == 1 else "s"}'
 
             print(f'{separate}\n{title}: {counter(items_count)}:\n{separate}')
@@ -83,6 +82,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             class_helper: list[callable, str],
             separate: str = separator
     ):
+        results = None
         _part = each_day
         script, class_name = class_helper
         class_name = getattr(script, class_name)
@@ -121,14 +121,14 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         except (ModuleNotFoundError, NameError):
             self.make_dir(year_path)
             self.write_file(created_script_path)
-            logger.info(f'Script created!')
+            logger.info(colored(f'Script created!', 'magenta', 'on_black'))
 
             _text = self.read_raw(self.paths_dir['script_example'])
             added_blank_functions = [x for x in _text]
 
             with open(created_script_path, 'w') as file_text:
                 file_text.writelines(added_blank_functions)
-                logger.info('New script successfully populated!')
+                logger.info(colored('New script successfully populated!', 'magenta', 'on_black'))
 
             script_exists = import_module(script_path)
 
@@ -138,7 +138,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             available_year = self.get_input_path(input_path)
             if available_year != year:
                 self.make_dir(input_path)
-                logger.info(f'Directory "src/input/{year}" have been created!')
+                logger.info(colored(f'Directory "src/input/{year}" have been created!', 'blue', 'on_black'))
 
             with open(input_path_day_sample, 'w') as f:
                 f.write('')
@@ -156,7 +156,10 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             except FileNotFoundError:
                 with open(input_path_day_sample, 'w') as f:
                     f.write('')
-                logger.info('Sample file created without data!')
-                logger.info('Populate file manually due multiple examples!')  # TO DO: find a pattern to automate it
+                logger.info(colored('Sample file created without data!', 'red', 'on_black'))
 
+        if sample and not input_data_exist:
+            raise ActionRequired(colored('Samples need to be populated manually from AOC webpage!', 
+                                        'light_yellow', 'on_black'))
+            
         return script_exists, input_data_exist

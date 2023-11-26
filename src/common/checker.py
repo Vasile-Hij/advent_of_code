@@ -1,6 +1,6 @@
 import logging
 from datetime import date
-from src.common.exceptions import Ignore
+from src.common.exceptions import ActionInFuture
 from src.common.configs import BaseConfig
 from termcolor import colored
 
@@ -52,7 +52,7 @@ class InputCheck:
         if self.current_year == year and self.month == 12 and self.today < day:
             diff = day - self.today
             msg_day = 'day' if len(diff) == 1 else 'days'
-            raise Ignore(f'You have to wait {diff} {msg_day}!')
+            raise ActionInFuture(f'You have to wait {diff} {msg_day}!')
             
         if day.isnumeric() and len(day) == INPUT_DAY_SHORT:
             day = f'0{day}'
@@ -69,10 +69,10 @@ class InputCheck:
             day = clean_value[2:]
             
             if year == self.current_year and self.month != '12':
-                raise Ignore('Wait until December and try to solve previous year!')
+                raise ActionInFuture('Wait until December and try to solve previous year!')
             
             if year > self.get_year():
-                raise Ignore('That year is into the future! Try previous years!')
+                raise ActionInFuture('That year is into the future! Try previous years!')
     
             if year < self.current_year:
                 print(colored("Let's go!", 'black', 'on_green', ['bold']))

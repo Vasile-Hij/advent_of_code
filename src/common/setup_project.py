@@ -1,5 +1,8 @@
 import logging
 import os
+
+from termcolor import colored
+
 from src.common.configs import BaseConfig
 
 logger = logging.getLogger(__name__)
@@ -42,4 +45,4 @@ class SetupProject:
             cls.make_dir(cls.src_input) 
             cls.make_dir(cls.src_cached_html)
             
-            logger.info('Everything is ok now! Run again!')
+            logger.info(colored('Everything is ok now! Run again!', 'green', 'on_black'))
