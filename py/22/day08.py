@@ -1,4 +1,4 @@
-from src.common.utils import SolverFunctions, Matrix2D
+from src.common.utils import SolverFunctions, Matrix2D, four_directions
 title = 'Day 8: Treetop Tree House'
 parser_method = 'find_digits'
 display_lines_or_paragraph = 'lines'
@@ -24,7 +24,7 @@ class SolveTheDay(SolverFunctions, Matrix2D):
             def is_visible(location) -> bool:
                 return any(
                     all(grid[point] < grid[location] for point in start_to_direction(location, direction, grid))
-                    for direction in cls.four_directions
+                    for direction in four_directions
                 )
     
             return cls.sum_items(grid, is_visible)
@@ -36,7 +36,7 @@ class SolveTheDay(SolverFunctions, Matrix2D):
         _data, start_to_direction = cls.helper(data)
         
         def distance_result(location, grid):
-            return cls._product(visual_distance(location, direction, matrix) for direction in cls.four_directions)
+            return cls._product(visual_distance(location, direction, matrix) for direction in four_directions)
                 
         def visual_distance(location, direction, grid):
             seen = 0

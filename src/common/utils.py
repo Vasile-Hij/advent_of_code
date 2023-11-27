@@ -1,9 +1,18 @@
 import re
 from typing import Tuple, List
+import operator
 
 separator = '─' * 100
+Position_zero = (0, 0)
+Point = Tuple[int, ...]
 
-    
+four_directions = East, South, West, North = ((1, 0), (0, 1), (-1, 0), (0, -1))
+arrow_direction = {
+    '.': Position_zero,
+    'U': North, 'D': South, 'R': East, 'L': West
+}
+
+
 class SolverFunctions:
     """
         File and text handler
@@ -76,10 +85,15 @@ class SolverFunctions:
     def find_strings(cls, text: str) -> Tuple[str]:
         return cls.make_tuple(str, re.findall(r'[a-zA-Z]+', text))
 
+    @classmethod
+    def get_instructions(cls, text: str) -> List[Tuple[str, int]]:
+        each_line = cls.strings_per_line(text)
+        return [(instruction[:1], int(instruction[1:])) for instruction in each_line]
+
     """
         Calculus
     """
-    
+
     @staticmethod
     def add_together(a, b):
         return a[0] + b[0], a[1] + b[1]
@@ -95,11 +109,29 @@ class SolverFunctions:
             result *= number
         return result
 
+    """
+        Utils
+    """
+    @staticmethod
+    def indication(x) -> int:  # "0, +1, or -1"
+        return (0 if x == 0 else +1 if x > 0 else -1)
 
-Zero = (0, 0)
-four_directions = ((1, 0), (0, 1), (-1, 0), (0, -1))
+    """
+        Points in space
+        p: numerator
+        q: non-zero denominator
+    """
 
-class Matrix2D(dict):
+    @classmethod
+    def add(cls, p: Point, q: Point) -> Point:
+        return cls.make_tuple(operator.add, p, q)
+
+    @classmethod
+    def sub(cls, p: Point, q: Point) -> Point:
+        return cls.make_tuple(operator.sub, p, q)
+
+
+class Matrix2D(dict):    
     def __init__(self, grid=(), directions=four_directions, skip=(), default=KeyError):
         super().__init__()
         self.directions = directions
