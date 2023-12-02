@@ -22,7 +22,7 @@ class SolveTheDay(SolverFunctions):
         return data
 
     @classmethod
-    def part_1(cls, data):       
+    def level_1(cls, data):       
         answer = 0
 
         for line in data:
@@ -42,7 +42,7 @@ class SolveTheDay(SolverFunctions):
         return
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         answer = 0
 
         for line in data:

@@ -73,7 +73,9 @@ For testing sample input add '-s s': `python main.py -v 2201 -s s`
 - [x] [#10](https://github.com/Vasile-Hij/advent_of_code/issues/10) Get input data from AoC in HTML format
 - [x] [#16](https://github.com/Vasile-Hij/advent_of_code/issues/16) Cache AOC's HTML storyline and input
 - [x] [#17](https://github.com/Vasile-Hij/advent_of_code/issues/17) Migrate project from functions to classes (bonus: coloured print)
-- [x] Test methods
+- [x] Test methods (continuously to be update it)
+- [x] [#19](https://github.com/Vasile-Hij/advent_of_code/issues/19) Submit result to AOC
+
 
 ### TO DO'S:
     1. find a pattern to automate downloading multiple examples when given and chose the right one required for testing solution

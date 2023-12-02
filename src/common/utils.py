@@ -29,6 +29,11 @@ class SolverFunctions:
             return file.write(source)
 
     @staticmethod
+    def append_file(source: str) -> str:
+        with open(source, 'a+') as file:
+            return file.write(source)
+
+    @staticmethod
     def make_tuple(method: callable, *sequences) -> Tuple:
         return tuple(map(method, *sequences))
 

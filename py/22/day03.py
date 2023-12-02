@@ -11,7 +11,7 @@ class SolveTheDay(SolverFunctions):
         return data
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         counter = 0
         _data = cls.helper(data)
         
@@ -34,7 +34,7 @@ class SolveTheDay(SolverFunctions):
         return counter
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         _data = cls.helper(data)
         counter = 0
         

@@ -12,12 +12,13 @@ class SetupProject:
     paths_dir = {
         'cached_html': 'src/cached_html/{year}/',
         'input_path': 'src/input/{year}/',
-        'input_path_day_sample': 'src/input/{year}/day{day}{sample}.txt',
+        'input_path_day_sample': 'src/input/{year}/day{day}{sample}_{level}.txt',
         'input_path_day': 'src/input/{year}/day{day}.txt',
         'script_example': 'py/script_example.txt',   
         'created_script_path': 'py/{year}/day{day}.py',
         'script_path': 'py.{year}.day{day}',
         'year_path': 'py/{year}/',
+        'results_path': 'results/results.json'
         }
     
     init_file = '__init__.py'
@@ -26,6 +27,7 @@ class SetupProject:
     src_common = '/'
     src_input = '../input/'
     src_cached_html = '../cached_html/'
+    src_results = '../input'
     
     @classmethod
     def make_dir(cls, dir_name):
@@ -44,5 +46,6 @@ class SetupProject:
             cls.make_dir(cls.src_common) 
             cls.make_dir(cls.src_input) 
             cls.make_dir(cls.src_cached_html)
+            cls.make_dir(cls.src_results)
             
             logger.info(colored('Everything is ok now! Run again!', 'green', 'on_black'))

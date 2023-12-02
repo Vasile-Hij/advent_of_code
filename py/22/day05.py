@@ -35,7 +35,7 @@ class SolveTheDay(SolverFunctions):
         return crates, operations
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         crates, operations = cls.helper(data)
     
         for operation in operations.values():
@@ -49,7 +49,7 @@ class SolveTheDay(SolverFunctions):
         return ''.join(crate.pop() for crate in arranged_crates.values())
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         crates, operations = cls.helper(data)
 
         for operation in operations.values():

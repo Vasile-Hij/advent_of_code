@@ -1,7 +1,7 @@
 class Ignore(Exception):
     """Raise this to stop the continuation"""
     pass
-    
+
     
 class ActionRequired(Exception):
     """Do the action specified in message!"""

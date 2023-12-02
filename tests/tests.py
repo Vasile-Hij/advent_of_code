@@ -8,6 +8,11 @@ _year, _day = '2022', '3'
 _year_long, _request_day = _year, _day
 _title = 'Codename 47'
 _display = 10
+_url = 'https://adventofcode.com/{year}/day/{day}'
+_level_a = 'a'
+_level_b = 'b'
+_part_1 = '8053'
+_part_2 = '2425'
 
 
 class Test(Display, AdventOfCodeBase):
@@ -60,11 +65,15 @@ class Test(Display, AdventOfCodeBase):
 
     @classmethod
     def test_aoc(cls):
+        url = _url.format(year=_year_long, day=_day)
+        request_day = _day[1:] if _day.startswith('0') else _day
+        
         assert cls.get_chrome_cookies()
-        assert cls.get_cookies()
-        assert cls.get_response(year=_year, day=_day)
-        assert cls.get_cached_html(year=_year, day=_day, year_long=_year_long, request_day=_request_day)
-
+        assert cls.get_token()
+        assert cls.make_request(method='GET', url=url)
+        assert cls.get_aoc_data(year=_year, day=_day)
+        assert cls.submit_answer(year=_year_long, day=request_day, level=_level_a, answer=_part_1)
+        assert cls.submit_answer(year=_year_long, day=request_day, level=_level_b, answer=_part_2)
         return
     
     @classmethod

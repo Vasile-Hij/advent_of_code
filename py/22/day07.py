@@ -25,12 +25,12 @@ class SolveTheDay(SolverFunctions):
         return dirs
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         maximum_size = 100000
         return sum(size for size in cls.helper(data).values() if size <= maximum_size)
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         available_space = 70000000
         required_space = 30000000
         dirs = cls.helper(data)
