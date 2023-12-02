@@ -14,11 +14,11 @@ class SolveTheDay(SolverFunctions):
                 return index
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         message = cls.helper(data, 4)
         return message
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         message = cls.helper(data, 14)
         return message

@@ -17,7 +17,7 @@ class SolveTheDay(SolverFunctions, Matrix2D):
         return _data, start_to_direction
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         _data, start_to_direction = cls.helper(data)
 
         def visible_from_outside(grid) -> int:
@@ -32,7 +32,7 @@ class SolveTheDay(SolverFunctions, Matrix2D):
         return visible_from_outside(Matrix2D(_data))
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         _data, start_to_direction = cls.helper(data)
         
         def distance_result(location, grid):

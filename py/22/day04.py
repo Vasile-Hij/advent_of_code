@@ -13,7 +13,7 @@ class SolveTheDay(SolverFunctions):
         return range(first, second + 1)
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         counter = 0
         for each_pair in data:
             first, second = each_pair.strip().split(',')
@@ -25,7 +25,7 @@ class SolveTheDay(SolverFunctions):
         return counter
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         counter = 0
         for each_pair in data:
             first, second = each_pair.strip().split(',')

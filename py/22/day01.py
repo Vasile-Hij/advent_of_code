@@ -17,12 +17,12 @@ class SolveTheDay(SolverFunctions):
         return result
     
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         result = cls.helper(data)
         result = result[:3]
         return result[0]
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         result = cls.helper(data)
         return sum(result[:3])

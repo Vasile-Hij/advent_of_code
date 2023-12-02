@@ -32,10 +32,11 @@ class InputCheck:
     month = get_month()
     today = get_today()
     
-    def clean_input(self, raw_value):
+    @classmethod
+    def check_year_day_input(cls, raw_value):
         value = str(raw_value)
-        is_day = self.input_day(value)
-        is_year_day = self.input_year_day(value)
+        is_day = cls.input_day(value)
+        is_year_day = cls.input_year_day(value)
         
         if is_day:
             year, day = is_day
@@ -44,13 +45,14 @@ class InputCheck:
         if is_year_day:
             year, day = is_year_day
             return year, day
-        
-    def input_day(self, value):
+
+    @classmethod
+    def input_day(cls, value):
         day = value.strip()
-        year = BaseConfig.get_input_path(self.current_year)
+        year = BaseConfig.get_input_path(cls.current_year)
         
-        if self.current_year == year and self.month == 12 and self.today < day:
-            diff = day - self.today
+        if cls.current_year == year and cls.month == 12 and cls.today < day:
+            diff = day - cls.today
             msg_day = 'day' if len(diff) == 1 else 'days'
             raise ActionInFuture(f'You have to wait {diff} {msg_day}!')
             
@@ -60,21 +62,22 @@ class InputCheck:
     
         if day.isnumeric() and len(day) == INPUT_DAY_LONG:
             return year, day
-        
-    def input_year_day(self, value):
+
+    @classmethod
+    def input_year_day(cls, value):
         clean_value = value.strip()
     
         if clean_value.isnumeric() and len(clean_value) == INPUT_YEAR_DAY:
             year = clean_value[:2]
             day = clean_value[2:]
             
-            if year == self.current_year and self.month != '12':
+            if year == cls.current_year and cls.month != '12':
                 raise ActionInFuture('Wait until December and try to solve previous year!')
             
-            if year > self.get_year():
+            if year > cls.get_year():
                 raise ActionInFuture('That year is into the future! Try previous years!')
     
-            if year < self.current_year:
+            if year < cls.current_year:
                 print(colored("Let's go!", 'black', 'on_green', ['bold']))
              
             return year, day

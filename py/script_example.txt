@@ -6,19 +6,19 @@ display_lines_or_paragraph = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    
-    @staticmethod
-    def helper(data):
+    @classmethod
+    def helper(cls, data):
     
         return
     
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         result = cls.helper(data)
         
         return
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         result = cls.helper(data)
         
         return

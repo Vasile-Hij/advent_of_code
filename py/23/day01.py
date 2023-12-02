@@ -12,7 +12,7 @@ class SolveTheDay(SolverFunctions):
         return cls.parse(data)
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         data = cls.helper(data)
         digits_data = [cls.find_digits(digit) for digit in data]
 
@@ -30,7 +30,7 @@ class SolveTheDay(SolverFunctions):
         return result
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         _data = cls.helper(data)
         result = 0
         alpha_num = 'one two three four five six seven eight nine'.split()
@@ -46,5 +46,3 @@ class SolveTheDay(SolverFunctions):
             result += int(digits[0] + digits[-1])
 
         return result
-
-   

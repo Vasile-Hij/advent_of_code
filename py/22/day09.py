@@ -14,7 +14,7 @@ class SolveTheDay(SolverFunctions):
         return data
 
     @classmethod
-    def part_1(cls, data):
+    def level_1(cls, data):
         def move_rope(motions, start=Position_zero) -> Set[Point]:
             head = tail = start
             visited = {start}
@@ -34,7 +34,7 @@ class SolveTheDay(SolverFunctions):
         return len(move_rope(data))
 
     @classmethod
-    def part_2(cls, data):
+    def level_2(cls, data):
         result = cls.helper(data)
 
         return

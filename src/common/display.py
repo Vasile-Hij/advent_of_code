@@ -1,3 +1,4 @@
+import json
 import logging
 
 from importlib import import_module
@@ -23,13 +24,13 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
 
     @classmethod
     def helper_base(
-            cls, 
+            cls,
             source: str, 
             year: str,
             title: str,
             display_type: str,
+            display: str,
             parser_method: callable = str,
-            display: int = 10
     ) -> Tuple:
         source_day_text, title, segmentation, method = source, title, display_type, parser_method,
 
@@ -46,15 +47,17 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
 
         print(colored(f'--- Year: 20{year} | {title} ---', 'black', 'on_light_grey', ['bold']))
 
-        cls.display_items(cls, 'Raw input', source_day_text.splitlines(), display)
+        cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display)
         data = cls.make_tuple(parser_method, segmentation)
         if parser_method != str or parser_method != lines:
-            cls.display_items(cls, 'Parsed file', data, display)
+            cls.display_items(title='Parsed file', items=data, display=display)
 
         return data
 
+    @classmethod
     def display_items(
-            self, 
+            cls,
+            *,
             title, 
             items, 
             display, 
@@ -69,35 +72,44 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                     return f'{name} {types.__name__}{"" if name == 1 else "s"}'
 
             print(f'{separate}\n{title}: {counter(items_count)}:\n{separate}')
+ 
+            display = int(display)
             for line in items[0:display]:
-                print(self.truncate(line))
+                print(cls.truncate(line))
             if display < len(items):
                 print('...')
 
     @classmethod
-    def printer(
+    def get_results(
             cls,
-            each_day: str,
-            result: tuple,
+            level: int,
+            data: tuple,
             class_helper: list[callable, str],
-            separate: str = separator
     ):
-        results = None
-        _part = each_day
+
+        _level = level
         script, class_name = class_helper
         class_name = getattr(script, class_name)
         
-        match each_day:
-            case 'part_1':
-                _part = 'Part 1'
-                results = f'{_part}: {class_name.part_1(result)}'
-            case 'part_2':
-                _part = 'Part 2'
-                results = f'{_part}: {class_name.part_2(result)}'
-        
+        match level:
+            case 1:
+                _level = 'Level 1'
+                cls._print_results(level=_level, result=class_name.level_1(data))
+                return class_name.level_1(data)
+            case 2:
+                _level = 'Level 2'
+                cls._print_results(level=_level, result=class_name.level_2(data))
+                return class_name.level_2(data)
+
+    @staticmethod
+    def _print_results(
+            level: str,
+            result: str,
+            separate: str = separator
+    ):
         print(
             f'{separate}\n',
-            colored(f'{results}', 'light_green', 'on_black', ['bold']),
+            colored(f'{level}: {result}', 'light_green', 'on_black', ['bold']),
             f'\n{separate}'
         )
      
@@ -107,23 +119,25 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         if len(string) <= width:
             return string
         return string[: width - len(dots)] + dots
-
-    def check_required_files_exists(self, year, day, sample):
-        script_path = self.paths_dir['script_path'].format(year=year, day=day)
-        created_script_path = self.paths_dir['created_script_path'].format(year=year, day=day)
-        input_path_day = self.paths_dir['input_path_day'].format(year=year, day=day)
-        input_path_day_sample = self.paths_dir['input_path_day_sample'].format(year=year, day=day, sample='_sample')
-        input_path = self.paths_dir['input_path'].format(year=year)
-        year_path = self.paths_dir['year_path'].format(year=year)
+    
+    @classmethod
+    def check_required_files_exists(cls, year, day, level, sample):
+        script_path = cls.paths_dir['script_path'].format(year=year, day=day)
+        created_script_path = cls.paths_dir['created_script_path'].format(year=year, day=day)
+        input_path_day = cls.paths_dir['input_path_day'].format(year=year, day=day)
+        input_path_day_sample = cls.paths_dir['input_path_day_sample'].format(year=year, day=day, 
+                                                                              sample='_sample', level=level)
+        input_path = cls.paths_dir['input_path'].format(year=year)
+        year_path = cls.paths_dir['year_path'].format(year=year)
 
         try:
             script_exists = import_module(script_path)
         except (ModuleNotFoundError, NameError):
-            self.make_dir(year_path)
-            self.write_file(created_script_path)
+            cls.make_dir(year_path)
+            cls.write_file(created_script_path)
             logger.info(colored(f'Script created!', 'magenta', 'on_black'))
 
-            _text = self.read_raw(self.paths_dir['script_example'])
+            _text = cls.read_raw(cls.paths_dir['script_example'])
             added_blank_functions = [x for x in _text]
 
             with open(created_script_path, 'w') as file_text:
@@ -133,33 +147,39 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             script_exists = import_module(script_path)
 
         try:
-            input_data_exist = self.read_raw(input_path_day)
+            input_data = cls.read_raw(input_path_day)
         except FileNotFoundError:
-            available_year = self.get_input_path(input_path)
+            available_year = cls.get_input_path(input_path)
             if available_year != year:
-                self.make_dir(input_path)
+                cls.make_dir(input_path)
                 logger.info(colored(f'Directory "src/input/{year}" have been created!', 'blue', 'on_black'))
 
             with open(input_path_day_sample, 'w') as f:
                 f.write('')
-            aoc_input = self.get_aoc_data(year, day)
+            aoc_input = cls.get_aoc_data(year, day, level)
 
             with open(input_path_day, 'w') as f:
                 for line in aoc_input:
                     f.write(line)
 
-            input_data_exist = self.read_raw(input_path_day)
-
+            input_data = cls.read_raw(input_path_day)
+            
+        if level == 2:
+            cls.get_aoc_data(year, day, level,)
+                
         if sample:
             try:
-                input_data_exist = self.read_raw(input_path_day_sample)
+                input_data = cls.read_raw(input_path_day_sample)
             except FileNotFoundError:
                 with open(input_path_day_sample, 'w') as f:
                     f.write('')
-                logger.info(colored('Sample file created without data!', 'red', 'on_black'))
+                raise ActionRequired(
+                    colored('Sample file created without data! Populate and rerun!', 'light_yellow', 'on_black'))
 
-        if sample and not input_data_exist:
-            raise ActionRequired(colored('Samples need to be populated manually from AOC webpage!', 
-                                        'light_yellow', 'on_black'))
+        if sample and not input_data:
+            raise ActionRequired(
+                colored('Samples need to be populated manually from AOC webpage!', 
+                        'light_yellow', 'on_black')
+            )
             
-        return script_exists, input_data_exist
+        return script_exists, input_data
