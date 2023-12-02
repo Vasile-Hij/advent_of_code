@@ -54,6 +54,10 @@ class SolverFunctions:
         return text.split()
     
     @staticmethod
+    def parse(text: Tuple) -> List[str]:
+        return [elem for elem in text[0]]
+
+    @staticmethod
     def check_len_string(text: str) -> bool:
         return True if len(text) > 1 else False
     
