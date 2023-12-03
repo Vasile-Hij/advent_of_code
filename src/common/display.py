@@ -1,16 +1,15 @@
-import json
 import logging
 
 from importlib import import_module
 from collections import Counter
 from typing import Tuple
+from termcolor import colored
 
 from src.common.exceptions import Ignore, ActionRequired
 from src.common.setup_project import SetupProject
 from src.aoc.aoc_client import AdventOfCodeBase
 from src.common.configs import BaseConfig
 from src.common.utils import SolverFunctions
-from termcolor import colored
 
 logging.basicConfig()
 logger = logging.getLogger()
@@ -20,8 +19,6 @@ lines = str.splitlines
 
 
 class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
-    separator = '─' * 100
-
     @classmethod
     def helper_base(
             cls,
@@ -30,6 +27,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             title: str,
             display_type: str,
             display: str,
+            separator: int, 
             parser_method: callable = str,
     ) -> Tuple:
         source_day_text, title, segmentation, method = source, title, display_type, parser_method,
@@ -47,10 +45,10 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
 
         print(colored(f'--- Year: 20{year} | {title} ---', 'black', 'on_light_grey', ['bold']))
 
-        cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display)
+        cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display, separator=separator)
         data = cls.make_tuple(parser_method, segmentation)
         if parser_method != str or parser_method != lines:
-            cls.display_items(title='Parsed file', items=data, display=display)
+            cls.display_items(title='Parsed file', items=data, display=display, separator=separator)
 
         return data
 
@@ -61,11 +59,12 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             title, 
             items, 
             display, 
-            separate=separator
+            separator
     ):
         if display:
             items_count = Counter(map(type, items))
-        
+            separate = '─' * separator    
+            
             def counter(all_items):
                 """count lines and verbose if plural"""
                 for types, name in all_items.items():
@@ -75,7 +74,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
  
             display = int(display)
             for line in items[0:display]:
-                print(cls.truncate(line))
+                print(cls.truncate(line, width=separator))
             if display < len(items):
                 print('...')
 
@@ -85,6 +84,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             level: int,
             data: tuple,
             class_helper: list[callable, str],
+            separator: int
     ):
 
         _level = level
@@ -94,19 +94,20 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         match level:
             case 1:
                 _level = 'Level 1'
-                cls._print_results(level=_level, result=class_name.level_1(data))
+                cls._print_results(level=_level, result=class_name.level_1(data), separator=separator)
                 return class_name.level_1(data)
             case 2:
                 _level = 'Level 2'
-                cls._print_results(level=_level, result=class_name.level_2(data))
+                cls._print_results(level=_level, result=class_name.level_2(data), separator=separator)
                 return class_name.level_2(data)
 
     @staticmethod
     def _print_results(
             level: str,
             result: str,
-            separate: str = separator
+            separator: int
     ):
+        separate = '─' * separator
         print(
             f'{separate}\n',
             colored(f'{level}: {result}', 'light_green', 'on_black', ['bold']),
@@ -114,7 +115,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         )
      
     @staticmethod
-    def truncate(obj, width: int = 100, dots: str = ' ...'):
+    def truncate(obj, width: int, dots: str = ' ...'):
         string = str(obj)
         if len(string) <= width:
             return string
@@ -174,7 +175,8 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                 with open(input_path_day_sample, 'w') as f:
                     f.write('')
                 raise ActionRequired(
-                    colored('Sample file created without data! Populate and rerun!', 'light_yellow', 'on_black'))
+                    colored(f'Sample file created without data! Populate {input_path_day_sample} then run', 
+                            'light_yellow', 'on_black'))
 
         if sample and not input_data:
             raise ActionRequired(

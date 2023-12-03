@@ -18,7 +18,7 @@ class SetupProject:
         'created_script_path': 'py/{year}/day{day}.py',
         'script_path': 'py.{year}.day{day}',
         'year_path': 'py/{year}/',
-        'results_path': 'results/results.json'
+        'results_file': 'src/results/result.json'
         }
     
     init_file = '__init__.py'
@@ -27,7 +27,7 @@ class SetupProject:
     src_common = '/'
     src_input = '../input/'
     src_cached_html = '../cached_html/'
-    src_results = '../input'
+    src_results = '../results/'
     
     @classmethod
     def make_dir(cls, dir_name):

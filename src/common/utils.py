@@ -1,8 +1,7 @@
 import re
-from typing import Tuple, List
 import operator
+from typing import Tuple, List
 
-separator = '─' * 100
 Position_zero = (0, 0)
 Point = Tuple[int, ...]
 
@@ -29,10 +28,10 @@ class SolverFunctions:
             return file.write(source)
 
     @staticmethod
-    def append_file(source: str) -> str:
-        with open(source, 'a+') as file:
-            return file.write(source)
-
+    def file_handler(source: str, json_data: str, mode: str = None):
+        with open(source, f'{mode}') as file:
+            file.write(json_data)
+     
     @staticmethod
     def make_tuple(method: callable, *sequences) -> Tuple:
         return tuple(map(method, *sequences))

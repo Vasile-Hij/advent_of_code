@@ -15,6 +15,7 @@ PARSER_METHOD = 'parser_method'
 DISPLAY_TYPE = 'display_lines_or_paragraph'
 SOLVER_CLASS = 'SolveTheDay'
 DISPLAY = '10'
+SEPARATOR = 150
 
 if __name__ == '__main__':
     _help = """
@@ -64,13 +65,14 @@ if __name__ == '__main__':
                 title=title,
                 display_type=display_type,
                 display=DISPLAY,
+                separator=SEPARATOR,
                 parser_method=parser_method
             )
             
             if not level:
                 raise ActionRequired('Add which part you want to run e.g: "-l 1"')
             
-            result = self.get_results(level=level, data=data, class_helper=[script, SOLVER_CLASS])
+            result = self.get_results(level=level, data=data, class_helper=[script, SOLVER_CLASS], separator=SEPARATOR)
 
             if submit_result and sample:
                 raise ActionRequired(
@@ -79,12 +81,8 @@ if __name__ == '__main__':
             
             if submit_result and not sample:
                 level = {'a': '1', 'b': '2'}['a' if level == 1 else 'b']
-                submitted = self.submit_answer(year=year, day=day, level=level, answer=result)
+                self.submit_answer(year=year, day=day, level=level, answer=result)
 
-                if submitted is True:
-                    print(colored('Submitted were successful!', 'green', 'on_black'))
-                else:
-                    print(colored('Not submitted!', 'red', 'on_black'))
                 
     runner = Command()
     runner.run()

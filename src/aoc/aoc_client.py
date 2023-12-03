@@ -95,27 +95,53 @@ class AdventOfCodeBase:
     @classmethod
     def submit_answer(cls, year, day, level, answer):
         submitted = False
+        star = None
+        message = None
+        right_answer = "That\'s the right answer!"
+        wrong_answer = "That\'s not the right answer!"
+        
         year_long = f'20{year}'
         day = day[1:] if day.startswith('0') else day
         data = {'level': level, 'answer': answer}
         url = cls.urls['aoc_answer'].format(year=year_long, day=day)
 
         response = cls.make_request(method='POST', url=url, data=data)
-        
+
         if response.status_code == 200:
             content = HTMLHelper.content_helper(response.content)
-            if 'right answer' in content:
+            content = content.text_content()
+
+            if right_answer in content:
+                logger.info(colored(f'{right_answer}', 'green', 'on_black'))
                 submitted = True
                 star = '*' if 'one gold star' in content else "**" if 'two gold stars' in content else None
-                cls.save_answer(year_long, day, level, answer, star, submitted)
+                message = right_answer
+            
+            if wrong_answer in content:
+                logger.info(colored(f'{wrong_answer}', 'red', 'on_black'))
+                submitted = True
+                message = wrong_answer
 
-        return f'{submitted=}'
+        cls.save_answer(year_long, day, level, answer, star, submitted, message)
+        
+        return logger.info(colored(f'{message}', 'green', 'on_black')) if message == right_answer \
+            else logger.info(colored(f'{message}', 'red', 'on_light_grey')) if message == wrong_answer \
+            else logger.info(colored(f'Something went wrong!', 'red', 'on_black'))
 
     @classmethod
-    def save_answer(cls, year_long, day, level, answer, star, submitted):
-        result_path = SetupProject.paths_dir['results_path']
-        data = json.loads(SolverFunctions.read_raw(result_path))
-        data.append({f'year: {year_long}: day: {day}: level: {level}, answer: {answer}, submitted: {submitted}, '
-                     f'time: {datetime}, 'f'star: {star}'}
-                    )
-        return SolverFunctions.append_file(json.dumps(result_path, indent=4))
+    def save_answer(cls, year_long, day, level, answer, star, submitted, message):
+        now = datetime.now()
+        json_file = SetupProject.paths_dir['results_file']
+        new_data = {'year': year_long, 'day': day, 'level': level, 'answer': str(answer), 'submitted': submitted, 
+                    'message': message, 'time': now.strftime("%Y-%m-%d %H:%M:%S"), 'star ': star}
+        
+        try:
+            file = SolverFunctions.read_raw(json_file)
+            data = json.loads(file)
+            data.append(new_data)
+            json_data = json.dumps(data, indent=4, default=str)
+            return SolverFunctions.file_handler(json_file, json_data, mode='w')
+        
+        except json.decoder.JSONDecodeError:
+            json_data = json.dumps([new_data], indent=4, default=str)
+            return SolverFunctions.file_handler(json_file, json_data, mode='w')
