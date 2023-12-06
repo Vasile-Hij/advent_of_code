@@ -43,7 +43,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         else:
             segmentation = lines(source_day_text.rstrip())
 
-        print(colored(f'--- Year: 20{year} | {title} ---', 'black', 'on_light_grey', ['bold']))
+        print(colored(f'Year: 20{year} | {title}', 'black', 'on_light_grey', ['bold']))
 
         cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display, separator=separator)
         data = cls.make_tuple(parser_method, segmentation)

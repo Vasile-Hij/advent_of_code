@@ -2,6 +2,7 @@
     {
         "year": "2023",
         "day": "1",
+        "title": "--- Day 1: Trebuchet?! ---",
         "level": "1",
         "answer": "54388",
         "submitted": true,
@@ -12,6 +13,7 @@
     {
         "year": "2023",
         "day": "1",
+        "title": "--- Day 1: Trebuchet?! ---",
         "level": "1",
         "answer": "53515",
         "submitted": true,
@@ -22,6 +24,7 @@
     {
         "year": "2023",
         "day": "2",
+        "title": "--- Day 2: Cube Conundrum ---",
         "level": "1",
         "answer": "355",
         "submitted": false,
@@ -32,6 +35,7 @@
     {
         "year": "2023",
         "day": "2",
+        "title": "--- Day 2: Cube Conundrum ---",
         "level": "1",
         "answer": "200",
         "submitted": false,
@@ -42,6 +46,7 @@
     {
         "year": "2023",
         "day": "2",
+        "title": "--- Day 2: Cube Conundrum ---",
         "level": "1",
         "answer": "2237",
         "submitted": true,
@@ -52,11 +57,45 @@
     {
         "year": "2023",
         "day": "2",
+        "title": "--- Day 2: Cube Conundrum ---",
         "level": "2",
         "answer": "66681",
         "submitted": true,
         "message": "That's the right answer",
         "time": "2023-12-03 19:26:45",
         "star ": "**"
+    },
+    {
+        "year": "2023",
+        "day": "3",
+        "title": "--- Day 3: Gear Ratios ---",
+        "level": "1",
+        "answer": "7219508",
+        "submitted": false,
+        "message": null,
+        "time": "2023-12-06 19:45:01",
+        "star ": null
+    },
+    {
+        "year": "2023",
+        "day": "3",
+        "title": "--- Day 3: Gear Ratios ---",
+        "level": "1",
+        "answer": "524899",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-06 23:23:49",
+        "star ": null
+    },
+    {
+        "year": "2023",
+        "day": "3",
+        "title": "--- Day 3: Gear Ratios ---",
+        "level": "1",
+        "answer": "526404",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-07 00:04:51",
+        "star ": "*"
     }
 ]

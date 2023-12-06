@@ -1,7 +1,7 @@
 from src.common.utils import SolverFunctions
 import more_itertools 
 
-title = 'Day'
+title = '--- Day 2: Cube Conundrum --'
 parser_method = 'strings_per_line'
 display_lines_or_paragraph = 'paragraph'  # by default
 

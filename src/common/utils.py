@@ -6,6 +6,8 @@ Position_zero = (0, 0)
 Point = Tuple[int, ...]
 
 four_directions = East, South, West, North = ((1, 0), (0, 1), (-1, 0), (0, -1))
+diagonals = SE, NE, SW, NW = ((1, 1), (1, -1), (-1, 1), (-1, -1))
+eight_directions = four_directions + diagonals
 arrow_direction = {
     '.': Position_zero,
     'U': North, 'D': South, 'R': East, 'L': West
@@ -153,3 +155,6 @@ class Matrix2D(dict):
                 if value not in skip
             }
         )
+        
+from collections import abc
+abc.Mapping

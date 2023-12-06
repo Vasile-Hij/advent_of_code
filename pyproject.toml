@@ -82,7 +82,7 @@ build-backend = "poetry.core.masonry.api"
 
 [virtualenvs]
 create = true
-in-project = true
+in-project = false
 
 [tool.ipdb]
 contenxt = 10

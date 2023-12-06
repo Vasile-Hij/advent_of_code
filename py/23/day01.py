@@ -1,7 +1,7 @@
 from src.common.utils import SolverFunctions
 import re
 
-title = 'Day'
+title = '--- Day 1: Trebuchet?! ---'
 parser_method = 'str_split'
 display_lines_or_paragraph = 'paragraph'  # by default
 

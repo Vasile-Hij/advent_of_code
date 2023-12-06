@@ -53,12 +53,15 @@ if __name__ == '__main__':
             
             year, day, level, sample, submit_result = self.cmd_arguments()
             
+            if not level:
+                raise ActionRequired(colored('Add which part you want to run e.g: "-l 1"', 'red', 'on_black'))
+            
             script, input_data_exist = self.check_required_files_exists(year=year, day=day, level=level, sample=sample)
 
             title = getattr(script, TITLE)
             parser_method = getattr(script, PARSER_METHOD)
             display_type = getattr(script, DISPLAY_TYPE)
-            
+
             data = self.helper_base(
                 source=input_data_exist, 
                 year=year, 
@@ -69,9 +72,6 @@ if __name__ == '__main__':
                 parser_method=parser_method
             )
             
-            if not level:
-                raise ActionRequired('Add which part you want to run e.g: "-l 1"')
-            
             result = self.get_results(level=level, data=data, class_helper=[script, SOLVER_CLASS], separator=SEPARATOR)
 
             if submit_result and sample:
@@ -81,7 +81,7 @@ if __name__ == '__main__':
             
             if submit_result and not sample:
                 level = {'a': '1', 'b': '2'}['a' if level == 1 else 'b']
-                self.submit_answer(year=year, day=day, level=level, answer=result)
+                self.submit_answer(year=year, day=day, title=title, level=level, answer=result)
 
                 
     runner = Command()
