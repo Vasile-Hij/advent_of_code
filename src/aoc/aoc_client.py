@@ -122,7 +122,7 @@ class AdventOfCodeBase:
             if right_answer in content:
                 logger.info(colored(f'{right_answer}', 'green', 'on_black'))
                 submitted = True
-                star = '*' if 'one gold star' in content else "**" if 'two gold stars' in content else None
+                star = '*' if '*' in content else "**" if '**' in content else None
                 message = right_answer
      
         cls.save_answer(year_long, day, title, level, answer, star, submitted, message)

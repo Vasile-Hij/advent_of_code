@@ -97,5 +97,27 @@
         "message": "the right answer",
         "time": "2023-12-07 00:04:51",
         "star ": "*"
+    },
+    {
+        "year": "2023",
+        "day": "3",
+        "title": "--- Day 3: Gear Ratios ---",
+        "level": "2",
+        "answer": "56470502",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-07 02:10:31",
+        "star ": null
+    },
+    {
+        "year": "2023",
+        "day": "3",
+        "title": "--- Day 3: Gear Ratios ---",
+        "level": "2",
+        "answer": "84399773",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-07 03:36:21",
+        "star ": "**"
     }
 ]

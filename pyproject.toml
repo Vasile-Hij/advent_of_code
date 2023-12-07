@@ -16,7 +16,6 @@ poetry-plus = "^0.11.4"
 ruff = "^0.1.4"
 python-dateutil = "^2.8.2"
 decorator = "^5.1.1"
-# ipython = "^8.17"  # error on pywinty due no binary version python 3.11
 twine = "^4.0"
 pre-commit = "^3.1.0"
 watchdog = {extras = ["watchmedo"], version = "^3.0.0"}
