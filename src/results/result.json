@@ -119,5 +119,16 @@
         "message": "the right answer",
         "time": "2023-12-07 03:36:21",
         "star ": "**"
+    },
+    {
+        "year": "2023",
+        "day": "4",
+        "title": "--- Day 4: Scratchcards ---",
+        "level": "1",
+        "answer": "20829",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-08 23:57:49",
+        "star ": "*"
     }
 ]

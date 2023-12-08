@@ -113,7 +113,7 @@ class SolverFunctions:
         return sum(1 for item in iterable if pred(item))
 
     @staticmethod
-    def _product(numbers) -> float:
+    def _product(numbers: list):
         result = 1
         for number in numbers:
             result *= number
@@ -126,6 +126,11 @@ class SolverFunctions:
     def indication(x) -> int:  # "0, +1, or -1"
         return (0 if x == 0 else +1 if x > 0 else -1)
 
+    @classmethod
+    def range_generator(cls, number: int, start: int = 0, multiplier: int = 1):
+        return [1 * multiplier for _ in range(start, number)]
+  
+    
     """
         Points in space
         p: numerator
