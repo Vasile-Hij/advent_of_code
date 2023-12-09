@@ -112,7 +112,6 @@ class AdventOfCodeBase:
         if response.status_code == 200:
             content = HTMLHelper.content_helper(response.content)
             content = content.text_content()
-            print(content)
 
             if wrong_answer in content:
                 logger.info(colored(f'{wrong_answer}', 'red', 'on_black'))
@@ -122,7 +121,7 @@ class AdventOfCodeBase:
             if right_answer in content:
                 logger.info(colored(f'{right_answer}', 'green', 'on_black'))
                 submitted = True
-                star = '*' if '*' in content else "**" if '**' in content else None
+                star = '**' if '**' or 'two gold' in content else "*" if '*' or 'one gold' in content else None
                 message = right_answer
      
         cls.save_answer(year_long, day, title, level, answer, star, submitted, message)
