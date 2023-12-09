@@ -38,7 +38,7 @@ class SolveTheDay(SolverFunctions):
                     for num in range(position + 1, position + common + 1):
                         cards[num] = cards.get(num, 1) + cards[position]
 
-        return sum(pile_scratchcards) if level == 1 else sum(cards.values())
+        return sum(pile_scratchcards) if level == 1 else sum(cards.values()) if level == 2 else "Add level!"
 
     @classmethod
     def level_1(cls, data):
