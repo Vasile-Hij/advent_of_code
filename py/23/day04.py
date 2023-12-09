@@ -1,5 +1,4 @@
 from src.common.utils import SolverFunctions
-from more_itertools import locate
 
 title = '--- Day 4: Scratchcards ---'
 parser_method = 'strings_per_line'
