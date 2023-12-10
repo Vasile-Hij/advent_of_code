@@ -38,7 +38,7 @@ class Test(Display, AdventOfCodeBase):
 
         assert cls.integers(_source) == (47, -2002)
         assert cls.positive_integers(_source) == (47, 2002)
-        assert cls.find_digits(_source) == (4, 7, 2, 0, 0, 2)
+        assert cls.find_digit(_source) == (4, 7, 2, 0, 0, 2)
         assert cls.find_strings(_source) == ('say', 'hello', 'to', 'my', 'little', 'friend', 'Codename')
         return
     
@@ -57,7 +57,7 @@ class Test(Display, AdventOfCodeBase):
     #         year=_year, 
     #         title=_title,
     #         display_type='paragraph',
-    #         parser_method='find_digits',
+    #         parser_method='find_digit',
     #         display=_display
     #     ) == ((1, 2, 3), (7,))
     # 

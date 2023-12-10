@@ -88,7 +88,7 @@ class SolverFunctions:
         return cls.make_tuple(int, re.findall(r'[0-9]+', text))
 
     @classmethod
-    def find_digits(cls, text: str) -> Tuple[int]:
+    def find_digit(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'[0-9]', text))
 
     @classmethod

@@ -1,6 +1,6 @@
 from src.common.utils import SolverFunctions, Matrix2D, four_directions
 title = 'Day 8: Treetop Tree House'
-parser_method = 'find_digits'
+parser_method = 'find_digit'
 display_lines_or_paragraph = 'lines'
 
 

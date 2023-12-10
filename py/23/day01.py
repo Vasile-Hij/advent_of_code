@@ -14,7 +14,7 @@ class SolveTheDay(SolverFunctions):
     @classmethod
     def level_1(cls, data):
         data = cls.helper(data)
-        digits_data = [cls.find_digits(digit) for digit in data]
+        digits_data = [cls.find_digit(digit) for digit in data]
 
         result = 0
         for digits in digits_data:
