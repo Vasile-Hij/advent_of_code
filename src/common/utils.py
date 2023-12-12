@@ -45,7 +45,7 @@ class SolverFunctions:
     """
         Strings operations
     """
-
+    
     @classmethod
     def strings_per_line(cls, text) -> List[str]:
         text = cls.paragraph(text)
@@ -99,6 +99,10 @@ class SolverFunctions:
     def get_instructions(cls, text: str) -> List[Tuple[str, int]]:
         each_line = cls.strings_per_line(text)
         return [(instruction[:1], int(instruction[1:])) for instruction in each_line]
+
+    @classmethod
+    def get_instructions_lines(cls, text: List) -> List[Tuple[str, str]]:
+        return [(x[:1], x[1:]) for x in text]
 
     """
         Calculus

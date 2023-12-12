@@ -42,7 +42,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             segmentation = custom_segmentation(source_day_text.rstrip())
         else:
             segmentation = lines(source_day_text.rstrip())
-
+        
         print(colored(f'Year: 20{year} | {title}', 'black', 'on_light_grey', ['bold']))
 
         cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display, separator=separator)
@@ -77,6 +77,13 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                 print(cls.truncate(line, width=separator))
             if display < len(items):
                 print('...')
+                
+    @staticmethod
+    def truncate(obj, width: int, dots: str = ' ...'):
+        string = str(obj)
+        if len(string) <= width:
+            return string
+        return string[: width - len(dots)] + dots
 
     @classmethod
     def get_results(
@@ -113,14 +120,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             colored(f'{level}: {result}', 'light_green', 'on_black', ['bold']),
             f'\n{separate}'
         )
-     
-    @staticmethod
-    def truncate(obj, width: int, dots: str = ' ...'):
-        string = str(obj)
-        if len(string) <= width:
-            return string
-        return string[: width - len(dots)] + dots
-    
+
     @classmethod
     def check_required_files_exists(cls, year, day, level, sample):
         script_path = cls.paths_dir['script_path'].format(year=year, day=day)

@@ -163,5 +163,27 @@
         "message": "the right answer",
         "time": "2023-12-11 01:36:59",
         "star ": "**"
+    },
+    {
+        "year": "2023",
+        "day": "6",
+        "title": "--- Day 6: Wait For It ---",
+        "level": "1",
+        "answer": "588588",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-12 14:40:59",
+        "star ": "*"
+    },
+    {
+        "year": "2023",
+        "day": "6",
+        "title": "--- Day 6: Wait For It ---",
+        "level": "2",
+        "answer": "34655848",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-12 14:42:30",
+        "star ": "**"
     }
 ]
