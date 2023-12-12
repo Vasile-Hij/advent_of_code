@@ -3,7 +3,7 @@ import more_itertools
 
 title = '--- Day 2: Cube Conundrum --'
 parser_method = 'strings_per_line'
-display_lines_or_paragraph = 'paragraph'  # by default
+handle_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

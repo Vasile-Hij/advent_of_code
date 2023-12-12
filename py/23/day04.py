@@ -2,7 +2,7 @@ from src.common.utils import SolverFunctions
 
 title = '--- Day 4: Scratchcards ---'
 parser_method = 'strings_per_line'
-display_lines_or_paragraph = 'paragraph'  # by default
+handle_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

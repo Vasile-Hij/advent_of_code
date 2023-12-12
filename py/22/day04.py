@@ -2,7 +2,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 4: Camp Cleanup'
 parser_method = 'str_strip'
-display_lines_or_paragraph = 'lines'
+handle_data = 'lines'
 
 #  find_range = lambda first, second: range(first, second + 1)  #  PEP8: E731
 

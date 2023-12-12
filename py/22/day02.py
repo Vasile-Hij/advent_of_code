@@ -13,14 +13,10 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 2: Rock Paper Scissors'
 parser_method = 'str_split'
-display_lines_or_paragraph = 'lines'
+handle_data = 'lines'
 
 
 class SolveTheDay(SolverFunctions):
-    @staticmethod
-    def helper(data):
-        return data
-
     @classmethod
     def level_1(cls, data):       
         answer = 0

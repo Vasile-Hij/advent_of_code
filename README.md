@@ -75,6 +75,7 @@ For testing sample input add '-s s': `python main.py -v 2201 -s s`
 - [x] [#17](https://github.com/Vasile-Hij/advent_of_code/issues/17) Migrate project from functions to classes (bonus: coloured print)
 - [x] Test methods (continuously to be update it)
 - [x] [#19](https://github.com/Vasile-Hij/advent_of_code/issues/19) Submit result to AOC
+- [x] - return data and lines counter (if needed)
 
 
 ### TO DO'S:

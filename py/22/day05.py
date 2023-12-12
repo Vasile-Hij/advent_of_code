@@ -4,7 +4,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 5: Supply Stacks'
 parser_method = 'strings_per_line'
-display_lines_or_paragraph = 'paragraph'
+handle_data = 'paragraph'
 
 
 class SolveTheDay(SolverFunctions):

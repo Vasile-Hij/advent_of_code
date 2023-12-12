@@ -2,7 +2,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day'
 parser_method = ''
-display_lines_or_paragraph = 'paragraph'  # by default
+handle_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

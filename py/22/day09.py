@@ -4,7 +4,7 @@ from src.common.utils import SolverFunctions, Position_zero, Point, arrow_direct
 
 title = '--- Day 3: Gear Ratios ---'
 parser_method = 'get_instructions'
-display_lines_or_paragraph = 'paragraph'  # by default
+handle_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):

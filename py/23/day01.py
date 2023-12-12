@@ -3,7 +3,7 @@ import re
 
 title = '--- Day 1: Trebuchet?! ---'
 parser_method = 'str_split'
-display_lines_or_paragraph = 'paragraph'  # by default
+handle_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):

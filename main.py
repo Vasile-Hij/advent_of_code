@@ -12,7 +12,7 @@ logger = logging.getLogger(__name__)
 
 TITLE = 'title'
 PARSER_METHOD = 'parser_method'
-DISPLAY_TYPE = 'display_lines_or_paragraph'
+HANDLE_DATA = 'handle_data'
 SOLVER_CLASS = 'SolveTheDay'
 DISPLAY = '10'
 SEPARATOR = 150
@@ -60,19 +60,25 @@ if __name__ == '__main__':
 
             title = getattr(script, TITLE)
             parser_method = getattr(script, PARSER_METHOD)
-            display_type = getattr(script, DISPLAY_TYPE)
+            handle_data = getattr(script, HANDLE_DATA)
 
-            data = self.helper_base(
+            data, lines_counter = self.helper_base(
                 source=input_data_exist, 
                 year=year, 
                 title=title,
-                display_type=display_type,
+                handle_data=handle_data,
                 display=DISPLAY,
                 separator=SEPARATOR,
                 parser_method=parser_method
             )
             
-            result = self.get_results(level=level, data=data, class_helper=[script, SOLVER_CLASS], separator=SEPARATOR)
+            result = self.get_results(
+                level=level, 
+                data=data,
+                class_helper=[script, SOLVER_CLASS], 
+                separator=SEPARATOR,
+                lines_counter=lines_counter
+            )
 
             if submit_result and sample:
                 raise ActionRequired(

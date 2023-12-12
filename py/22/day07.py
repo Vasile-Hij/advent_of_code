@@ -4,7 +4,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 7: No Space Left On Device'
 parser_method = 'str_split'
-display_lines_or_paragraph = 'lines'
+handle_data = 'lines'
 
 
 class SolveTheDay(SolverFunctions):
