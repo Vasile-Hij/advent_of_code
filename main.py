@@ -62,14 +62,14 @@ if __name__ == '__main__':
             parser_method = getattr(script, PARSER_METHOD)
             handle_data = getattr(script, HANDLE_DATA)
 
-            data, lines_counter = self.helper_base(
+            data = self.helper_base(
                 source=input_data_exist, 
                 year=year, 
                 title=title,
                 handle_data=handle_data,
                 display=DISPLAY,
                 separator=SEPARATOR,
-                parser_method=parser_method
+                parser_method=parser_method,
             )
             
             result = self.get_results(
@@ -77,7 +77,6 @@ if __name__ == '__main__':
                 data=data,
                 class_helper=[script, SOLVER_CLASS], 
                 separator=SEPARATOR,
-                lines_counter=lines_counter
             )
 
             if submit_result and sample:

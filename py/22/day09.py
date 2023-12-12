@@ -3,7 +3,7 @@ from src.common.utils import SolverFunctions, Position_zero, Point, arrow_direct
 
 
 title = '--- Day 3: Gear Ratios ---'
-parser_method = 'get_instructions'
+parser_method = 'make_instructions'
 handle_data = 'paragraph'  # by default
 
 

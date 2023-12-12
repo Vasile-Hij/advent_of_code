@@ -45,13 +45,11 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         
         print(colored(f'Year: 20{year} | {title}', 'black', 'on_light_grey', ['bold']))
 
-        lines_counter = cls.display_items(
-            title='Raw input', items=source_day_text.splitlines(), display=display, separator=separator
-        )
+        cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display, separator=separator)
         data = cls.make_tuple(parser_method, handle_data)
         cls.display_items(title='Parsed file', items=data, display=display, separator=separator)
 
-        return data, lines_counter
+        return data
 
     @classmethod
     def display_items(
@@ -71,16 +69,13 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                 for types, name in all_items.items():
                     return f'{name} {types.__name__}{"" if name == 1 else "s"}'
             
-            counter = counter(items_count)
-            print(f'{separate}\n{title}: {counter}:\n{separate}')
+            print(f'{separate}\n{title}: {counter(items_count)}:\n{separate}')
  
             display = int(display)
             for line in items[0:display]:
                 print(cls.truncate(line, width=separator))
             if display < len(items):
                 print('...')
-
-            return int(counter.split(' ')[0])
             
     @staticmethod
     def truncate(obj, width: int, dots: str = ' ...'):
@@ -95,35 +90,25 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             level: int,
             data: tuple,
             class_helper: list[callable, str],
-            separator: int,
-            lines_counter: int
+            separator: int
     ):
 
         _level = level
         script, class_name = class_helper
         class_name = getattr(script, class_name)
-        
+
         match level:
             case 1:
                 _level = 'Level 1'
-                try:
-                    cls._print_results(level=_level, result=class_name.level_1(data), separator=separator)
-                    return class_name.level_1(data)
-                except TypeError:
-                    cls._print_results(level=_level, result=class_name.level_1(data, lines_counter=''),
-                                       separator=separator)
-                    return class_name.level_1(data, lines_counter)
+
+                cls._print_results(level=_level, result=class_name.level_1(data), separator=separator)
+                return class_name.level_1(data)
+
             case 2:
                 _level = 'Level 2'
-                try:
-                    cls._print_results(level=_level, result=class_name.level_2(data), separator=separator)
-                    return class_name.level_2(data)
-                except TypeError:
-                    cls._print_results(level=_level, result=class_name.level_2(data, lines_counter=''),
-                                       separator=separator)
-                    return class_name.level_2(data, lines_counter)
-                
 
+                cls._print_results(level=_level, result=class_name.level_2(data), separator=separator)
+                return class_name.level_2(data)
 
     @staticmethod
     def _print_results(

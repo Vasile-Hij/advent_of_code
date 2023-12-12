@@ -18,7 +18,7 @@ class SolverFunctions:
     """
         File and text handler
     """
-    
+
     @staticmethod
     def read_raw(source: str) -> str:
         with open(source, 'r') as file:
@@ -33,7 +33,7 @@ class SolverFunctions:
     def file_handler(source: str, json_data: str, mode: str = None):
         with open(source, f'{mode}') as file:
             file.write(json_data)
-     
+
     @staticmethod
     def make_tuple(method: callable, *sequences) -> Tuple:
         return tuple(map(method, *sequences))
@@ -41,11 +41,11 @@ class SolverFunctions:
     @staticmethod
     def make_list(method: callable, *sequences) -> List:
         return list(map(method, *sequences))
-    
+
     """
         Strings operations
     """
-    
+
     @classmethod
     def strings_per_line(cls, text) -> List[str]:
         text = cls.paragraph(text)
@@ -58,7 +58,7 @@ class SolverFunctions:
     @staticmethod
     def str_split(text: str) -> List[str]:
         return text.split()
-    
+
     @staticmethod
     def parse(text: Tuple) -> List[str]:
         return [elem for elem in text[0]]
@@ -66,9 +66,9 @@ class SolverFunctions:
     @staticmethod
     def check_len_string(text: str) -> bool:
         return True if len(text) > 1 else False
-    
+
     @staticmethod
-    def paragraph(text: str) -> str:
+    def paragraph(text: str) -> List[str]:
         return text.split('\n\n')
 
     @staticmethod
@@ -78,7 +78,7 @@ class SolverFunctions:
     @staticmethod
     def each_item(data: str) -> List[str]:
         return [item for item in data]
-    
+
     @classmethod
     def integers(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'-?[0-9]+', text))
@@ -96,13 +96,22 @@ class SolverFunctions:
         return cls.make_tuple(str, re.findall(r'[a-zA-Z]+', text))
 
     @classmethod
-    def get_instructions(cls, text: str) -> List[Tuple[str, int]]:
+    def make_instructions(cls, text: str) -> List[Tuple[str, int]]:
         each_line = cls.strings_per_line(text)
         return [(instruction[:1], int(instruction[1:])) for instruction in each_line]
 
     @classmethod
-    def get_instructions_lines(cls, text: List) -> List[Tuple[str, str]]:
-        return [(x[:1], x[1:]) for x in text]
+    def split_two_in_list(cls, text: str) -> List[str]:
+        each_line = cls.str_split(text)
+        return [(line.split(':')[0]) for line in each_line]
+
+    @classmethod
+    def split_two_in_tuple(cls, text: str) -> Tuple[str, str]:
+        each_line = cls.paragraph(text)
+
+        for line in each_line:
+            split = line.split()
+            return split[0], split[1]
 
     """
         Calculus
@@ -126,6 +135,7 @@ class SolverFunctions:
     """
         Utils
     """
+
     @staticmethod
     def indication(x) -> int:  # "0, +1, or -1"
         return (0 if x == 0 else +1 if x > 0 else -1)
@@ -133,8 +143,7 @@ class SolverFunctions:
     @classmethod
     def range_generator(cls, number: int, start: int = 0, multiplier: int = 1):
         return [1 * multiplier for _ in range(start, number)]
-  
-    
+
     """
         Points in space
         p: numerator
@@ -150,7 +159,7 @@ class SolverFunctions:
         return cls.make_tuple(operator.sub, p, q)
 
 
-class Matrix2D(dict):    
+class Matrix2D(dict):
     def __init__(self, grid=(), directions=four_directions, skip=(), default=KeyError):
         super().__init__()
         self.directions = directions
@@ -164,6 +173,3 @@ class Matrix2D(dict):
                 if value not in skip
             }
         )
-        
-from collections import abc
-abc.Mapping
