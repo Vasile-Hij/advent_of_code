@@ -123,7 +123,7 @@ class AdventOfCodeBase:
                 submitted = True
                 star = '**' if 'two gold stars' in content else "*" if 'one gold star' in content else None
                 message = right_answer
-     
+
         cls.save_answer(year_long, day, title, level, answer, star, submitted, message)
         
         return logger.info(colored(f'{message}', 'green', 'on_black')) if message == right_answer \
@@ -138,7 +138,7 @@ class AdventOfCodeBase:
             'year': year_long, 'day': day, 'title': title, 'level': level, 'answer': str(answer), 
             'submitted': submitted, 'message': message, 'time': now.strftime("%Y-%m-%d %H:%M:%S"), 'star ': star
         }
-        
+
         try:
             file = SolverFunctions.read_raw(json_file)
             data = json.loads(file)

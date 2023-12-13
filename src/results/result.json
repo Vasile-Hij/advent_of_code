@@ -196,5 +196,16 @@
         "message": "the right answer",
         "time": "2023-12-12 23:29:16",
         "star ": "*"
+    },
+    {
+        "year": "2023",
+        "day": "7",
+        "title": "--- Day 7: Camel Cards ---",
+        "level": "2",
+        "answer": "249781879",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2023-12-13 00:01:04",
+        "star ": "*"
     }
 ]
