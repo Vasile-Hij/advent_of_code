@@ -82,6 +82,15 @@ class BaseConfig:
                 logger.info('AoC cookies are cached now!')
     
         return token
+
+    @classmethod
+    def delete_file(cls, file_path):
+        if os.path.isfile(file_path):
+            os.remove(file_path)
+            print('File was deleted!')
+        else:
+            print('File does not exist!')
+    
     
     @classmethod
     def make_setup(cls):

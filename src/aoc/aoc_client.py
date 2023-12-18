@@ -93,6 +93,21 @@ class AdventOfCodeBase:
         return session
 
     @classmethod
+    def check_response(cls, response):
+        if response.status_code == 200:
+            content = HTMLHelper.content_helper(response.content)
+            content = content.text_content()
+            
+            if 'To play, please identify yourself via one of these services' in content:
+                
+                from src.common.configs import BaseConfig
+                
+                BaseConfig.delete_file('.config.cfg')
+                return None
+                
+            return content
+
+    @classmethod
     def submit_answer(cls, year, day, title, level, answer):
         submitted = False
         star = None
@@ -108,11 +123,12 @@ class AdventOfCodeBase:
         url = cls.urls['aoc_answer'].format(year=year_long, day=day)
 
         response = cls.make_request(method='POST', url=url, data=data)
-
-        if response.status_code == 200:
-            content = HTMLHelper.content_helper(response.content)
-            content = content.text_content()
-
+        
+        content = cls.check_response(response)
+        if not content:
+            response = cls.make_request(method='POST', url=url, data=data)
+            content = cls.check_response(response)
+            
             if wrong_answer in content:
                 logger.info(colored(f'{wrong_answer}', 'red', 'on_black'))
                 submitted = True
@@ -149,3 +165,4 @@ class AdventOfCodeBase:
         except json.decoder.JSONDecodeError:
             json_data = json.dumps([new_data], indent=4, default=str)
             return SolverFunctions.file_handler(json_file, json_data, mode='w')
+    
