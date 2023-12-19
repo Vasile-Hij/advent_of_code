@@ -36,13 +36,10 @@ class AdventOfCodeBase:
     @classmethod
     def get_cached_html_story(cls, year, day, year_long, request_day, level):
         url = cls.urls['base_url'].format(year=year_long, day=request_day)
-        print(f'Request {url=}')
-        logger.info(colored('Requesting AoC story!', 'black', 'on_light_yellow'))
         return cls.get_cached_html(year, day, url, level)
 
     @classmethod
     def get_cached_html_input(cls, year, day, year_long, request_day, level):
-        logger.info(colored('Requesting AoC input!', 'black', 'on_light_yellow'))
         url = cls.urls['input_url'].format(year=year_long, day=request_day)
         return cls.get_cached_html(year, day, url, level, need_input=True).text_content()
 
@@ -59,11 +56,15 @@ class AdventOfCodeBase:
         try:
             with open(file_path, 'r') as file:
                 file_response = file.read()
+
             return HTMLHelper.content_helper(file_response)
         except FileNotFoundError:
             SetupProject.make_dir(cached_html_directory)
             response = cls.make_request(method='GET', url=url)
+            story_or_input = 'input' if need_input else 'story'
             
+            logger.info(colored(f'Requested AoC {story_or_input}!', 'black', 'on_light_yellow'))
+
             with open(file_path, 'wb+') as file:
                 file.write(response.content)
     
@@ -97,7 +98,7 @@ class AdventOfCodeBase:
         if response.status_code == 200:
             content = HTMLHelper.content_helper(response.content)
             content = content.text_content()
-            
+
             if 'To play, please identify yourself via one of these services' in content:
                 
                 from src.common.configs import BaseConfig
