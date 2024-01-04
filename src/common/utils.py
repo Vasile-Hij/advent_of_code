@@ -1,6 +1,7 @@
 import re
 import operator
 from typing import Tuple, List
+from collections import abc
 
 Position_zero = (0, 0)
 Point = Tuple[int, ...]
@@ -164,12 +165,17 @@ class Matrix2D(dict):
         super().__init__()
         self.directions = directions
         self.default = default
-
-        self.update(
-            {
-                (x, y): value
-                for y, row in enumerate(grid)
-                for x, value in enumerate(row)
-                if value not in skip
-            }
-        )
+        
+        if isinstance(grid, abc.Mapping):
+            self.update(grid)
+        else:
+            if isinstance(grid, str):
+                grid = grid.splitlines()
+            self.update(
+                {
+                    (x, y): value
+                    for y, row in enumerate(grid)
+                    for x, value in enumerate(row)
+                    if value not in skip
+                }
+            )

@@ -6,7 +6,7 @@ handle_data = 'lines'
 
 class SolveTheDay(SolverFunctions, Matrix2D):
     @classmethod
-    def helper(cls, _data):
+    def helper(cls):
         def start_to_direction(start, direction, grid):
             while True:
                 start = cls.add_together(start, direction)
@@ -14,11 +14,11 @@ class SolveTheDay(SolverFunctions, Matrix2D):
                     return
                 yield start
   
-        return _data, start_to_direction
+        return start_to_direction
 
     @classmethod
     def level_1(cls, data):
-        _data, start_to_direction = cls.helper(data)
+        start_to_direction = cls.helper()
 
         def visible_from_outside(grid) -> int:
             def is_visible(location) -> bool:
@@ -29,11 +29,11 @@ class SolveTheDay(SolverFunctions, Matrix2D):
     
             return cls.sum_items(grid, is_visible)
     
-        return visible_from_outside(Matrix2D(_data))
+        return visible_from_outside(Matrix2D(data))
 
     @classmethod
     def level_2(cls, data):
-        _data, start_to_direction = cls.helper(data)
+        start_to_direction = cls.helper()
         
         def distance_result(location, grid):
             return cls._product(visual_distance(location, direction, matrix) for direction in four_directions)
@@ -46,6 +46,6 @@ class SolveTheDay(SolverFunctions, Matrix2D):
                     break
             return seen
                     
-        matrix = Matrix2D(grid=_data)
+        matrix = Matrix2D(grid=data)
         
         return max(distance_result(point, matrix) for point in matrix)
