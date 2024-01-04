@@ -284,5 +284,16 @@
         "message": "the right answer",
         "time": "2024-01-04 16:05:54",
         "star ": "*"
+    },
+    {
+        "year": "2023",
+        "day": "10",
+        "title": "--- Day 10: Pipe Maze ---",
+        "level": "2",
+        "answer": "407",
+        "submitted": true,
+        "message": "the right answer",
+        "time": "2024-01-04 18:21:18",
+        "star ": "*"
     }
 ]
