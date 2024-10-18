@@ -1,8 +1,9 @@
 import logging
 from datetime import date
 from src.common.exceptions import ActionInFuture
-from src.common.configs import BaseConfig
+from src.common.configs import BaseConfig, BROWSER_OPTIONS
 from termcolor import colored
+
 
 
 logger = logging.getLogger(__name__)
@@ -78,6 +79,17 @@ class InputCheck:
                 raise ActionInFuture('That year is into the future! Try previous years!')
     
             if year < cls.current_year:
-                print(colored("Let's go!", 'black', 'on_green', ['bold']))
+                logger.info(colored("Let's go!", 'black', 'on_green', ['bold']))
              
             return year, day
+
+    @classmethod
+    def get_browser_preference(self):
+        logger.info(colored(f'Choose a browser: {BROWSER_OPTIONS} ', 'green', 'on_black'))
+        choice = input()
+        
+        if choice.isnumeric() and len(choice) < 2:
+            return choice
+
+        logger.info(colored("Please choose only specified browsers!", 'red', 'on_black'))
+        
