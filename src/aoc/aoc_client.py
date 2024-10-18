@@ -7,9 +7,11 @@ from termcolor import colored
 from datetime import datetime
 
 from src.aoc.lxml_utils import HTMLHelper
+from src.common.checker import InputCheck
 from src.common.configs import BaseConfig
 from src.common.utils import SolverFunctions
 from src.common.setup_project import SetupProject
+from src.common.configs import (CONFIG, GITHUB_HEADER_NAME, DOMAIN_NAME, BROWSER_OPTIONS)
 
 
 logger = logging.getLogger(__name__)
@@ -56,7 +58,6 @@ class AdventOfCodeBase:
         try:
             with open(file_path, 'r') as file:
                 file_response = file.read()
-
             return HTMLHelper.content_helper(file_response)
         except FileNotFoundError:
             SetupProject.make_dir(cached_html_directory)
@@ -82,16 +83,77 @@ class AdventOfCodeBase:
 
     @classmethod
     def get_token(cls):
-        return BaseConfig.github_session(value=cls.get_chrome_cookies())
+        token = cls.get_github_token()
+        if not token:
+            raise NotImplementedError
+        
+        return token
 
+    @classmethod
+    def get_github_token(cls):
+        choice = int(InputCheck.get_browser_preference())
+        
+        token, created = BaseConfig.get_config_value(
+            cfg_name=CONFIG, 
+            header_name=GITHUB_HEADER_NAME, 
+            field_name=BROWSER_OPTIONS[choice], 
+            value=None
+        )
+        if token and not created:
+            logger.info(colored('Returned cached cookies for AoC!', 'green', 'on_black'))
+            return token
+    
+        if not token:
+            browser_method = getattr(AdventOfCodeBase, f'get_{BROWSER_OPTIONS[choice]}_cookies')
+
+            token, created = BaseConfig.get_config_value(
+                cfg_name=CONFIG,
+                header_name=GITHUB_HEADER_NAME,
+                field_name=BROWSER_OPTIONS[choice],
+                value=browser_method()
+            )
+            
+            if created:
+                logger.info(colored(f'AoC cookies from --{BROWSER_OPTIONS[choice]}-- are cached now!', 'yellow', 'on_black'))
+
+            return token
+    
     @staticmethod
     def get_chrome_cookies():
         # using configparser to save cookies as some users may use Windows instead Linux/macOS
-        # cookie_file = glob.glob(os.path.expanduser('~/.config/google-chrome/*/Cookies'))
-        chrome = browser_cookie.chrome(domain_name='.adventofcode.com')  # cookie_file=cookie_file, 
-        chrome_cookie = [c for c in chrome if c.name == 'session']
-        session = [c.value for c in chrome_cookie][0]
-        return session
+        # cookie_file = glob.glob(os.path.expanduser('~/.config/google-chrome/*/Cookies'))        
+        try:
+            chrome_cookies = browser_cookie.chrome(domain_name=DOMAIN_NAME) 
+            return [c for c in chrome_cookies if c.name == 'session'][0].value
+        except IndexError:
+            logger.info(colored(f'No cookies in Google Chrome!', 'red', 'on_black'))
+            return None
+    
+    
+    @staticmethod
+    def get_firefox_cookies():
+        try:
+            firefox_cookies = browser_cookie.firefox(domain_name=DOMAIN_NAME)
+            if not firefox_cookies:
+                firefox_cookies = browser_cookie.firefox(
+                    cookie_file=BaseConfig.get_macos_firefox_cookies_custom_user(), 
+                    domain_name=DOMAIN_NAME
+                )
+            return [f for f in firefox_cookies if f.name == "session"][0].value
+        except IndexError:
+            logger.info(colored(f'No cookies in Firefox!', 'red', 'on_black'))
+            return None
+        
+    @staticmethod
+    def get_edge_cookies():
+        try:
+            edge = browser_cookie.edge(domain_name=DOMAIN_NAME) 
+            edge_cookie = [e for e in edge if e.name == "session"]
+            return [c.value for c in edge_cookie][0]
+        except IndexError:
+            logger.info(colored(f'No cookies in Microsoft Edge!', 'red', 'on_black'))
+            return None
+    
 
     @classmethod
     def check_response(cls, response):
