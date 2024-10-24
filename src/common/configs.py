@@ -1,9 +1,13 @@
 import os
+import json
 import logging
 import sys
 import re
 from pathlib import Path
 from configparser import ConfigParser, NoOptionError, NoSectionError
+
+from datetime import datetime
+from src.common.setup_project import SetupProject
 from src.common.utils import SolverFunctions
 
 logger = logging.getLogger(__name__)
@@ -21,6 +25,8 @@ MACOS_FIREFOX_PATH = '~/Library/Application Support/Firefox/Profiles'
 
 
 class BaseConfig:
+    solver_functions = SolverFunctions()
+
     @staticmethod
     def get_path():
         path = Path(__file__)
@@ -115,3 +121,23 @@ class BaseConfig:
             raise f'Your cookies were not found! Verify {MACOS_FIREFOX_PATH} if "default-release" exists.'
         file_name = [file_name.group(0) for file_name in files if file_name is not None][0]
         return f'{full_path}/{file_name}/cookies.sqlite'
+
+    @classmethod
+    def save_answer(cls, long_year, day, title, level, answer, star, submitted, message):
+        now = datetime.now()
+        json_file = SetupProject.paths_dir['results_file']
+        new_data = {
+            'year': long_year, 'day': day, 'title': title, 'level': level, 'answer': str(answer),
+            'submitted': submitted, 'message': message, 'time': now.strftime("%Y-%m-%d %H:%M:%S"), 'star ': star
+        }
+
+        try:
+            file = cls.solver_functions.read_raw(json_file)
+            data = json.loads(file)
+            data.append(new_data)
+            json_data = json.dumps(data, indent=4, default=str)
+            return cls.solver_functions.file_handler(json_file, json_data, mode='w')
+
+        except json.decoder.JSONDecodeError:
+            json_data = json.dumps([new_data], indent=4, default=str)
+            return cls.solver_functions.file_handler(json_file, json_data, mode='w')

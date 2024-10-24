@@ -2,8 +2,8 @@ from lxml import html
 
 
 class HTMLHelper(object):
-    @staticmethod
-    def content_helper(data):
+    @classmethod
+    def parser(cls, data):
         content = data
         
         if isinstance(data, str):
@@ -12,3 +12,7 @@ class HTMLHelper(object):
         parser = html.HTMLParser()
         
         return html.fromstring(content, parser=parser)
+
+    @classmethod
+    def get_data_from_html(cls, data):
+        return cls.parser(data).text_content()

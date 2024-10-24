@@ -19,16 +19,17 @@ SEPARATOR = 150
 
 if __name__ == '__main__':
     _help = """
-            1. For year 2022 and day 01 type: -v 2201 -l 1 ("-v" is value, "22" is directory , "01" is "day01" 
-            while -l is level "1" as each day contains 2 parts) 
-            2. If you type only 2 digits, it will be considered that day, but no more than 25 (if that day is solved yet),
-            and year it will be the latest year available in 'input' directory.
-            3. Sample day is taken by adding an "s" by the of digits: -v 01 -s s or -v 2201 -s s.
-            4. Account states for signing to AOC using GitHub credentials: e.g: ... -a github
+            1.1 For year 2022 and day 01 type: "-v 2201".
+            1.2 If you type only 2 digits and omit year, which it will be the latest year available in 'input' dir,
+                it will run that day; days available from 01 to 25: "-l 01".
+            2. Level 1 as each day contains 2 parts: 1 and 2. Commands is: "-l 1".
+            3. For sample day test add "-s s".
+            4. Sending results to "https://adventofcode.com/{year}/day/{day}/answer" add "-aoc true".
 
-            Run sample input: Run e.g.: python3 main.py -v 2201 -l 1 -s s'
-            Run input: Run e.g.: python3 main.py -v 2201 -l 1 -s s'
-            Run input and submit: Run e.g.: python3 main.py -v 2201 -l 1 -aoc true'        
+            Run input type <yearday> level 1: Run e.g.: python3 main.py -v 2201 -l 1
+            Run input type <day> level 1 Run e.g.: python3 main.py -v 01 -l 1
+            Run sample input for level 1: Run e.g.: python3 main.py -v 2201 -l 1 -s s
+            Run input and submit: Run e.g.: python3 main.py -v 2201 -l 1 -aoc true 
            """
 
     class Command(InputCheck, Display):
