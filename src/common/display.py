@@ -126,28 +126,32 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
     @classmethod
     def check_required_files_exists(cls, year, day, level, sample):
         script_path = cls.paths_dir['script_path'].format(year=year, day=day)
-        created_script_path = cls.paths_dir['created_script_path'].format(year=year, day=day)
+        new_script_path = cls.paths_dir['new_script_path'].format(year=year, day=day)
         input_path_day = cls.paths_dir['input_path_day'].format(year=year, day=day)
-        input_path_day_sample = cls.paths_dir['input_path_day_sample'].format(year=year, day=day, 
-                                                                              sample='_sample', level=level)
+        input_path_day_sample = cls.paths_dir['input_path_day_sample'].format(
+            year=year,
+            day=day,
+            sample='_sample',
+            level=level
+        )
         input_path = cls.paths_dir['input_path'].format(year=year)
         year_path = cls.paths_dir['year_path'].format(year=year)
 
         try:
-            script_exists = import_module(script_path)
+            script_module = import_module(script_path)
         except (ModuleNotFoundError, NameError):
             cls.make_dir(year_path)
-            cls.write_file(created_script_path)
+            cls.write_file(new_script_path)
             logger.info(colored(f'Script created!', 'magenta', 'on_black'))
 
-            _text = cls.read_raw(cls.paths_dir['script_example'])
-            added_blank_functions = [x for x in _text]
+            text = cls.read_raw(cls.paths_dir['script_example'])
+            added_blank_functions = [x for x in text]
 
-            with open(created_script_path, 'w') as file_text:
+            with open(new_script_path, 'w') as file_text:
                 file_text.writelines(added_blank_functions)
-                logger.info(colored('New script successfully populated!', 'magenta', 'on_black'))
+                logger.info(colored('New script was successfully populated!', 'magenta', 'on_black'))
 
-            script_exists = import_module(script_path)
+            script_module = import_module(script_path)
 
         try:
             input_data = cls.read_raw(input_path_day)
@@ -159,16 +163,16 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
 
             with open(input_path_day_sample, 'w') as f:
                 f.write('')
-            aoc_input = cls.get_aoc_data(year, day, level)
+            story_input = cls.get_story_input(year, day)
 
             with open(input_path_day, 'w') as f:
-                for line in aoc_input:
+                for line in story_input:
                     f.write(line)
 
             input_data = cls.read_raw(input_path_day)
             
         if level == 2:
-            cls.get_aoc_data(year, day, level,)
+            cls.get_story_input(year, day)
                 
         if sample:
             try:
@@ -177,7 +181,8 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                 with open(input_path_day_sample, 'w') as f:
                     f.write('')
                 raise ActionRequired(
-                    colored(f'Sample file created without data! Populate {input_path_day_sample} then run', 
+                    colored(f'Sample file created without any data! '
+                            f'Populate manually {input_path_day_sample} then run', 
                             'light_yellow', 'on_black'))
 
         if sample and not input_data:
@@ -186,4 +191,4 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                         'light_yellow', 'on_black')
             )
             
-        return script_exists, input_data
+        return script_module, input_data
