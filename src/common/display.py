@@ -1,5 +1,5 @@
+import sys
 import logging
-
 from importlib import import_module
 from collections import Counter
 from typing import Tuple
@@ -35,8 +35,9 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         if parser_method:
             parser_method = cls.get_method(method)
         else:
-            raise Ignore(colored('Please add a "parser_method" in the day script!', 'black', 'on_red'))
-
+            logger.warning(colored('Please add a "parser_method" in the day script!', 'black', 'on_red'))
+            sys.exit()
+            
         if segmentation != 'lines' or not segmentation:
             custom_segmentation = cls.get_method(segmentation)
             handle_data = custom_segmentation(source_day_text.rstrip())
@@ -125,6 +126,9 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
 
     @classmethod
     def check_required_files_exists(cls, year, day, level, sample):
+        script_created = False
+        input_data_created = False
+
         script_path = cls.paths_dir['script_path'].format(year=year, day=day)
         new_script_path = cls.paths_dir['new_script_path'].format(year=year, day=day)
         input_path_day = cls.paths_dir['input_path_day'].format(year=year, day=day)
@@ -152,6 +156,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                 logger.info(colored('New script was successfully populated!', 'magenta', 'on_black'))
 
             script_module = import_module(script_path)
+            script_created = True
 
         try:
             input_data = cls.read_raw(input_path_day)
@@ -160,7 +165,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             if available_year != year:
                 cls.make_dir(input_path)
                 logger.info(colored(f'Directory "src/input/{year}" have been created!', 'blue', 'on_black'))
-
+                
             with open(input_path_day_sample, 'w') as f:
                 f.write('')
             story_input = cls.get_story_input(year, day)
@@ -170,7 +175,8 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                     f.write(line)
 
             input_data = cls.read_raw(input_path_day)
-            
+            input_data_created = True
+
         if level == 2:
             cls.get_story_input(year, day)
                 
@@ -180,15 +186,21 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             except FileNotFoundError:
                 with open(input_path_day_sample, 'w') as f:
                     f.write('')
-                raise ActionRequired(
+                logger.warning(
                     colored(f'Sample file created without any data! '
                             f'Populate manually {input_path_day_sample} then run', 
                             'light_yellow', 'on_black'))
+                sys.exit()
+
+        if script_created and input_data_created:
+            logger.info(colored("Everything is setup. Just need to solve the quiz and run again!",'black', 'on_light_yellow'))
+            sys.exit()
 
         if sample and not input_data:
-            raise ActionRequired(
+            logger.warning(
                 colored('Samples need to be populated manually from AOC webpage!', 
                         'light_yellow', 'on_black')
             )
-            
+            sys.exit()
+
         return script_module, input_data

@@ -1,0 +1,33 @@
+repos:
+    -   repo: https://github.com/psf/black
+        rev: stable
+        hooks:
+            -   id: black
+                name: black
+                entry: black
+                language: python
+                minimum_pre_commit_version: 2.9.2
+                require_serial: true
+                types_or: [python, pyi]
+                exclude: (\.git|\.config\.cfg|\.setup\.cfg)
+            -   id: black-jupyter
+                name: black-jupyter
+                entry: black
+                language: python
+                minimum_pre_commit_version: 2.9.2
+                require_serial: true
+                types_or: [python, pyi, jupyter]
+                additional_dependencies: [".[jupyter]"]
+    -   repo: https://github.com/astral-sh/ruff-pre-commit
+        rev: v0.7.1
+        hooks:
+            -   id: ruff
+                args: [ --fix ]
+            -   id: ruff-format
+    -   repo: local
+        hooks:
+            -   id: prevent_ipdb_set_trace
+                name: prevent_ipdb_set_trace
+                types: [ python ]
+                entry: ^.*__import__\(['"]ipdb['"]\).set_trace\(.*$
+                language: pygrep

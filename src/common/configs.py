@@ -1,13 +1,9 @@
 import os
-import json
 import logging
 import sys
 import re
 from pathlib import Path
-from configparser import ConfigParser, NoOptionError, NoSectionError
-
-from datetime import datetime
-from src.common.setup_project import SetupProject
+from configparser import ConfigParser, NoOptionError, NoSectionError, DuplicateSectionError
 from src.common.utils import SolverFunctions
 
 logger = logging.getLogger(__name__)
@@ -20,7 +16,9 @@ SETUP_CONFIG = '.setup.cfg'
 SETUP_HEADER_NAME = 'SETUP'
 SETUP_FIELD_NAME = 'project'
 DOMAIN_NAME = '.adventofcode.com'
-BROWSER_OPTIONS = {1: 'chrome', 2: 'firefox', 3: 'edge'}
+DEFAULT_BROWSER_HEADER = 'Default browser'
+DEFAULT_BROWSER = 'choice'
+BROWSER_OPTIONS = {'1': 'chrome', '2': 'firefox', '3': 'edge'}
 MACOS_FIREFOX_PATH = '~/Library/Application Support/Firefox/Profiles'
 
 
@@ -48,31 +46,34 @@ class BaseConfig:
                 year = available_year_or_last_year
                 return year
 
-    @staticmethod
-    def get_config_value(cfg_name, header_name, field_name, value):
+    @classmethod
+    def get_or_create_config_value(cls, cfg_name, header_name, field_name, value=None, force=True):
         path = Path(__file__)
         ROOT_DIR = path.parent.parent.parent
     
         config_path = os.path.join(ROOT_DIR, cfg_name)
         config = ConfigParser()
         config.read(config_path)
-        created = False
 
         try:
-            return config.get(header_name, field_name), created
+            return config.get(header_name, field_name)
         except (NoOptionError, NoSectionError):
-            if field_name in BROWSER_OPTIONS.values() and not value:
-                return None, created
+            if not force:
+                return
 
-            config.add_section(header_name)
-            config.set(header_name, field_name, value)
-    
+            try:
+                config.add_section(header_name)
+            except DuplicateSectionError:
+                config.set(field_name, f'{value}')
+            else:
+                config.set(header_name, field_name, value)
+
             with open(cfg_name, 'w') as cfg:
                 config.write(cfg)
-    
+
             with open(GITIGNORE, 'r') as rf:
                 gitignore_file = rf.read().splitlines()
-                
+
             if cfg_name not in gitignore_file:
                 with open(GITIGNORE, 'a+') as gf:
                     if gitignore_file[-1] != '':
@@ -82,9 +83,8 @@ class BaseConfig:
                         gf.write(cfg_name)
 
                 logger.info(f'{cfg_name} added to {GITIGNORE}')
-                        
-            created = True
-            return config.get(header_name, field_name), created
+
+            return config.get(header_name, field_name)
     
     @classmethod
     def delete_file(cls, file_path):
@@ -96,12 +96,20 @@ class BaseConfig:
     
     @classmethod
     def make_setup(cls):
-        value = 'True'
+        created = cls.get_or_create_config_value(
+            cfg_name=SETUP_CONFIG, 
+            header_name=SETUP_HEADER_NAME, 
+            field_name=SETUP_FIELD_NAME
+        )
+        if not created:
+            return bool(cls.get_or_create_config_value(
+                cfg_name=SETUP_CONFIG,
+                header_name=SETUP_HEADER_NAME,
+                field_name=SETUP_FIELD_NAME,
+                value=True
+            ))
+        return bool(created)
         
-        return cls.get_config_value(
-            cfg_name=SETUP_CONFIG, header_name=SETUP_HEADER_NAME, field_name=SETUP_FIELD_NAME, value=value
-            )
-
     @staticmethod
     def get_method(method_name: str):
         isinstance(SolverFunctions.__dict__[f'{method_name}'], classmethod)
@@ -121,23 +129,3 @@ class BaseConfig:
             raise f'Your cookies were not found! Verify {MACOS_FIREFOX_PATH} if "default-release" exists.'
         file_name = [file_name.group(0) for file_name in files if file_name is not None][0]
         return f'{full_path}/{file_name}/cookies.sqlite'
-
-    @classmethod
-    def save_answer(cls, long_year, day, title, level, answer, star, submitted, message):
-        now = datetime.now()
-        json_file = SetupProject.paths_dir['results_file']
-        new_data = {
-            'year': long_year, 'day': day, 'title': title, 'level': level, 'answer': str(answer),
-            'submitted': submitted, 'message': message, 'time': now.strftime("%Y-%m-%d %H:%M:%S"), 'star ': star
-        }
-
-        try:
-            file = cls.solver_functions.read_raw(json_file)
-            data = json.loads(file)
-            data.append(new_data)
-            json_data = json.dumps(data, indent=4, default=str)
-            return cls.solver_functions.file_handler(json_file, json_data, mode='w')
-
-        except json.decoder.JSONDecodeError:
-            json_data = json.dumps([new_data], indent=4, default=str)
-            return cls.solver_functions.file_handler(json_file, json_data, mode='w')

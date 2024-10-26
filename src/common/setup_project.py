@@ -37,8 +37,8 @@ class SetupProject:
 
     @classmethod
     def get_setup(cls):
-        project, created = BaseConfig.make_setup()
-        if created:
+        created = BaseConfig.make_setup()
+        if not created:
             cls.make_dir(cls.src_py)
             cls.make_dir(cls.src_dir)
             cls.make_dir(cls.src_common) 
