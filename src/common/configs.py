@@ -29,17 +29,17 @@ class BaseConfig:
     def get_path():
         path = Path(__file__)
         return path.parent.parent
-    
+
     @classmethod
     def get_input_path(cls, value):
         year = value
         ROOT_DIR = cls.get_path()
-        input_path = os.path.join(ROOT_DIR, 'input')
-        
-        for dirpath, dirnames, filenames in os.walk(input_path):
+        input_path = os.path
+
+        for dirpath, dirnames, filenames in os.walk(input_path.join(ROOT_DIR, 'input')):
             dirnames.sort(reverse=True)
             available_year_or_last_year = (dirnames[:1])[0]
-    
+
             if year == available_year_or_last_year:
                 return year
             if year != available_year_or_last_year:
@@ -50,10 +50,10 @@ class BaseConfig:
     def get_or_create_config_value(cls, cfg_name, header_name, field_name, value=None, force=True):
         path = Path(__file__)
         ROOT_DIR = path.parent.parent.parent
-    
-        config_path = os.path.join(ROOT_DIR, cfg_name)
+
+        config_path = os.path
         config = ConfigParser()
-        config.read(config_path)
+        config.read(config_path.join(ROOT_DIR, cfg_name))
 
         try:
             return config.get(header_name, field_name)
@@ -77,7 +77,7 @@ class BaseConfig:
             if cfg_name not in gitignore_file:
                 with open(GITIGNORE, 'a+') as gf:
                     if gitignore_file[-1] != '':
-                        gf.write(f'\n')
+                        gf.write('\n')
                         gf.write(cfg_name)
                     else:
                         gf.write(cfg_name)
@@ -85,7 +85,7 @@ class BaseConfig:
                 logger.info(f'{cfg_name} added to {GITIGNORE}')
 
             return config.get(header_name, field_name)
-    
+
     @classmethod
     def delete_file(cls, file_path):
         if os.path.isfile(file_path):
@@ -93,12 +93,12 @@ class BaseConfig:
             print('File was deleted!')
         else:
             print('File does not exist!')
-    
+
     @classmethod
     def make_setup(cls):
         created = cls.get_or_create_config_value(
-            cfg_name=SETUP_CONFIG, 
-            header_name=SETUP_HEADER_NAME, 
+            cfg_name=SETUP_CONFIG,
+            header_name=SETUP_HEADER_NAME,
             field_name=SETUP_FIELD_NAME
         )
         if not created:
@@ -109,7 +109,7 @@ class BaseConfig:
                 value=True
             ))
         return bool(created)
-        
+
     @staticmethod
     def get_method(method_name: str):
         isinstance(SolverFunctions.__dict__[f'{method_name}'], classmethod)
@@ -119,9 +119,9 @@ class BaseConfig:
     def get_macos_firefox_cookies_custom_user(cls):
         if not sys.platform == 'darwin':
             return NotImplementedError
-        
+
         full_path = os.path.expanduser(MACOS_FIREFOX_PATH)
-        
+
         files = [
             re.search('[A-Za-z0-9].*default-release', file) for file in os.listdir(full_path)
         ]

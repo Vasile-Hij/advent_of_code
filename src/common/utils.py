@@ -165,7 +165,7 @@ class Matrix2D(dict):
         super().__init__()
         self.directions = directions
         self.default = default
-        
+
         if isinstance(grid, abc.Mapping):
             self.update(grid)
         else:

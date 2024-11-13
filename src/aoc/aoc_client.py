@@ -40,7 +40,7 @@ class AdventOfCodeBase:
     @classmethod
     def get_content(cls, url):
         response = cls.make_request(method='GET', url=url)
-        logger.info(colored(f'AoC input requested!', 'green', 'on_black'))
+        logger.info(colored('AoC input requested!', 'green', 'on_black'))
         return cls.html_parser.get_data_from_html(response.content)
 
     @classmethod
@@ -50,7 +50,7 @@ class AdventOfCodeBase:
         }
         response = requests.request(method=method, url=url, cookies=cookies, data=data)
         response.raise_for_status()
-    
+
         return response
 
     @classmethod
@@ -58,14 +58,14 @@ class AdventOfCodeBase:
         token = cls.get_github_token()
         if not token:
             raise NotImplementedError
-        
+
         return token
 
     @classmethod
     def get_github_token(cls):
         browser_choice = cls.base_config.get_or_create_config_value(
             cfg_name=CONFIG, 
-            header_name=DEFAULT_BROWSER_HEADER, 
+            header_name=DEFAULT_BROWSER_HEADER,
             field_name=DEFAULT_BROWSER,
             force=False
         )
@@ -85,7 +85,7 @@ class AdventOfCodeBase:
                 field_name=DEFAULT_BROWSER,
                 value=choice
             )
-            
+
             token = getattr(AdventOfCodeBase, f'get_{BROWSER_OPTIONS[choice]}_cookies')()
             cls.base_config.get_or_create_config_value(
                 cfg_name=CONFIG,
@@ -97,30 +97,30 @@ class AdventOfCodeBase:
                 colored(f'AoC cookies from --{BROWSER_OPTIONS[choice]}-- are cached now!', 'yellow', 'on_black'))
 
             return token
-    
+
     @staticmethod
     def get_chrome_cookies():
         # using configparser to save cookies as some users may use Windows instead Linux/macOS
-        # cookie_file = glob.glob(os.path.expanduser('~/.config/google-chrome/*/Cookies'))        
+        # cookie_file = glob.glob(os.path.expanduser('~/.config/google-chrome/*/Cookies'))
         try:
-            chrome_cookies = browser_cookie.chrome(domain_name=DOMAIN_NAME) 
+            chrome_cookies = browser_cookie.chrome(domain_name=DOMAIN_NAME)
             return [c for c in chrome_cookies if c.name == 'session'][0].value
         except IndexError:
             logger.info(colored(f'No cookies in Google Chrome!', 'red', 'on_black'))
             return None
-    
+
     @classmethod
     def get_firefox_cookies(cls):
         try:
             firefox_cookies = browser_cookie.firefox(domain_name=DOMAIN_NAME)
             if not firefox_cookies:
                 firefox_cookies = browser_cookie.firefox(
-                    cookie_file=cls.base_config.get_macos_firefox_cookies_custom_user(), 
+                    cookie_file=cls.base_config.get_macos_firefox_cookies_custom_user(),
                     domain_name=DOMAIN_NAME
                 )
             return [f for f in firefox_cookies if f.name == "session"][0].value
         except IndexError:
-            logger.info(colored(f'No cookies in Firefox!', 'red', 'on_black'))
+            logger.info(colored('No cookies in Firefox!', 'red', 'on_black'))
             return None
 
     @staticmethod
@@ -130,7 +130,7 @@ class AdventOfCodeBase:
             edge_cookie = [e for e in edge if e.name == "session"]
             return [c.value for c in edge_cookie][0]
         except IndexError:
-            logger.info(colored(f'No cookies in Microsoft Edge!', 'red', 'on_black'))
+            logger.info(colored('No cookies in Microsoft Edge!', 'red', 'on_black'))
             return None
 
 
@@ -140,12 +140,9 @@ class AdventOfCodeBase:
             content = cls.html_parser.get_data_from_html(response.content)
 
             if 'To play, please identify yourself via one of these services' in content:
-                
-                from src.common.configs import BaseConfig
-                
                 cls.base_config.delete_file('.config.cfg')
                 return None
-                
+
             return content
 
     @classmethod
@@ -184,7 +181,7 @@ class AdventOfCodeBase:
 
         return logger.info(colored(f'{message}', 'green', 'on_black')) if message == right_answer \
             else logger.info(colored(f'{message}', 'red', 'on_light_grey')) if message == wrong_answer \
-            else logger.info(colored(f'Something went wrong!', 'red', 'on_black'))
+            else logger.info(colored('Something went wrong!', 'red', 'on_black'))
 
     @classmethod
     def save_answer(cls, long_year, day, title, level, answer, star, submitted, message):
@@ -192,7 +189,7 @@ class AdventOfCodeBase:
         json_file = SetupProject.paths_dir['results_file']
         new_data = {
             'year': long_year, 'day': day, 'title': title, 'level': level, 'answer': str(answer),
-            'submitted': submitted, 'message': message, 'time': now.strftime("%Y-%m-%d %H:%M:%S"), 'star ': star
+            'submitted': submitted, 'message': message, 'time': now.strftime('%Y-%m-%d %H:%M:%S'), 'star ': star
         }
 
         try:

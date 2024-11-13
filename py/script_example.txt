@@ -5,20 +5,17 @@ parser_method = ''
 handle_data = 'paragraph'  # by default
 
 
-class SolveTheDay(SolverFunctions):    
+class SolveTheDay(SolverFunctions):
     @classmethod
     def helper(cls, data):
-    
         return
     
     @classmethod
     def level_1(cls, data):
         data = cls.helper(data)
-        
         return
 
     @classmethod
     def level_2(cls, data):
         data = cls.helper(data)
-        
         return

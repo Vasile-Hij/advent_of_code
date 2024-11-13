@@ -26,12 +26,13 @@ class SetupProject:
     src_common = '/'
     src_input = '../input/'
     src_results = '../results/'
-    
+
     @classmethod
     def make_dir(cls, dir_name):
-        if not os.path.exists(dir_name):
+        os_path = os.path
+        if not os_path.exists(dir_name):
             os.makedirs(dir_name)
-        if not os.path.isfile(cls.init_file):
+        if not os_path.isfile(cls.init_file):
             with open(f'{dir_name}{cls.init_file}', 'w') as f:
                 f.write('')
 
@@ -44,5 +45,5 @@ class SetupProject:
             cls.make_dir(cls.src_common) 
             cls.make_dir(cls.src_input) 
             cls.make_dir(cls.src_results)
-            
+
             logger.info(colored('Everything is ok now! Run again!', 'green', 'on_black'))

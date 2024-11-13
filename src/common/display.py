@@ -22,28 +22,28 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
     @classmethod
     def helper_base(
             cls,
-            source: str, 
+            source: str,
             year: str,
             title: str,
             handle_data: str,
             display: str,
-            separator: int, 
+            separator: int,
             parser_method: callable = str,
     ) -> Tuple:
-        source_day_text, title, segmentation, method = source, title, handle_data, parser_method,
+        source_day_text, title, segmentation, method = source, title, handle_data, parser_method
 
         if parser_method:
             parser_method = cls.get_method(method)
         else:
             logger.warning(colored('Please add a "parser_method" in the day script!', 'black', 'on_red'))
             sys.exit()
-            
+
         if segmentation != 'lines' or not segmentation:
             custom_segmentation = cls.get_method(segmentation)
             handle_data = custom_segmentation(source_day_text.rstrip())
         else:
             handle_data = lines(source_day_text.rstrip())
-        
+
         print(colored(f'Year: 20{year} | {title}', 'black', 'on_light_grey', ['bold']))
 
         cls.display_items(title='Raw input', items=source_day_text.splitlines(), display=display, separator=separator)
@@ -56,28 +56,28 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
     def display_items(
             cls,
             *,
-            title, 
-            items, 
-            display, 
+            title,
+            items,
+            display,
             separator
     ):
         if display:
             items_count = Counter(map(type, items))
-            separate = '─' * separator    
-            
+            separate = '─' * separator
+
             def counter(all_items):
-                """count lines and verbose if plural"""
+                """Count lines and verbose if plural"""
                 for types, name in all_items.items():
                     return f'{name} {types.__name__}{"" if name == 1 else "s"}'
-            
+
             print(f'{separate}\n{title}: {counter(items_count)}:\n{separate}')
- 
+
             display = int(display)
             for line in items[0:display]:
                 print(cls.truncate(line, width=separator))
             if display < len(items):
                 print('...')
-            
+
     @staticmethod
     def truncate(obj, width: int, dots: str = ' ...'):
         string = str(obj)
@@ -94,21 +94,21 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             separator: int
     ):
 
-        _level = level
+        my_level = level
         script, class_name = class_helper
         class_name = getattr(script, class_name)
 
         match level:
             case 1:
-                _level = 'Level 1'
+                my_level = 'Level 1'
 
-                cls._print_results(level=_level, result=class_name.level_1(data), separator=separator)
+                cls._print_results(level=my_level, result=class_name.level_1(data), separator=separator)
                 return class_name.level_1(data)
 
             case 2:
-                _level = 'Level 2'
+                my_level = 'Level 2'
 
-                cls._print_results(level=_level, result=class_name.level_2(data), separator=separator)
+                cls._print_results(level=my_level, result=class_name.level_2(data), separator=separator)
                 return class_name.level_2(data)
 
     @staticmethod
@@ -146,10 +146,10 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
         except (ModuleNotFoundError, NameError):
             cls.make_dir(year_path)
             cls.write_file(new_script_path)
-            logger.info(colored(f'Script created!', 'magenta', 'on_black'))
+            logger.info(colored('Script created!', 'magenta', 'on_black'))
 
             text = cls.read_raw(cls.paths_dir['script_example'])
-            added_blank_functions = [x for x in text]
+            added_blank_functions = list(text)
 
             with open(new_script_path, 'w') as file_text:
                 file_text.writelines(added_blank_functions)
@@ -165,7 +165,7 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             if available_year != year:
                 cls.make_dir(input_path)
                 logger.info(colored(f'Directory "src/input/{year}" have been created!', 'blue', 'on_black'))
-                
+
             with open(input_path_day_sample, 'w') as f:
                 f.write('')
             story_input = cls.get_story_input(year, day)
@@ -177,9 +177,9 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
             input_data = cls.read_raw(input_path_day)
             input_data_created = True
 
-        if level == 2:
-            cls.get_story_input(year, day)
-                
+        # if level == 2:
+        #     cls.get_story_input(year, day)
+
         if sample:
             try:
                 input_data = cls.read_raw(input_path_day_sample)
@@ -188,17 +188,17 @@ class Display(SetupProject, BaseConfig, AdventOfCodeBase, SolverFunctions):
                     f.write('')
                 logger.warning(
                     colored(f'Sample file created without any data! '
-                            f'Populate manually {input_path_day_sample} then run', 
+                            f'Populate manually {input_path_day_sample} then run',
                             'light_yellow', 'on_black'))
                 sys.exit()
 
         if script_created and input_data_created:
-            logger.info(colored("Everything is setup. Just need to solve the quiz and run again!",'black', 'on_light_yellow'))
+            logger.info(colored('Everything is setup. Just need to solve the quiz and run again!','black', 'on_light_yellow'))
             sys.exit()
 
         if sample and not input_data:
             logger.warning(
-                colored('Samples need to be populated manually from AOC webpage!', 
+                colored('Samples need to be populated manually from AOC webpage!',
                         'light_yellow', 'on_black')
             )
             sys.exit()
