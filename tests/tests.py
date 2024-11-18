@@ -18,7 +18,7 @@ PART_2 = '2425'
 class Test(Display, AdventOfCodeBase):
     @classmethod
     def test_solver_functions(cls):
-        # print(cls.read_raw('.setup.cfg'))
+        # print(cls.reader('.setup.cfg'))
         # print(cls.write_file('delete_this'))
 
         assert cls.make_list(str, SOURCE) == ['s', 'a', 'y', ' ', 'h', 'e', 'l', 'l', 'o', ',', ' ', 't', 'o', ' ', 'm', 'y', ' ', 'l', 'i', 't', 't', 'l', 'e', ' ', 'f', 'r', 'i', 'e', 'n', 'd', '!', ' ', 'C', 'o', 'd', 'e', 'n', 'a', 'm', 'e', '_', '4', '7', '-', '2', '0', '0', '2']
@@ -31,14 +31,14 @@ class Test(Display, AdventOfCodeBase):
         assert cls.each_first_item(YEAR) == ['2', '0', '2', '2']
         assert cls.each_item(YEAR) == ['2', '0', '2', '2']
         assert cls.check_len_string(SOURCE) is True
-        assert cls.strings_per_line(SOURCE_MULTILINES) == ['say hello, to my little friend!', 'Codename_47-2002']
+        assert cls.get_each_character(SOURCE_MULTILINES) == ['say hello, to my little friend!', 'Codename_47-2002']
 
-        assert cls.truncate(obj='say hello', width=99) == 'say hello'
-        assert cls.truncate(obj='say hello', width=7) == 'say ...'
+        assert cls.truncate(obj='say hello', width_separator=99) == 'say hello'
+        assert cls.truncate(obj='say hello', width_separator=7) == 'say ...'
 
         assert cls.integers(SOURCE) == (47, -2002)
-        assert cls.positive_integers(SOURCE) == (47, 2002)
-        assert cls.find_digit(SOURCE) == (4, 7, 2, 0, 0, 2)
+        assert cls.find_positive_integers(SOURCE) == (47, 2002)
+        assert cls.find_digits(SOURCE) == (4, 7, 2, 0, 0, 2)
         assert cls.find_strings(SOURCE) == ('say', 'hello', 'to', 'my', 'little', 'friend', 'Codename')
         return
     

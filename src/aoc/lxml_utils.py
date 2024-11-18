@@ -5,12 +5,12 @@ class HTMLHelper(object):
     @classmethod
     def parser(cls, data):
         content = data
-        
+
         if isinstance(data, str):
-            content = data.encode('utf-8')     
-            
+            content = data.encode('utf-8')
+
         parser = html.HTMLParser()
-        
+
         return html.fromstring(content, parser=parser)
 
     @classmethod

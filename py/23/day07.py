@@ -5,7 +5,7 @@ from src.common.utils import SolverFunctions
 
 title = '--- Day 7: Camel Cards ---'
 parser_method = 'split_two_in_tuple'
-handle_data = 'lines'  # by default
+visual_handler_data = 'lines'  # by default
 
 
 class SolveTheDay(SolverFunctions):

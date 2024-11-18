@@ -1,7 +1,7 @@
 from src.common.utils import SolverFunctions, Matrix2D, four_directions
 title = 'Day 8: Treetop Tree House'
-parser_method = 'find_digit'
-handle_data = 'lines'
+parser_method = 'find_digits'
+visual_handler_data = 'lines'
 
 
 class SolveTheDay(SolverFunctions, Matrix2D):

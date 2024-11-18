@@ -5,7 +5,7 @@ from collections import deque
 
 title = '--- Day 10: Pipe Maze ---'
 parser_method = 'str_strip'
-handle_data = 'lines'  # by default
+visual_handler_data = 'lines'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

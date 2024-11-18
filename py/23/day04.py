@@ -1,11 +1,11 @@
 from src.common.utils import SolverFunctions
 
 title = '--- Day 4: Scratchcards ---'
-parser_method = 'strings_per_line'
-handle_data = 'paragraph'  # by default
+parser_method = 'get_each_character'
+visual_handler_data = 'paragraph'  # by default
 
 
-class SolveTheDay(SolverFunctions):    
+class SolveTheDay(SolverFunctions):
     @classmethod
     def helper(cls, data, level=None):
         data = cls.parse(data)
@@ -29,11 +29,11 @@ class SolveTheDay(SolverFunctions):
                     times_occurred = cls._product(times_occurred)
 
                 pile_scratchcards.append(times_occurred)
-                
+
             if level == 2:
                 if position not in cards.keys():
                     cards[position] = 1
-                
+
                 if common:
                     for num in range(position + 1, position + common + 1):
                         cards[num] = cards.get(num, 1) + cards[position]
