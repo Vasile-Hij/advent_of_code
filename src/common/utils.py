@@ -9,19 +9,16 @@ Point = Tuple[int, ...]
 four_directions = East, South, West, North = ((1, 0), (0, 1), (-1, 0), (0, -1))
 diagonals = SE, NE, SW, NW = ((1, 1), (1, -1), (-1, 1), (-1, -1))
 eight_directions = four_directions + diagonals
-arrow_direction = {
-    '.': Position_zero,
-    'U': North, 'D': South, 'R': East, 'L': West
-}
+arrow_direction = {'.': Position_zero, 'U': North, 'D': South, 'R': East, 'L': West}
 
 
 class SolverFunctions:
     """
-        File and text handler
+    File and text handler
     """
 
     @staticmethod
-    def read_raw(source: str) -> str:
+    def reader(source: str) -> str:
         with open(source, 'r') as file:
             return file.read()
 
@@ -48,9 +45,13 @@ class SolverFunctions:
     """
 
     @classmethod
-    def strings_per_line(cls, text) -> List[str]:
+    def get_each_character(cls, text) -> List[str]:
         text = cls.paragraph(text)
         return [[item for item in line.split('\n') if item] for line in text if line][0]
+
+    @classmethod
+    def get_each_line_split(cls, text):
+        return text.splitlines()
 
     @staticmethod
     def str_strip(text: str) -> str:
@@ -78,18 +79,18 @@ class SolverFunctions:
 
     @staticmethod
     def each_item(data: str) -> List[str]:
-        return [item for item in data]
+        return list(data)
 
     @classmethod
     def integers(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'-?[0-9]+', text))
 
     @classmethod
-    def positive_integers(cls, text: str) -> Tuple[int]:
+    def find_positive_integers(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'[0-9]+', text))
 
     @classmethod
-    def find_digit(cls, text: str) -> Tuple[int]:
+    def find_digits(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'[0-9]', text))
 
     @classmethod
@@ -98,7 +99,7 @@ class SolverFunctions:
 
     @classmethod
     def make_instructions(cls, text: str) -> List[Tuple[str, int]]:
-        each_line = cls.strings_per_line(text)
+        each_line = cls.get_each_character(text)
         return [(instruction[:1], int(instruction[1:])) for instruction in each_line]
 
     @classmethod
@@ -139,7 +140,7 @@ class SolverFunctions:
 
     @staticmethod
     def indication(x) -> int:  # "0, +1, or -1"
-        return (0 if x == 0 else +1 if x > 0 else -1)
+        return 0 if x == 0 else +1 if x > 0 else -1
 
     @classmethod
     def range_generator(cls, number: int, start: int = 0, multiplier: int = 1):

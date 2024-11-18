@@ -2,7 +2,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 3: Rucksack Reorganization'
 parser_method = 'each_first_item'
-handle_data = 'lines'
+visual_handler_data = 'lines'
 
 
 class SolveTheDay(SolverFunctions):

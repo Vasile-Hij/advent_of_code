@@ -2,7 +2,7 @@ from src.common.utils import SolverFunctions
 
 title = '--- Day 6: Wait For It ---'
 parser_method = 'str_split'
-handle_data = 'lines'  # by default
+visual_handler_data = 'lines'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

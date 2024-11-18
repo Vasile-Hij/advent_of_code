@@ -6,7 +6,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 1: Calorie Counting'
 parser_method = 'integers'
-handle_data = 'paragraph'
+visual_handler_data = 'paragraph'
 
 
 class SolveTheDay(SolverFunctions):    

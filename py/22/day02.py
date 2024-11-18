@@ -13,7 +13,7 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 2: Rock Paper Scissors'
 parser_method = 'str_split'
-handle_data = 'lines'
+visual_handler_data = 'lines'
 
 
 class SolveTheDay(SolverFunctions):

@@ -3,8 +3,8 @@ from functools import cache
 from src.common.utils import SolverFunctions
 
 title = '--- Day 5: If You Give A Seed A Fertilizer ---'
-parser_method = 'strings_per_line'
-handle_data = 'paragraph'  # by default
+parser_method = 'get_each_character'
+visual_handler_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

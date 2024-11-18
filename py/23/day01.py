@@ -3,7 +3,8 @@ import re
 
 title = '--- Day 1: Trebuchet?! ---'
 parser_method = 'str_split'
-handle_data = 'paragraph'  # by default
+visual_handler_data = 'paragraph'  # by default
+
 
 
 class SolveTheDay(SolverFunctions):
@@ -14,7 +15,7 @@ class SolveTheDay(SolverFunctions):
     @classmethod
     def level_1(cls, data):
         data = cls.helper(data)
-        digits_data = [cls.find_digit(digit) for digit in data]
+        digits_data = [cls.find_digits(digit) for digit in data]
 
         result = 0
         for digits in digits_data:

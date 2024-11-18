@@ -2,8 +2,8 @@ from src.common.utils import SolverFunctions
 from math import gcd
 
 title = '--- Day 8: Haunted Wasteland ---'
-parser_method = 'strings_per_line'
-handle_data = 'paragraph'  # by default
+parser_method = 'get_each_character'
+visual_handler_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    

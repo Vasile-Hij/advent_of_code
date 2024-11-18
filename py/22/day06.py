@@ -2,10 +2,10 @@ from src.common.utils import SolverFunctions
 
 title = 'Day 6: Tuning Trouble'
 parser_method = 'str_strip'
-handle_data = 'lines'
+visual_handler_data = 'lines'
 
 
-class SolveTheDay(SolverFunctions):    
+class SolveTheDay(SolverFunctions):
     @staticmethod
     def helper(data, stream_buffer):
         _data = data[0]

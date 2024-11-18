@@ -3,8 +3,8 @@ import re
 from src.common.utils import SolverFunctions
 
 title = 'Day 5: Supply Stacks'
-parser_method = 'strings_per_line'
-handle_data = 'paragraph'
+parser_method = 'get_each_character'
+visual_handler_data = 'paragraph'
 
 
 class SolveTheDay(SolverFunctions):

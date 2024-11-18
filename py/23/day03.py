@@ -2,8 +2,8 @@ from src.common.utils import SolverFunctions, Matrix2D, eight_directions
 import collections
 
 title = '--- Day 3: Gear Ratios ---'
-parser_method = 'strings_per_line'
-handle_data = 'paragraph'  # by default
+parser_method = 'get_each_character'
+visual_handler_data = 'paragraph'  # by default
 
 
 class SolveTheDay(SolverFunctions):    
