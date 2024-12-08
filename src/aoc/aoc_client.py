@@ -1,4 +1,5 @@
 import json
+import sys
 import logging
 from datetime import datetime
 
@@ -11,6 +12,7 @@ from src.common.checker import InputCheck
 from src.common.configs import BaseConfig
 from src.common.utils import SolverFunctions
 from src.common.setup_project import SetupProject
+from typing import ClassVar
 from src.common.configs import (
     CONFIG,
     DEFAULT_BROWSER,
@@ -29,7 +31,7 @@ class AdventOfCodeBase:
     base_config = BaseConfig
     solver_functions = SolverFunctions
 
-    urls = {
+    urls: ClassVar[dict[str, str]] = {
         'base_url': 'https://adventofcode.com/{year}/day/{day}',
         'input_url': 'https://adventofcode.com/{year}/day/{day}/input',
         'log_in_github': 'https://adventofcode.com/{}/auth/github',
@@ -45,9 +47,11 @@ class AdventOfCodeBase:
         return cls.get_content(url)
 
     @classmethod
-    def get_content(cls, url):
-        response = cls.make_request(method='GET', url=url)
-        logger.info(colored('AoC input requested!', 'green', 'on_black'))
+    def get_content(cls, url, data, method='GET', selector=None):
+        response = cls.make_request(method=method, url=url, data=data)
+        logger.info(colored(f'AoC url request: {url}', 'green', 'on_black'))
+        if selector:
+            return cls.html_parser.get_data_from_html_selector(response.content, selector=selector)
         return cls.html_parser.get_data_from_html(response.content)
 
     @classmethod
@@ -56,6 +60,23 @@ class AdventOfCodeBase:
             'session': cls.get_token(),
         }
         response = requests.request(method=method, url=url, cookies=cookies, data=data)
+
+        if response.status_code == 200:
+            content = cls.html_parser.get_data_from_html(response.content)
+
+            if 'To play, please identify yourself via one of these services' in content:
+                cls.base_config.delete_file('.config.cfg')
+                return None
+
+        if response.status_code == 400:
+            cls.base_config.clear_cached_token(
+                cfg_name=CONFIG,
+                header_name=GITHUB_HEADER_NAME,
+                field_name=DEFAULT_BROWSER,
+            )
+            logger.info(colored('Cache was cleared! Run again!', 'yellow', 'on_black'))
+            sys.exit()
+
         response.raise_for_status()
 
         return response
@@ -146,17 +167,6 @@ class AdventOfCodeBase:
             return None
 
     @classmethod
-    def check_response_status_code(cls, response):
-        if response.status_code == 200:
-            content = cls.html_parser.get_data_from_html(response.content)
-
-            if 'To play, please identify yourself via one of these services' in content:
-                cls.base_config.delete_file('.config.cfg')
-                return None
-
-            return content
-
-    @classmethod
     def submit_answer(cls, year, day, title, level, answer):
         submitted = False
         star = None
@@ -165,44 +175,50 @@ class AdventOfCodeBase:
         wrong_answer = 'not the right answer'
         too_high = 'too high'
         too_low = 'too low'
+        need_to_wait = 'you have to wait after submitting an answer before trying again'
+        submitted_already = "you don't seem to be solving the right level.  did you already complete it?"
 
-        long_year = f'20{year}'
-        day = day[1:] if day.startswith('0') else day
+        long_year, day = cls.get_long_year_and_day(year, day)
         data = {'level': level, 'answer': answer}
         url = cls.urls['aoc_answer'].format(year=long_year, day=day)
 
-        response = cls.make_request(method='POST', url=url, data=data)
+        content = cls.get_content(method='POST', url=url, data=data)
 
-        content = cls.check_response_status_code(response)
-        if not content:
-            response = cls.make_request(method='POST', url=url, data=data)
-            content = cls.check_response_status_code(response)
+        if content:
+            content = content.lower()
+
             if wrong_answer in content:
                 logger.info(colored(f'{wrong_answer}', 'red', 'on_black'))
                 submitted = True
-                message = wrong_answer
+                if too_high in content:
+                    logger.info(colored(f'{wrong_answer}|{too_high}', 'red', 'on_light_grey'))
+                    sys.exit()
+
+                if too_low in content:
+                    logger.info(colored(f'{wrong_answer}|{too_low}', 'red', 'on_light_grey'))
+                    sys.exit()
 
             if right_answer in content:
-                logger.info(colored(f'{right_answer}', 'green', 'on_black'))
                 submitted = True
                 star = (
                     '**'
                     if 'two gold stars' in content
-                    else "*" if 'one gold star' in content else None
+                    else "*"
                 )
-                message = right_answer
+                logger.info(colored(f'{right_answer}', 'green', 'on_black'))
+
+            if submitted_already in content:
+                logger.info(colored(f'{submitted_already}', 'green', 'on_black'))
+
+            if need_to_wait in content:
+                logger.info(colored(f'{need_to_wait}', 'magenta', 'on_black'))
+                sys.exit()
+
+            if any([wrong_answer, right_answer, submitted_already]) != True:
+                logger.info(colored('Something went wrong!', 'red', 'on_black'))
+                sys.exit()
 
         cls.save_answer(long_year, day, title, level, answer, star, submitted, message)
-
-        return (
-            logger.info(colored(f'{message}', 'green', 'on_black'))
-            if message == right_answer
-            else (
-                logger.info(colored(f'{message}', 'red', 'on_light_grey'))
-                if message == wrong_answer
-                else logger.info(colored('Something went wrong!', 'red', 'on_black'))
-            )
-        )
 
     @classmethod
     def save_answer(cls, long_year, day, title, level, answer, star, submitted, message):

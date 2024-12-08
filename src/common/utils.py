@@ -2,6 +2,7 @@ import re
 import operator
 from typing import Tuple, List
 from collections import abc
+from pathlib import Path
 
 Position_zero = (0, 0)
 Point = Tuple[int, ...]
@@ -19,17 +20,17 @@ class SolverFunctions:
 
     @staticmethod
     def reader(source: str) -> str:
-        with open(source, 'r') as file:
+        with Path.open(source, 'r') as file:
             return file.read()
 
     @staticmethod
-    def write_file(source: str) -> str:
-        with open(source, 'w') as file:
+    def write_file(path, source: str = '') -> str:
+        with Path.open(path, 'w') as file:
             return file.write(source)
 
     @staticmethod
     def file_handler(source: str, json_data: str, mode: str = None):
-        with open(source, f'{mode}') as file:
+        with Path.open(source, f'{mode}') as file:
             file.write(json_data)
 
     @staticmethod
@@ -105,7 +106,7 @@ class SolverFunctions:
     @classmethod
     def split_two_in_list(cls, text: str) -> List[str]:
         each_line = cls.str_split(text)
-        return [(line.split(':')[0]) for line in each_line]
+        return [(line.split('\n')[0]) for line in each_line]
 
     @classmethod
     def split_two_in_tuple(cls, text: str) -> Tuple[str, str]:

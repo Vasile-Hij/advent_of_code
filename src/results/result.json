@@ -295,5 +295,27 @@
         "message": "the right answer",
         "time": "2024-01-04 18:21:18",
         "star ": "*"
+    },
+    {
+        "year": "2024",
+        "day": "1",
+        "title": "--- Day 1: Historian Hysteria ---",
+        "level": "1",
+        "answer": "2176849",
+        "submitted": false,
+        "message": null,
+        "time": "2024-12-08 20:43:34",
+        "star ": "*"
+    },
+    {
+        "year": "2024",
+        "day": "1",
+        "title": "Day",
+        "level": "2",
+        "answer": "23384288",
+        "submitted": true,
+        "message": null,
+        "time": "2024-12-09 00:08:27",
+        "star ": "**"
     }
 ]

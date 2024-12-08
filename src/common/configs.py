@@ -68,14 +68,14 @@ class BaseConfig:
             else:
                 config.set(header_name, field_name, value)
 
-            with open(cfg_name, 'w') as cfg:
+            with Path.open(cfg_name, 'w') as cfg:
                 config.write(cfg)
 
-            with open(GITIGNORE, 'r') as rf:
+            with Path.open(GITIGNORE, 'r') as rf:
                 gitignore_file = rf.read().splitlines()
 
             if cfg_name not in gitignore_file:
-                with open(GITIGNORE, 'a+') as gf:
+                with Path.open(GITIGNORE, 'a+') as gf:
                     if gitignore_file[-1] != '':
                         gf.write('\n')
                         gf.write(cfg_name)
@@ -87,9 +87,23 @@ class BaseConfig:
             return config.get(header_name, field_name)
 
     @classmethod
+    def clear_cached_token(cls, cfg_name, header_name, field_name):
+        path = Path(__file__)
+        ROOT_DIR = path.parent.parent.parent
+
+        config_path = os.path
+        config = ConfigParser()
+        config.read(config_path.join(ROOT_DIR, cfg_name))
+
+        config.remove_section(header_name)
+        config.remove_section(field_name)
+
+        cls.write_file(config)
+
+    @classmethod
     def delete_file(cls, file_path):
-        if os.path.isfile(file_path):
-            os.remove(file_path)
+        if Path.isfile(file_path):
+            Path.unlink(file_path)
             print('File was deleted!')
         else:
             print('File does not exist!')
@@ -117,10 +131,10 @@ class BaseConfig:
 
     @classmethod
     def get_macos_firefox_cookies_custom_user(cls):
-        if not sys.platform == 'darwin':
+        if sys.platform != 'darwin':
             return NotImplementedError
 
-        full_path = os.path.expanduser(MACOS_FIREFOX_PATH)
+        full_path = Path.expanduser(MACOS_FIREFOX_PATH)
 
         files = [
             re.search('[A-Za-z0-9].*default-release', file) for file in os.listdir(full_path)
