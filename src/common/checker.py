@@ -84,7 +84,7 @@ class InputCheck:
             return year, day
 
     @classmethod
-    def get_browser_preference(self):
+    def get_browser_preference(cls):
         logger.info(colored(f'Choose a browser: {BROWSER_OPTIONS} ', 'green', 'on_black'))
         choice = input()
 
@@ -92,3 +92,8 @@ class InputCheck:
             return choice
 
         logger.info(colored('Please choose only specified browsers!', 'red', 'on_black'))
+
+
+    @classmethod
+    def get_long_year_and_day(cls, year, day):
+        return f'20{year}', day[1:] if day.startswith('0') else day

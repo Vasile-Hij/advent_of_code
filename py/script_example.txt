@@ -1,6 +1,6 @@
 from src.common.utils import SolverFunctions
 
-title = 'Day'
+title = 'day_to_change'
 parser_method = ''
 custom_parser_method = True # if True no parser method is required!!!
 visual_handler_data = 'paragraph'  # by default
@@ -10,7 +10,7 @@ class SolveTheDay(SolverFunctions):
     @classmethod
     def helper(cls, data):
         return
-    
+
     @classmethod
     def level_1(cls, data):
         return
