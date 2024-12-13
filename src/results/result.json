@@ -317,5 +317,27 @@
         "message": null,
         "time": "2024-12-09 00:08:27",
         "star ": "**"
+    },
+    {
+        "year": "2024",
+        "day": "2",
+        "title": "--- Day 2: Red-Nosed Reports ---",
+        "level": "1",
+        "answer": "660",
+        "submitted": true,
+        "message": "That's the right answer",
+        "time": "2024-12-11 10:23:38",
+        "star ": "*"
+    },
+    {
+        "year": "2024",
+        "day": "2",
+        "title": "--- Day 2: Red-Nosed Reports ---",
+        "level": "2",
+        "answer": "689",
+        "submitted": true,
+        "message": "That's the right answer",
+        "time": "2024-12-12 22:53:38",
+        "star ": "**"
     }
 ]

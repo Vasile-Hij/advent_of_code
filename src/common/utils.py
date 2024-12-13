@@ -1,11 +1,12 @@
 import re
 import operator
-from typing import Tuple, List
+from typing import Tuple, List, Union
 from collections import abc
 from pathlib import Path
 
 Position_zero = (0, 0)
 Point = Tuple[int, ...]
+Atom = Union[str, float, int]
 
 four_directions = East, South, West, North = ((1, 0), (0, 1), (-1, 0), (0, -1))
 diagonals = SE, NE, SW, NW = ((1, 1), (1, -1), (-1, 1), (-1, -1))
@@ -83,6 +84,32 @@ class SolverFunctions:
         return list(data)
 
     @classmethod
+    def all_atoms(cls, text: str, splitter='\n') -> List[Atom]:
+        all_atoms = []
+
+        for line in text.split(splitter):
+            atoms = cls.find_digit_float_string(line)
+            temp_atoms = []
+
+            for atom in atoms:
+                temp_atoms.append(cls.atom(atom))
+            all_atoms.append(temp_atoms)
+
+        return all_atoms
+
+    @classmethod
+    def atom(cls, text: str) -> Atom:
+        try:
+            x = float(text)
+            return round(x) if x.is_integer() else x
+        except ValueError:
+            return text.strip()
+
+    @classmethod
+    def compare_2_nums(cls, x, y):
+        return (x > y) - (x < y)
+
+    @classmethod
     def integers(cls, text: str) -> Tuple[int]:
         return cls.make_tuple(int, re.findall(r'-?[0-9]+', text))
 
@@ -97,6 +124,10 @@ class SolverFunctions:
     @classmethod
     def find_strings(cls, text: str) -> Tuple[str]:
         return cls.make_tuple(str, re.findall(r'[a-zA-Z]+', text))
+
+    @classmethod
+    def find_digit_float_string(cls, text: str) -> List:
+        return re.findall(r'[+-]?\d+\.?\d*|\w+', text)
 
     @classmethod
     def make_instructions(cls, text: str) -> List[Tuple[str, int]]:

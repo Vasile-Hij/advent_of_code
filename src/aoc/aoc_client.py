@@ -47,7 +47,7 @@ class AdventOfCodeBase:
         return cls.get_content(url)
 
     @classmethod
-    def get_content(cls, url, data, method='GET', selector=None):
+    def get_content(cls, url, data=None, method='GET', selector=None):
         response = cls.make_request(method=method, url=url, data=data)
         logger.info(colored(f'AoC url request: {url}', 'green', 'on_black'))
         if selector:
@@ -177,6 +177,7 @@ class AdventOfCodeBase:
         too_low = 'too low'
         need_to_wait = 'you have to wait after submitting an answer before trying again'
         submitted_already = "you don't seem to be solving the right level.  did you already complete it?"
+        wait = 'wait'
 
         long_year, day = cls.get_long_year_and_day(year, day)
         data = {'level': level, 'answer': answer}
@@ -186,6 +187,10 @@ class AdventOfCodeBase:
 
         if content:
             content = content.lower()
+
+            if wait in content:
+                logger.info(colored(f'{wait}', 'blue', 'on_black'))
+                sys.exit()
 
             if wrong_answer in content:
                 logger.info(colored(f'{wrong_answer}', 'red', 'on_black'))
@@ -200,11 +205,7 @@ class AdventOfCodeBase:
 
             if right_answer in content:
                 submitted = True
-                star = (
-                    '**'
-                    if 'two gold stars' in content
-                    else "*"
-                )
+                star = '**' if level == 2 else '*'
                 logger.info(colored(f'{right_answer}', 'green', 'on_black'))
 
             if submitted_already in content:

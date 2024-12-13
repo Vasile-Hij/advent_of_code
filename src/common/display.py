@@ -9,7 +9,6 @@ from src.common.setup_project import SetupProject
 from src.aoc.aoc_client import AdventOfCodeBase
 from src.common.configs import BaseConfig
 from src.common.utils import SolverFunctions
-from src.aoc.lxml_utils import HTMLHelper
 from pathlib import Path
 
 logging.basicConfig()
