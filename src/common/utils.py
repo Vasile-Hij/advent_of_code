@@ -84,7 +84,8 @@ class SolverFunctions:
         return list(data)
 
     @classmethod
-    def all_atoms(cls, text: str, splitter='\n') -> List[Atom]:
+    def all_atoms(
+        cls, text: str, default: bool = True, splitter: str = '\n') -> List[Atom]:
         all_atoms = []
 
         for line in text.split(splitter):
@@ -146,6 +147,10 @@ class SolverFunctions:
         for line in each_line:
             split = line.split()
             return split[0], split[1]
+
+    @classmethod
+    def concat(cls, text: str):
+        return ''.join(map(str, text))
 
     """
         Calculus

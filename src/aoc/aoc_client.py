@@ -170,14 +170,14 @@ class AdventOfCodeBase:
     def submit_answer(cls, year, day, title, level, answer):
         submitted = False
         star = None
+        gold_star = 'gold star'
         message = None
         right_answer = 'the right answer'
         wrong_answer = 'not the right answer'
         too_high = 'too high'
         too_low = 'too low'
-        need_to_wait = 'you have to wait after submitting an answer before trying again'
+        need_to_wait = ['you have to wait after submitting an answer before trying again', 'try again', 'wait']
         submitted_already = "you don't seem to be solving the right level.  did you already complete it?"
-        wait = 'wait'
 
         long_year, day = cls.get_long_year_and_day(year, day)
         data = {'level': level, 'answer': answer}
@@ -188,36 +188,30 @@ class AdventOfCodeBase:
         if content:
             content = content.lower()
 
-            if wait in content:
-                logger.info(colored(f'{wait}', 'blue', 'on_black'))
-                sys.exit()
-
             if wrong_answer in content:
-                logger.info(colored(f'{wrong_answer}', 'red', 'on_black'))
-                submitted = True
                 if too_high in content:
-                    logger.info(colored(f'{wrong_answer}|{too_high}', 'red', 'on_light_grey'))
+                    logger.info(colored(f'{wrong_answer}|{too_high}', 'red', 'on_black'))
                     sys.exit()
 
                 if too_low in content:
-                    logger.info(colored(f'{wrong_answer}|{too_low}', 'red', 'on_light_grey'))
+                    logger.info(colored(f'{wrong_answer}|{too_low}', 'red', 'on_black'))
                     sys.exit()
 
-            if right_answer in content:
-                submitted = True
+            if (right_answer and gold_star) in content:
                 star = '**' if level == 2 else '*'
                 logger.info(colored(f'{right_answer}', 'green', 'on_black'))
 
             if submitted_already in content:
                 logger.info(colored(f'{submitted_already}', 'green', 'on_black'))
 
-            if need_to_wait in content:
-                logger.info(colored(f'{need_to_wait}', 'magenta', 'on_black'))
-                sys.exit()
-
             if any([wrong_answer, right_answer, submitted_already]) != True:
                 logger.info(colored('Something went wrong!', 'red', 'on_black'))
                 sys.exit()
+
+            for phrase in need_to_wait:
+                if phrase in content:
+                    logger.info(colored(f'{phrase}', 'magenta', 'on_black'))
+                    sys.exit()
 
         cls.save_answer(long_year, day, title, level, answer, star, submitted, message)
 

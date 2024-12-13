@@ -339,5 +339,16 @@
         "message": "That's the right answer",
         "time": "2024-12-12 22:53:38",
         "star ": "**"
+    },
+    {
+        "year": "2024",
+        "day": "3",
+        "title": "--- Day 3: Mull It Over ---",
+        "level": "1",
+        "answer": "183380722",
+        "submitted": true,
+        "message": "That's the right answer",
+        "time": "2024-12-13 04:12:30",
+        "star ": "*"
     }
 ]
